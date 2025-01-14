@@ -114,11 +114,11 @@ MyBtn.OnEvent("Click", MyBtn_Click)  <em>; Call MyBtn_Click when clicked.</em>
 <p>Known limitation: Certain desktop themes might not display a checkbox's text properly. If this occurs, try including <code>-Wrap</code> (minus Wrap) in the control's options. However, this also prevents having more than one line of text.</p>
 
 <h2 id="ComboBox">ComboBox</h2>
-<p>Same as DropDownList but also permits free-form text to be entered as an alternative to picking an item from the list.</p>
+<p>Same as DropDownList but also permits free-form text to be entered as an alternative to picking an item from the list. In this case, the last parameter of <a href="Gui.htm#Add">MyGui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1","Choice2","Choice3"]</code>.</p>
 <p>For example:</p>
-<pre>MyGui.Add("ComboBox", "vColorChoice", ["Red","Green","Blue"])</pre>
+<pre>MyGui.Add("ComboBox", "vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddComboBox("vColorChoice", ["Red","Green","Blue"])</pre>
+<pre>MyGui.AddComboBox("vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_combo.png" alt="ComboBox" />
 <p>In addition to allowing all the same options as DropDownList above, the word <strong>Limit</strong> may be included in <em>Options</em> to restrict the user's input to the visible width of the ComboBox's edit field. Also, the word <strong>Simple</strong> may be specified to make the ComboBox behave as though it is an Edit field with a ListBox beneath it.</p>
@@ -238,9 +238,9 @@ IPCtrlGetAddress(GuiCtrl)
 <a id="DDL"></a><h2 id="DropDownList">DropDownList (or DDL)</h2>
 <p>A list of choices that is displayed in response to pressing a small button.  In this case, the last parameter of <a href="Gui.htm#Add">MyGui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1","Choice2","Choice3"]</code>.</p>
 <p>For example:</p>
-<pre>MyGui.Add("DropDownList", "vColorChoice", ["Black","White","Red"])</pre>
+<pre>MyGui.Add("DropDownList", "vColorChoice", ["Black","White","Red","Green","Blue"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddDropDownList("vColorChoice", ["Black","White","Red"])</pre>
+<pre>MyGui.AddDropDownList("vColorChoice", ["Black","White","Red","Green","Blue"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_ddl.png" alt="DDL" />
 <p>To have one of the items pre-selected when the window first appears, include in <em>Options</em> the word <strong>Choose</strong> followed immediately by the number of an item to be pre-selected. For example, <code>Choose5</code> would pre-select the fifth item (as with other options, it can also be a variable such as <code>"Choose" Var</code>). After the control is created, use <a href="GuiControl.htm#Value">GuiCtrl.Value</a>, <a href="GuiControl.htm#Text">GuiCtrl.Text</a> or <a href="GuiControl.htm#Choose">GuiCtrl.Choose</a> to change the selection, and <a href="GuiControl.htm#Add">GuiCtrl.Add</a> or <a href="GuiControl.htm#Delete">GuiCtrl.Delete</a> to add or remove entries from the list.</p>
