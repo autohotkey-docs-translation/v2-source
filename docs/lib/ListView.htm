@@ -45,11 +45,11 @@ LV.OnEvent("DoubleClick", LV_DoubleClick)
 Loop Files, A_MyDocuments "\*.*"
     <a href="#Add">LV.Add</a>(, A_LoopFileName, A_LoopFileSizeKB)
 
-<a href="#ModifyCol">LV.ModifyCol</a>  <em>; Auto-size each column to fit its contents.</em>
+<a href="#ModifyCol">LV.ModifyCol</a>()  <em>; Auto-size each column to fit its contents.</em>
 LV.ModifyCol(2, "Integer")  <em>; For sorting purposes, indicate that column 2 is an integer.</em>
 
 <em>; Display the window:</em>
-MyGui.Show
+MyGui.Show()
 
 LV_DoubleClick(LV, RowNumber)
 {
@@ -449,7 +449,7 @@ Loop 10  <em>; Load the ImageList with a series of icons from the DLL.</em>
     <a href="#IL_Add">IL_Add</a>(ImageListID, "shell32.dll", A_Index) 
 Loop 10  <em>; Add rows to the ListView (for demonstration purposes, one for each icon).</em>
     LV.Add("Icon" . A_Index, A_Index, "n/a")
-MyGui.Show</pre>
+MyGui.Show()</pre>
 
 <h3 id="IL_Create">IL_Create</h3>
 <p>Creates a new ImageList that is initially empty.</p>
