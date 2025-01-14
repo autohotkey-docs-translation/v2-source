@@ -393,7 +393,7 @@ Loop 5
     <a href="ListView.htm#IL_Add">IL_Add</a>(ImageListID, "shell32.dll", A_Index)
 <em>; Create a <a href="#GuiAdd">TreeView</a> and a ListView side-by-side to behave like Windows Explorer:</em>
 TV := <a href="#GuiAdd">MyGui.Add</a>("TreeView", "r20 w" TreeViewWidth " <a href="#ImageList">ImageList</a>" ImageListID)
-LV := MyGui.Add("ListView", "r20 w" ListViewWidth " x+10", ["Name","Modified"])
+LV := MyGui.Add("ListView", "r20 w" ListViewWidth " x+10", ["Name", "Modified"])
 
 <em>; Create a <a href="GuiControls.htm#StatusBar">Status Bar</a> to give info about the number of files and their total size:</em>
 SB := MyGui.Add("StatusBar")

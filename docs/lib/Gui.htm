@@ -671,7 +671,7 @@ ProcessUserInput(*)
 <div class="ex" id="ExTab">
 <p><a class="ex_number" href="#ExTab"></a> Creates a tab control with multiple tabs, each containing different controls to interact with.</p>
 <pre>MyGui := Gui()
-Tab := MyGui.Add("Tab3",, ["First Tab","Second Tab","Third Tab"])
+Tab := MyGui.Add("Tab3",, ["First Tab", "Second Tab", "Third Tab"])
 MyGui.Add("CheckBox", "vMyCheckBox", "Sample checkbox") 
 Tab.UseTab(2)
 MyGui.Add("Radio", "vMyRadio", "Sample radio1")
@@ -721,7 +721,7 @@ MyGui := Gui()
 MyEdit := MyGui.Add("Edit")
 <em>; Store the tooltip text in a custom property:</em>
 MyEdit.ToolTip := "This is a tooltip for the control whose name is MyEdit."
-MyDDL := MyGui.Add("DropDownList",, ["Red","Green","Blue"])
+MyDDL := MyGui.Add("DropDownList",, ["Red", "Green", "Blue"])
 MyDDL.ToolTip := "Choose a color from the drop-down list."
 MyGui.Add("CheckBox",, "This control has no tooltip.")
 MyGui.Show()

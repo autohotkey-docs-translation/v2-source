@@ -114,11 +114,11 @@ MyBtn.OnEvent("Click", MyBtn_Click)  <em>; Call MyBtn_Click when clicked.</em>
 <p>Known limitation: Certain desktop themes might not display a checkbox's text properly. If this occurs, try including <code>-Wrap</code> (minus Wrap) in the control's options. However, this also prevents having more than one line of text.</p>
 
 <h2 id="ComboBox">ComboBox</h2>
-<p>Same as DropDownList but also permits free-form text to be entered as an alternative to picking an item from the list. In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1","Choice2","Choice3"]</code>.</p>
+<p>Same as DropDownList but also permits free-form text to be entered as an alternative to picking an item from the list. In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1", "Choice2", "Choice3"]</code>.</p>
 <p>For example:</p>
-<pre>MyGui.Add("ComboBox", "vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
+<pre>MyGui.Add("ComboBox", "vColorChoice", ["Red", "Green", "Blue", "Black", "White"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddComboBox("vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
+<pre>MyGui.AddComboBox("vColorChoice", ["Red", "Green", "Blue", "Black", "White"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_combo.png" alt="ComboBox" />
 <p>In addition to allowing all the same options as DropDownList above, the word <strong>Limit</strong> may be included in <em>Options</em> to restrict the user's input to the visible width of the ComboBox's edit field. Also, the word <strong>Simple</strong> may be specified to make the ComboBox behave as though it is an Edit field with a ListBox beneath it.</p>
@@ -236,11 +236,11 @@ IPCtrlGetAddress(GuiCtrl)
 <pre><a href="SendMessage.htm">SendMessage</a> 0x1006, 4, 0xFFAA99, "SysDateTimePick321" <em>; 0x1006 is DTM_SETMCCOLOR. 4 is MCSC_MONTHBK (background color). The color must be specified in BGR vs. RGB format (red and blue components swapped).</em></pre>
 
 <a id="DDL"></a><h2 id="DropDownList">DropDownList (or DDL)</h2>
-<p>A list of choices that is displayed in response to pressing a small button.  In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1","Choice2","Choice3"]</code>.</p>
+<p>A list of choices that is displayed in response to pressing a small button.  In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1", "Choice2", "Choice3"]</code>.</p>
 <p>For example:</p>
-<pre>MyGui.Add("DropDownList", "vColorChoice", ["Black","White","Red","Green","Blue"])</pre>
+<pre>MyGui.Add("DropDownList", "vColorChoice", ["Black", "White", "Red", "Green", "Blue"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddDropDownList("vColorChoice", ["Black","White","Red","Green","Blue"])</pre>
+<pre>MyGui.AddDropDownList("vColorChoice", ["Black", "White", "Red", "Green", "Blue"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_ddl.png" alt="DDL" />
 <p>To have one of the items pre-selected when the window first appears, include in <em>Options</em> the word <strong>Choose</strong> followed immediately by the number of an item to be pre-selected. For example, <code>Choose5</code> would pre-select the fifth item (as with other options, it can also be a variable such as <code>"Choose" Var</code>). After the control is created, use <a href="GuiControl.htm#Value">GuiControl.Value</a>, <a href="GuiControl.htm#Text">GuiControl.Text</a> or <a href="GuiControl.htm#Choose">GuiControl.Choose</a> to change the selection, and <a href="GuiControl.htm#Add">GuiControl.Add</a> or <a href="GuiControl.htm#Delete">GuiControl.Delete</a> to add or remove entries from the list.</p>
@@ -250,7 +250,7 @@ IPCtrlGetAddress(GuiCtrl)
 <p>Use the <a href="Gui.htm#R">R or H option</a> to control the height of the popup list. For example, specifying <code>R5</code> would make the list 5 rows tall, while <code>H400</code> would set the total height of the selection field and list to 400 pixels. If both R and H are omitted, the list will automatically expand to take advantage of the available height of the user's desktop.</p>
 <p id="ComboBoxHeight">To set the height of the selection field or list items, use the <a href="https://learn.microsoft.com/windows/win32/controls/cb-setitemheight">CB_SETITEMHEIGHT</a> message as in the example below:</p>
 <pre>MyGui := Gui()
-DDL := MyGui.Add("DDL", "vcbx w200 Choose1", ["One","Two"])
+DDL := MyGui.Add("DDL", "vcbx w200 Choose1", ["One", "Two"])
 <em>; CB_SETITEMHEIGHT = 0x0153</em>
 PostMessage(0x0153, -1, 50, DDL)  <em>; Set height of selection field.</em>
 PostMessage(0x0153, 0, 50, DDL)  <em>; Set height of list items.</em>
@@ -358,11 +358,11 @@ Link_Click(Ctrl, ID, HREF)
 MyGui.Show()</pre>
 
 <h2 id="ListBox">ListBox</h2>
-<p>A relatively tall box containing a list of choices that can be selected. In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1","Choice2","Choice3"]</code>.</p>
+<p>A relatively tall box containing a list of choices that can be selected. In this case, the last parameter of <a href="Gui.htm#Add">Gui.Add</a> is an <a href="Array.htm">Array</a> like <code>["Choice1", "Choice2", "Choice3"]</code>.</p>
 <p>For example:</p>
-<pre>MyGui.Add("ListBox", "r5 vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
+<pre>MyGui.Add("ListBox", "r5 vColorChoice", ["Red", "Green", "Blue", "Black", "White"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddListBox("r5 vColorChoice", ["Red","Green","Blue","Black","White"])</pre>
+<pre>MyGui.AddListBox("r5 vColorChoice", ["Red", "Green", "Blue", "Black", "White"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_list.png" alt="ListBox" />
 <p id="ChooseLB">To have one of the items pre-selected when the window first appears, include in <em>Options</em> the word <strong>Choose</strong> followed immediately by the number of an item to be pre-selected. For example, <code>Choose5</code> would pre-select the fifth item. To have multiple items pre-selected, use <a href="GuiControl.htm#Choose">GuiControl.Choose</a> multiple times (requires the <a href="#ListBoxMulti">Multi</a> option). After the control is created, use <a href="GuiControl.htm#Value">GuiControl.Value</a>, <a href="GuiControl.htm#Text">GuiControl.Text</a> or <a href="GuiControl.htm#Choose">GuiControl.Choose</a> to change the selection, and <a href="GuiControl.htm#Add">GuiControl.Add</a> or <a href="GuiControl.htm#Delete">GuiControl.Delete</a> to add or remove entries from the list.</p>
@@ -387,9 +387,9 @@ MyGui.Show()</pre>
 <h2 id="ListView">ListView</h2>
 <p>A ListView is one of the most elaborate controls provided by the operating system. In its most recognizable form, it displays a tabular view of rows and columns, the most common example of which is Explorer's list of files and folders (detail view).</p>
 <p>For example:</p>
-<pre>MyGui.Add("ListView", "r20 w700", ["Name","In Folder","Size (KB)","Type"])</pre>
+<pre>MyGui.Add("ListView", "r20 w700", ["Name", "In Folder", "Size (KB)", "Type"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddListView("r20 w700", ["Name","In Folder","Size (KB)","Type"])</pre>
+<pre>MyGui.AddListView("r20 w700", ["Name", "In Folder", "Size (KB)", "Type"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_listview.png" alt="ListView" />
 <p>See the separate <a href="ListView.htm">ListView</a> page for more information.</p>
@@ -607,9 +607,9 @@ SB.SetText("There are " . RowCount . " rows selected.")</pre>
   <li><strong>Tab:</strong> Retained for backward compatibility because of <a href="#Tab_vs">differences in behavior</a> between Tab2/Tab3 and Tab.</li>
 </ul>
 <p>For example:</p>
-<pre>MyGui.Add("Tab3",, ["General","View","Settings"])</pre>
+<pre>MyGui.Add("Tab3",, ["General", "View", "Settings"])</pre>
 <p>Or:</p>
-<pre>MyGui.AddTab3(, ["General","View","Settings"])</pre>
+<pre>MyGui.AddTab3(, ["General", "View", "Settings"])</pre>
 <p>Appearance:</p>
 <img src="../static/ctrl_tab.png" alt="Tab" />
 <p>The last parameter above is an <a href="Array.htm">Array</a> of tab names. After creating a Tab control, subsequently added controls automatically belong to its first tab. To change this, use the UseTab method below. For details and an example, see <a href="#Tab_Usage">Tab Usage</a>.</p>
