@@ -462,9 +462,9 @@ function ctor_highlighter()
     /** Searches for numeric values, formats them and replaces them with placeholders. */
     function numeric_values(innerHTML)
     {
-      return innerHTML.replace(new RegExp('\\b(' + self.num + ')\\b', 'gm'), function(NUMBER)
+      return innerHTML.replace(new RegExp('(^|[^a-z0-9_\\#@\\$\\u00A0-\\uFFFF])(' + self.num + ')(?![a-z0-9_\\#@\\$\\u00A0-\\uFFFF])', 'gim'), function(_, PRE, NUMBER)
       {
-        return ph('num', wrap(NUMBER, 'num', null));
+        return PRE + ph('num', wrap(NUMBER, 'num', null));
       });
     }
     /** Searches for methods, formats them and replaces them with placeholders. */
@@ -512,8 +512,8 @@ function ctor_highlighter()
     function expressions(innerHTML)
     {
       innerHTML = strings(innerHTML);
-      innerHTML = numeric_values(innerHTML);
       innerHTML = methods(innerHTML);
+      innerHTML = numeric_values(innerHTML);
       innerHTML = properties(innerHTML);
       innerHTML = built_in_vars(innerHTML);
       innerHTML = built_in_functions(innerHTML);
