@@ -5,8 +5,6 @@ var highlighter = new ctor_highlighter;
  */
 function ctor_highlighter()
 {
-  var self = this;
-  self.syntax = {};
   /**
    * Adds syntax highlighting for AutoHotkey code.
    *
@@ -26,13 +24,11 @@ function ctor_highlighter()
    * @param {string} docs_path - The path to the docs.
    * @param {boolean} new_tab - If true, the link opens in a new tab.
    */
-  self.addSyntaxColors = function(codes, index_data, docs_path, new_tab)
+  this.addSyntaxColors = function(codes, index_data, docs_path, new_tab)
   {
     if (!-[1,]) // Exclude Internet Explorer 8 or below
       return;
-    if (!self.syntax[0]) // empty
-      self.syntax = sort_syntax_by_type(index_data);
-    var syn = self.syntax;
+    var syn = sort_syntax_by_type(index_data);
     var r_op_assign = '(?:&lt;&lt;|<<|&gt;&gt;|>>|\\/\\/|\\^|&amp;|&|\\||\\.|\\/|\\*|-|\\+|:|)='; // assignment operators
     var r_num = '(?:0(?:x|X)[0-9a-fA-F]*)|(?:(?:[0-9]+\\.?[0-9]*)|(?:\\.[0-9]+))(?:(?:e|E)(?:\\+|-)?[0-9]+)?'; // number
     var r_char = 'A-Za-z0-9_\\#@\\$\\u00A0-\\uFFFF'; // allowed chars
