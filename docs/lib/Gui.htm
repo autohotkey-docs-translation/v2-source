@@ -559,7 +559,7 @@ WinSetTransColor("EEAA99", MyGui)</pre>
 <pre class="Syntax">MyGui.<span class="func">MarginX</span> := NewValue</pre>
 <p><em>CurrentValue</em> is the number of pixels of the current horizontal margin.</p>
 <p><em>NewValue</em> is the number of pixels of space to leave at the left and right side of the window when auto-positioning any control that lacks an explicit <a href="#XY">X coordinate</a>. Also, the margin is used to determine the horizontal distance that separates auto-positioned controls from each other. Finally, the margin is taken into account by the first use of <a href="#Show">Gui.Show</a> to calculate the window's size (when no explicit size is specified).</p>
-<p>By default, this margin is proportional to the size of the currently selected <a href="#SetFont">font</a> (1.25 times font-height for left &amp; right).</p>
+<p>If not set by the script, MarginX acquires a default value of 1.25 times the <a href="#SetFont">current font</a>'s height the first time <a href="#Add">Gui.Add</a> or <a href="#Show">Gui.Show</a> is called or <a href="#MarginX">Gui.MarginX</a> or <a href="#MarginY">Gui.MarginY</a> is retrieved (whichever occurs first).</p>
 </div>
 
 <div class="methodShort" id="MarginY">
@@ -569,7 +569,7 @@ WinSetTransColor("EEAA99", MyGui)</pre>
 <pre class="Syntax">MyGui.<span class="func">MarginY</span> := NewValue</pre>
 <p><em>CurrentValue</em> is the number of pixels of the current vertical margin.</p>
 <p><em>NewValue</em> is the number of pixels of space to leave at the top and bottom side of the window when auto-positioning any control that lacks an explicit <a href="#XY">Y coordinate</a>. Also, the margin is used to determine the vertical distance that separates auto-positioned controls from each other. Finally, the margin is taken into account by the first use of <a href="#Show">Gui.Show</a> to calculate the window's size (when no explicit size is specified).</p>
-<p>By default, this margin is proportional to the size of the currently selected <a href="#SetFont">font</a> (0.75 times font-height for top &amp; bottom).</p>
+<p>If not set by the script, MarginY acquires a default value of 0.75 times the <a href="#SetFont">current font</a>'s height the first time <a href="#Add">Gui.Add</a> or <a href="#Show">Gui.Show</a> is called or <a href="#MarginX">Gui.MarginX</a> or <a href="#MarginY">Gui.MarginY</a> is retrieved (whichever occurs first).</p>
 </div>
 
 <div class="methodShort" id="MenuBar">
