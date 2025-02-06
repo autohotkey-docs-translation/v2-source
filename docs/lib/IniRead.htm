@@ -15,8 +15,8 @@
 <p>Reads a value, section or list of section names from a standard format .ini file.</p>
 
 <pre class="Syntax">Value := <span class="func">IniRead</span>(Filename, Section, Key <span class="optional">, Default</span>)
-Section := <span class="func">IniRead</span>(Filename, Section)
-SectionNames := <span class="func">IniRead</span>(Filename)</pre>
+Section := <span class="func">IniRead</span>(Filename, Section <span class="optional">,, Default</span>)
+SectionNames := <span class="func">IniRead</span>(Filename <span class="optional">,,, Default</span>)</pre>
 <h2 id="Parameters">Parameters</h2>
 <dl>
 
@@ -48,9 +48,13 @@ SectionNames := <span class="func">IniRead</span>(Filename)</pre>
 
 <h2 id="Return_Value">Return Value</h2>
 <p>Type: <a href="../Concepts.htm#strings">String</a></p>
-<p>This function returns the actual value of the specified key. If the value cannot be retrieved, the default value indicated by the <em>Default</em> parameter is returned.</p>
-<p>If the <em>Key</em> parameter is omitted, this function returns an entire section. Comments and empty lines are omitted. Only the first 65,533 characters of the section are retrieved.</p>
-<p>If the <em>Key</em> and <em>Section</em> parameters are omitted, this function returns a linefeed (<code>`n</code>) delimited list of section names.</p>
+<p>This function returns one of the following depending on the <em>Key</em> and <em>Section</em> parameters:</p>
+<ul>
+  <li>If both parameters are specified, this function returns the actual value of the specified key.</li>
+  <li>If <em>Key</em> is omitted, this function returns an entire section. Comments and empty lines are omitted. Only the first 65,533 characters of the section are retrieved.</li>
+  <li>If <em>Key</em> and <em>Section</em> are omitted, this function returns a linefeed (<code>`n</code>) delimited list of section names.</li>
+</ul>
+<p>If none of these can be retrieved, the default value indicated by the <em>Default</em> parameter is returned.</p>
 
 <h2 id="Error_Handling">Error Handling</h2>
 <p>An <a href="Error.htm#OSError">OSError</a> is thrown on failure, but only if <em>Default</em> is omitted.</p>
