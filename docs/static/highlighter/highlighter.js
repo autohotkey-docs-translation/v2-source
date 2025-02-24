@@ -94,7 +94,6 @@ function ctor_highlighter()
       try
       {
         innerHTML = comments(innerHTML);
-        innerHTML = function_definitions(innerHTML);
         innerHTML = continuation_sections(innerHTML);
         innerHTML = hotstrings(innerHTML);
         innerHTML = hotkeys(innerHTML);
@@ -103,6 +102,7 @@ function ctor_highlighter()
         innerHTML = command_alikes(innerHTML);
         innerHTML = legacy_assignments(innerHTML);
         innerHTML = expressions(innerHTML);
+        innerHTML = function_definitions(innerHTML);
         innerHTML = labels(innerHTML);
       } catch (e) {
         if (window.console) // For IE9
@@ -158,10 +158,9 @@ function ctor_highlighter()
     /** Searches for function definitions, formats them and replaces them with placeholders. */
     function function_definitions(innerHTML)
     {
-      return innerHTML.replace(new RegExp('^(' + r_s + '*?)([' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*{)', 'mg'), function(ASIS, PRE, NAME, PARAMS)
+      return innerHTML.replace(new RegExp('^(' + r_s + '*?)(<bif\\d+></bif\\d+>|[' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*{)', 'mg'), function(ASIS, PRE, NAME, PARAMS)
       {
-        if (NAME.match(/^(while|if)$/i)) // Ignore while and if statements with open parenthesis
-          return ASIS;
+        NAME = resolve_placeholders(NAME, 'bif');
         PARAMS = PARAMS.replace(/\bbyref\b/gim, function(BYREF) // ByRef
         {
           return ph('byref', wrap(BYREF, 'dec', index_data[syn[5].dict['byref']][1]));
