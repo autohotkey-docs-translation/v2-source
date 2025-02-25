@@ -163,5 +163,26 @@ RefreshTrayTip()
 }</pre>
 </div>
 
+<div class="ex" id="ExOnMessage">
+<p><a class="ex_number" href="#ExOnMessage"></a> Shows a message box whenever a traytip is left-clicked, timed out, closed, shown, queued, or disappeared. Press <kbd>F1</kbd> to test this example. For details, see <a href="https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shell_notifyicona">Shell_NotifyIcon (Microsoft Docs)</a>.</p>
+<pre>OnMessage 0x404, AHK_NOTIFYICON
+
+F1::TrayTip("foo", "bar")
+
+AHK_NOTIFYICON(wParam, lParam, msg, hwnd)
+{
+    if (hwnd != A_ScriptHwnd)
+        return
+    if (lParam = 1029) ; NIN_BALLOONUSERCLICK
+        MsgBox "Traytip was left-clicked."
+    if (lParam = 1028) ; NIN_BALLOONTIMEOUT
+        MsgBox "Traytip timed out or was closed or right-clicked."
+    if (lParam = 1026) ; NIN_BALLOONSHOW
+        MsgBox "Traytip was shown or queued."
+    if (lParam = 1027) ; NIN_BALLOONHIDE
+        MsgBox "Traytip disappeared, but not due to timeout or user interaction."
+}</pre>
+</div>
+
 </body>
 </html>
