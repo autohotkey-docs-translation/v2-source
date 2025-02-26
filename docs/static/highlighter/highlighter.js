@@ -92,7 +92,6 @@ function ctor_highlighter()
       try
       {
         innerHTML = comments(innerHTML);
-        innerHTML = function_definitions(innerHTML);
         innerHTML = continuation_sections(innerHTML);
         innerHTML = hotkeys(innerHTML);
         innerHTML = escape_sequences(innerHTML);
@@ -101,6 +100,7 @@ function ctor_highlighter()
         innerHTML = directives(innerHTML);
         innerHTML = control_flow_statements(innerHTML);
         innerHTML = expressions(innerHTML);
+        innerHTML = function_definitions(innerHTML);
         innerHTML = labels(innerHTML);
       } catch (e) {
         if (window.console) // For IE9
@@ -156,10 +156,9 @@ function ctor_highlighter()
     /** Searches for function definitions, formats them and replaces them with placeholders. */
     function function_definitions(innerHTML)
     {
-      return innerHTML.replace(new RegExp('^(' + r_s + '*?static' + r_s + '*?|' + r_s + '*?)([' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*{)', 'mg'), function(ASIS, PRE, NAME, PARAMS)
+      return innerHTML.replace(new RegExp('^(' + r_s + '*?<dec\\d+></dec\\d+>' + r_s + '*?|' + r_s + '*?)(<bif\\d+></bif\\d+>|[' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*{)', 'mg'), function(ASIS, PRE, NAME, PARAMS)
       {
-        if (syn[3].dict[NAME.toLowerCase()]) // Exclude control flow statement keywords
-          return ASIS;
+        NAME = resolve_placeholders(NAME, 'bif');
         return PRE + ph('fun', wrap(NAME, 'fun', null) + expressions(PARAMS));
       });
     }
@@ -205,7 +204,7 @@ function ctor_highlighter()
               out += m[2] + wrap(m[3], 'dec', link) + m[4] + expressions(m[5]);
             return PRE + ph('dec', out + m[6]);
           }
-        return PRE + ph('dec', wrap(DEC, 'dec', 5) + (VARS ? SEP + expressions(VARS) : ''));
+        return PRE + ph('dec', wrap(DEC, 'dec', 5)) + (VARS ? SEP + VARS : '');
       });
     }
     /** Searches for directives, formats them and replaces them with placeholders. */
