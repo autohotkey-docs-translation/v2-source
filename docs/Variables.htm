@@ -90,7 +90,7 @@ MsgBox(1.00)  <em>; Shows 1.0</em></pre>
   </tr>
   <tr id="objdot">
     <td class="center bold">x.y<br>x.%z%</td>
-    <td><strong>Member access</strong>. Get or set a value or call a method of object <i>x</i>, where <i>y</i> is a literal name and <em>z</em> is an expression which evaluates to a name. See <a href="Objects.htm#Usage_Objects">object syntax</a>.</td>
+    <td><strong>Member access</strong>. Get, set or call a property of object <i>x</i>, where <i>y</i> is a literal name and <em>z</em> is an expression which evaluates to a name. See <a href="Objects.htm#Usage_Objects">object syntax</a> for more details.</td>
   </tr>
   <tr id="maybe">
     <td class="center"><em>var</em><strong>?</strong></td>
@@ -343,6 +343,13 @@ sumfn := Sum</pre>
   </tr>
   <tr>
     <td class="center" style="white-space: nowrap;"><p><em>(expression)</em><strong>()</strong></p></td>
+  </tr>
+  <tr id="method-call">
+    <td class="center"><p>x<strong>.y()</strong></p></td>
+    <td>
+      <p><strong>Method call</strong>. The target object <em>x</em> is an expression, while <em>y</em> is a literal property name. There must be no space on either side of the method name, but the dot can be preceded by whitespace, including line breaks.</p>
+      <p>The object <em>x</em> is implicitly passed as the first parameter of the method's function. This normally corresponds to <code>this</code> and should not be explicitly defined in a <a href="Objects.htm#Custom_Classes_method">method definition</a>, but any other type of <a href="Language.htm#functions">function definition</a> must account for it in the parameter list.</p>
+    </td>
   </tr>
   <tr>
     <td class="center">Fn(<strong><em>Params</em>*</strong>)</td>
