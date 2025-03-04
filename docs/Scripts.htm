@@ -107,7 +107,7 @@ MsgBox(
     }
 }</pre>
 <p id="continuation-section"><strong>Continuation section:</strong> This method should be used to merge a large number of lines or when the lines are not suitable for the other methods. Although this method is especially useful for <a href="Hotstrings.htm">auto-replace hotstrings</a>, it can also be used with any <a href="Variables.htm#Expressions">expression</a>. For example:</p>
-<pre><em>; EXAMPLE #1:</em>
+<pre><em>; EXAMPLE #1 - inside a quoted/literal string:</em>
 Var := "
 (
 A line of text.
@@ -116,15 +116,32 @@ By default, the hard carriage return (Enter) between the previous line and this 
 Additionally, "quote marks" are <a href="#continuation_quotes">automatically escaped</a> when appropriate.
 )"
 
-<em>; EXAMPLE #2:</em>
+; EXAMPLE #2 - outside a quoted/literal string:
+Var :=
+(
+"Same as above, except that quote marks are not automatically escaped.
+Specify variables as follows: " Var "
+A line of text."
+)
+
+<em>; EXAMPLE #3:</em>
 FileAppend "
 (
 Line 1 of the text.
 Line 2 of the text. By default, a linefeed (`n) is present between lines.
-)", A_Desktop "\My File.txt"</pre>
+)", A_Desktop "\My File.txt"
+
+<em>; EXAMPLE #4:</em>
+FormatStr := "
+(
+Another way of using variables with a continuation section.
+Input value 1: {1}
+Input value 2: {2}
+)"
+MsgBox Format(FormatStr, A_TickCount, A_Now)</pre>
 <p>In the examples above, a series of lines is bounded at the top and bottom by a pair of parentheses. This is known as a <em>continuation section</em>. Notice that any code after the closing parenthesis is also joined with the other lines (without any delimiter), but the opening and closing parentheses are not included.</p>
 <p>If the line above the continuation section ends with a <a href="Concepts.htm#names">name</a> character and the section does not start inside a quoted string, a single space is automatically inserted to separate the name from the contents of the continuation section.</p>
-<p id="continuation_quotes">Quote marks are automatically escaped (i.e. they are interpreted as literal characters) if the continuation section starts inside a quoted string, as in the examples above. Otherwise, quote marks act as they do normally; that is, continuation sections can contain expressions with quoted strings.</p>
+<p id="continuation_quotes">Quote marks are automatically escaped (i.e. they are interpreted as literal characters) if the continuation section starts inside a quoted/literal string, as in the examples except #2 above. Otherwise, quote marks act as they do normally; that is, continuation sections can contain expressions with quoted strings, as in the example #2 above.</p>
 <p id="continuation_defaults">By default, leading spaces or tabs are omitted based on the indentation of the first line inside the continuation section. If the first line mixes spaces and tabs, only the first type of character is treated as indentation. If any line is indented less than the first line or with the wrong characters, all leading whitespace on that line is left as is. </p>
 <p>By default, trailing spaces or tabs are omitted.</p>
 <p>The default behavior of a continuation section can be overridden by including one or more of the following options to the right of the section's opening parenthesis. If more than one option is present, separate each one from the previous with a space. For example: <code class="no-highlight">( LTrim Join|</code>.</p>
