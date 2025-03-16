@@ -192,7 +192,7 @@ function ctor_highlighter()
     /** Searches for declarations, formats them and replaces them with placeholders. */
     function declarations(innerHTML)
     {
-      return innerHTML.replace(new RegExp(r_pre + '\\b(' + syn[5].join('|') + ')(?:' + r_s + '*$|(' + r_s + '+)(.+?)(?=' + r_s + '+' + r_com + '|$))', 'gim'), function(_, PRE, DEC, SEP, VARS)
+      return innerHTML.replace(new RegExp(r_pre + '\\b(' + syn[5].join('|') + ')(?:' + r_s + '*$|(' + r_s + '+(?!' + r_op_assign + '))(.+?)(?=' + r_s + '+' + r_com + '|$))', 'gim'), function(_, PRE, DEC, SEP, VARS)
       {
         var dec = DEC.toLowerCase();
         if (dec == 'class' && VARS) // class statements:
