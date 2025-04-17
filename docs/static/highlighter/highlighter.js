@@ -156,7 +156,7 @@ function ctor_highlighter()
     /** Searches for function definitions, formats them and replaces them with placeholders. */
     function function_definitions(innerHTML)
     {
-      return innerHTML.replace(new RegExp('^(' + r_s + '*?<dec\\d+></dec\\d+>' + r_s + '*?|' + r_s + '*?)(<bif\\d+></bif\\d+>|[' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*{)', 'mg'), function(ASIS, PRE, NAME, PARAMS)
+      return innerHTML.replace(new RegExp('^(' + r_s + '*?<dec\\d+></dec\\d+>' + r_s + '*?|' + r_s + '*?)(<bif\\d+></bif\\d+>|[' + r_char + ']+?)(\\(.*?\\))(?=\\s*(' + r_com + '\\s*)*({|=&gt;|=>))', 'mg'), function(ASIS, PRE, NAME, PARAMS)
       {
         NAME = resolve_placeholders(NAME, 'bif');
         return PRE + ph('fun', wrap(NAME, 'fun', null) + expressions(PARAMS));
