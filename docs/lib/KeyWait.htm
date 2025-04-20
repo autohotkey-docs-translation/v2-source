@@ -93,7 +93,7 @@ KeyWait "Alt"</pre>
 <p><a class="ex_number" href="#ExDouble"></a> Detects when a key has been double-pressed (similar to double-click). KeyWait is used to stop the keyboard's auto-repeat feature from creating an unwanted double-press when you hold down the RControl key to modify another key. It does this by keeping the hotkey's thread running, which blocks the auto-repeats by relying upon #MaxThreadsPerHotkey being at its default setting of 1. For a more elaborate script that distinguishes between single, double and triple-presses, see <a href="SetTimer.htm#ExampleCount">SetTimer example #3</a>.</p>
 <pre>~RControl::
 {
-    if (A_PriorHotkey != "~RControl" or A_TimeSincePriorHotkey &gt; 400)
+    if (A_PriorHotkey != ThisHotkey or A_TimeSincePriorHotkey &gt; 400)
     {
         <em>; Too much time between presses, so this isn't a double-press.</em>
         KeyWait "RControl"
