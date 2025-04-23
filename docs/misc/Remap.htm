@@ -148,7 +148,7 @@ return</pre>
 <pre>Hotkey, *a, Off
 Hotkey, *a up, Off</pre>
 <p id="AltTab">Alt-tab issues: If you remap a key or mouse button to become <kbd>Alt</kbd>, that key will probably not be able to alt-tab properly. A possible work-around is to add the hotkey <code>*Tab::Send {Blind}{Tab}</code> -- but be aware that it will likely interfere with using the real <kbd>Alt</kbd> to alt-tab. Therefore, it should be used only when you alt-tab solely by means of remapped keys and/or <a href="../Hotkeys.htm#alttab">alt-tab hotkeys</a>.</p>
-<p>In addition to the keys and mouse buttons on the <a href="../KeyList.htm">Key List</a> page, the source key may also be a virtual key (VKnn) or scan code (SCnnn) as described in the <a href="../KeyList.htm#SpecialKeys">Special Keys</a> section. The same is true for the destination key except that it may optionally specify a scan code after the virtual key. For example, <code>sc01e::vk42sc030</code> is equivalent to <code>a::b</code> on most keyboard layouts.</p>
+<p>In addition to the keys and mouse buttons on the <a href="../KeyList.htm">Key List</a> page, the source and destination keys may also be a virtual key (VKnn) or scan code (SCnnn) as described in the <a href="../KeyList.htm#SpecialKeys">Special Keys</a> section. For example, <code>sc01e::vk42</code> is equivalent to <code>a::b</code> on most keyboard layouts.</p>
 <p>To disable a key rather than remapping it, make it a hotkey that simply <a href="../lib/Return.htm">returns</a>. For example, <code>F1::return</code> would disable <kbd>F1</kbd>.</p>
 <p>The following keys are not supported by the built-in remapping method:</p>
 <ul>
