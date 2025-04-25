@@ -54,12 +54,12 @@
     <strong>,</strong> A_ProgramFiles "\SomeApplication\LogFile.txt"  <em>; Comment.</em></pre>
 <p>Similarly, the following lines would get merged into a single line because the last two start with "and" or "or":</p>
 <pre>if Color = "Red" or Color = "Green"  or Color = "Blue"   <em>; Comment.</em>
-    <strong>or</strong> Color = "Black" or Color = "Gray" or Color = "White"   <em>; Comment.</em>
-    <strong>and</strong> ProductIsAvailableInColor(Product, Color)   <em>; Comment.</em></pre>
+    or Color = "Black" or Color = "Gray" or Color = "White"   <em>; Comment.</em>
+    and ProductIsAvailableInColor(Product, Color)   <em>; Comment.</em></pre>
 <p>The <a href="Variables.htm#ternary">ternary operator</a> is also a good candidate:</p>
 <pre>ProductIsAvailable := (Color = "Red")
-    <strong>?</strong> false  <em>; We don't have any red products, so don't bother calling the function.</em>
-    <strong>:</strong> ProductIsAvailableInColor(Product, Color)</pre>
+    ? false  <em>; We don't have any red products, so don't bother calling the function.</em>
+    : ProductIsAvailableInColor(Product, Color)</pre>
 <p>The following examples are equivalent to those above:</p>
 <pre>FileAppend "This is the text to append.`n"<strong>,</strong>   <em>; A comment is allowed here.</em>
     A_ProgramFiles "\SomeApplication\LogFile.txt"  <em>; Comment.</em>
@@ -162,7 +162,7 @@ MsgBox Format(FormatStr, A_TickCount, A_Now)</pre>
     &nbsp;; This is <strong>not</strong> a comment; it is literal. Include the word <i>Comments</i> in the line above to make it a comment.
 )", "C:\File.txt"   <em>; Comment.</em></pre>
 <p>As a consequence of the above, semicolons never need to be <a href="misc/EscapeChar.htm">escaped</a> within a continuation section.</p>
-<p>Since a closing parenthesis indicates the end of a continuation section, to have a line start with literal closing parenthesis, precede it with an accent/backtick: <code>`)</code>. However, this cannot be combined with the <a href="#accent">accent (`) option</a>.</p>
+<p>Since a closing parenthesis indicates the end of a continuation section, to have a line start with literal closing parenthesis, precede it with an accent/backtick: <code class="no-highlight">`)</code>. However, this cannot be combined with the <a href="#accent">accent (`) option</a>.</p>
 <p>A continuation section can be immediately followed by a line containing the open-parenthesis of another continuation section. This allows the options mentioned above to be varied during the course of building a single line.</p>
 <p>The piecemeal construction of a continuation section by means of <a href="lib/_Include.htm">#Include</a> is not supported.</p>
 
@@ -238,11 +238,11 @@ MsgBox Format(FormatStr, A_TickCount, A_Now)</pre>
       </tr>
       <tr id="SlashGui">
         <td>/gui</td>
-        <td>Shows the GUI instead of immediately compiling. The other parameters can be used to override the settings last saved in the GUI. <code>/in</code> is optional in this case.</td>
+        <td>Shows the GUI instead of immediately compiling. The other parameters can be used to override the settings last saved in the GUI. <code class="no-highlight">/in</code> is optional in this case.</td>
       </tr>
       <tr id="SlashGuiSilent">
         <td>/silent [verbose]</td>
-        <td>Disables all message boxes and instead outputs errors to the standard error stream (stderr); or to the standard output stream (stdout) if stderr fails. Other messages are also output to stdout. Optionally enter the word <code>verbose</code> to output status messages to stdout as well.</td>
+        <td>Disables all message boxes and instead outputs errors to the standard error stream (stderr); or to the standard output stream (stdout) if stderr fails. Other messages are also output to stdout. Optionally enter the word <code class="no-highlight">verbose</code> to output status messages to stdout as well.</td>
       </tr>
       <tr id="SlashAhk">
         <td class="warning"><strong>Deprecated:</strong><br>/ahk <i>file_name</i></td>
@@ -287,13 +287,13 @@ MsgBox Format(FormatStr, A_TickCount, A_Now)</pre>
 <p>See <a href="misc/Ahk2ExeDirectives.htm">Script Compiler Directives</a> for more details.</p>
 
 <h3 id="mpress">Compressing Compiled Scripts</h3>
-<p>Ahk2Exe optionally uses MPRESS or UPX freeware to compress compiled scripts. If <strong>MPRESS.exe</strong> and/or <strong>UPX.exe</strong> has been copied to the "Compiler" subfolder where AutoHotkey was installed, either can be used to compress the .exe as directed by the <code>/compress</code> parameter or the GUI setting. </p>
+<p>Ahk2Exe optionally uses MPRESS or UPX freeware to compress compiled scripts. If <strong>MPRESS.exe</strong> and/or <strong>UPX.exe</strong> has been copied to the "Compiler" subfolder where AutoHotkey was installed, either can be used to compress the .exe as directed by the <code class="no-highlight">/compress</code> parameter or the GUI setting. </p>
 <p><strong>MPRESS:</strong> <a href="https://www.autohotkey.com/mpress/mpress_web.htm">archived official website</a> (downloads and information) | <a href="https://www.autohotkey.com/mpress/mpress.219.zip">direct download</a> (95 KB)</p>
 <p><strong>UPX:</strong> <a href="https://upx.github.io/">official website</a> (downloads and information)</p>
 <p><strong>Note:</strong> While compressing the script executable prevents casual inspection of the script's source code using a plain text editor like Notepad or a PE resource editor, it does not prevent the source code from being extracted by tools dedicated to that purpose.</p>
 
 <h3 id="information">Background Information</h3>
- <p>The following folder structure is supported, where the running version of <code>Ahk2Exe.exe</code> is in the first \Compiler directory shown below:</p>
+ <p>The following folder structure is supported, where the running version of <code class="no-highlight">Ahk2Exe.exe</code> is in the first \Compiler directory shown below:</p>
 <pre class="no-highlight">\AutoHotkey 
    AutoHotkeyA32.exe 
    AutoHotkeyU32.exe
@@ -311,15 +311,15 @@ MsgBox Format(FormatStr, A_TickCount, A_Now)</pre>
       AutoHotkey32.exe
       AutoHotkey64.exe</pre>
 <p>The base file search algorithm runs for a short amount of time when Ahk2Exe starts, and works as follows:</p>
-<p>Qualifying AutoHotkey .exe files and all .bin files are searched for in the compiler's directory, the compiler's parent directory, and any of the compiler's sibling directories with directory names that start with <code>AutoHotkey</code> or <code>V</code>, but do not start with <code>AutoHotkey_H</code>. The selected directories are searched recursively. Any AutoHotkey.exe files found are excluded, leaving files such as AutoHotkeyA32.exe, AutoHotkey64.exe, etc. plus all .bin files found. All .exe files that are included must have a name starting with <code>AutoHotkey</code> and a file description containing the word <code>AutoHotkey</code>, and  must have a version of <code class="no-highlight">1.1.34+</code> or <code class="no-highlight">2.0-a135+</code>.</p>
+<p>Qualifying AutoHotkey .exe files and all .bin files are searched for in the compiler's directory, the compiler's parent directory, and any of the compiler's sibling directories with directory names that start with <code class="no-highlight">AutoHotkey</code> or <code class="no-highlight">V</code>, but do not start with <code class="no-highlight">AutoHotkey_H</code>. The selected directories are searched recursively. Any AutoHotkey.exe files found are excluded, leaving files such as AutoHotkeyA32.exe, AutoHotkey64.exe, etc. plus all .bin files found. All .exe files that are included must have a name starting with <code class="no-highlight">AutoHotkey</code> and a file description containing the word <code class="no-highlight">AutoHotkey</code>, and  must have a version of <code class="no-highlight">1.1.34+</code> or <code class="no-highlight">2.0-a135+</code>.</p>
 <p>A version of the AutoHotkey interpreter is also needed (as a utility) for a successful compile, and one is selected using a similar algorithm. In most cases the version of the interpreter used will match the version of the base file selected by the user for the compile.</p>
 
 
 <h2 id="cmd">Passing Command Line Parameters to a Script</h2>
 <p>Scripts support command line parameters. The format is:</p>
-<pre>AutoHotkey.exe [<i>Switches</i>] [<i>Script Filename</i>] [<i>Script Parameters</i>]</pre>
+<pre class="no-highlight">AutoHotkey.exe [<i>Switches</i>] [<i>Script Filename</i>] [<i>Script Parameters</i>]</pre>
 <p>And for compiled scripts, the format is:</p>
-<pre>CompiledScript.exe [<i>Switches</i>] [<i>Script Parameters</i>]</pre>
+<pre class="no-highlight">CompiledScript.exe [<i>Switches</i>] [<i>Script Parameters</i>]</pre>
 <p><strong>Switches:</strong> Zero or more of the following:</p>
 <table class="info">
   <tr><th>Switch</th><th>Meaning</th><th class="wrap" abbr="Compiled?">Works compiled?</th></tr>

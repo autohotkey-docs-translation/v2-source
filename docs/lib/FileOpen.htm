@@ -44,7 +44,7 @@ FileOpen("**", "w")  <em>; for stderr</em></pre>
   <dd>
     <p>Type: <a href="../Concepts.htm#strings">String</a> or <a href="../Concepts.htm#numbers">Integer</a></p>
     <p>If omitted, the default encoding (as set by <a href="FileEncoding.htm">FileEncoding</a> or CP0 otherwise) will be used. If blank, it defaults to CP0 (the system default ANSI code page). Otherwise, specify the encoding or code page to use for text I/O, e.g. <code>"UTF-8"</code>, <code>"UTF-16"</code>, <code>"CP936"</code> or <code>936</code>.</p>
-    <p>If the file contains a UTF-8 or UTF-16 byte order mark (BOM), or if the <code>h</code> (handle) flag is used, this parameter and the default encoding will be ignored, unless the file is being opened with write-only access (i.e. the previous contents of the file are being discarded).</p>
+    <p>If the file contains a UTF-8 or UTF-16 byte order mark (BOM), or if the <code class="no-highlight">h</code> (handle) flag is used, this parameter and the default encoding will be ignored, unless the file is being opened with write-only access (i.e. the previous contents of the file are being discarded).</p>
   </dd>
 
 </dl>
@@ -103,7 +103,7 @@ FileOpen("**", "w")  <em>; for stderr</em></pre>
     <td class="center">-rwd</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td>Locks the file for read, write and/or delete access. Any combination of <code>r</code>, <code>w</code> and <code>d</code> may be used. Specifying <code>-</code> is the same as specifying <code>-rwd</code>. If omitted entirely, the default is to share all access.</td>
+    <td>Locks the file for read, write and/or delete access. Any combination of <code class="no-highlight">r</code>, <code class="no-highlight">w</code> and <code class="no-highlight">d</code> may be used. Specifying <code class="no-highlight">-</code> is the same as specifying <code class="no-highlight">-rwd</code>. If omitted entirely, the default is to share all access.</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -143,13 +143,13 @@ FileOpen("**", "w")  <em>; for stderr</em></pre>
     <td class="center">`n</td>
     <td class="right">4</td>
     <td class="right">0x4</td>
-    <td>Replace <code>`r`n</code> with <code>`n</code> when reading and <code>`n</code> with <code>`r`n</code> when writing.</td>
+    <td>Replace <code class="no-highlight">`r`n</code> with <code class="no-highlight">`n</code> when reading and <code class="no-highlight">`n</code> with <code class="no-highlight">`r`n</code> when writing.</td>
   </tr>
   <tr>
     <td class="center">`r</td>
     <td class="right">8</td>
     <td class="right">0x8</td>
-    <td>Replace standalone <code>`r</code> with <code>`n</code> when reading.</td>
+    <td>Replace standalone <code class="no-highlight">`r</code> with <code class="no-highlight">`n</code> when reading.</td>
   </tr>
 </table>
 
