@@ -182,9 +182,9 @@ function ctor_highlighter()
     /** Searches for declarations, formats them and replaces them with placeholders. */
     function declarations(innerHTML)
     {
-      innerHTML = innerHTML.replace(new RegExp('\\b(' + syn[5].join('|') + ')(?=' + r_s + '+[' + r_char + ']+|' + r_s + '+' + r_com + '|$)', 'gim'), function(_, DEC)
+      innerHTML = innerHTML.replace(new RegExp(r_pre + '\\b(' + syn[5].join('|') + ')(?=' + r_s + '+[' + r_char + ']+|' + r_s + '+' + r_com + '|$)', 'gim'), function(_, PRE, DEC)
       {
-        return ph('dec', wrap(DEC, 'dec', 5));
+        return PRE + ph('dec', wrap(DEC, 'dec', 5));
       });
       // class declarations:
       innerHTML = innerHTML.replace(new RegExp('(<dec\\d+></dec\\d+>)(' + r_s + '+)([' + r_char + ']+)(' + r_s + '+)(extends)(' + r_s + '+)([' + r_char + ']+)', 'gim'), function(ASIS, CLASS, SPACE1, NAME1, SPACE2, EXTENDS, SPACE3, NAME2)
@@ -206,7 +206,7 @@ function ctor_highlighter()
         PARAMS = param_list_to_array(PARAMS);
         PARAMS = merge_excess_params(PARAMS, types);
         PARAMS = param_array_to_list(PARAMS, types);
-        return PRE + ph('dir', wrap(DIR, 'dir', 0) + operators(SEP) + PARAMS);
+        return PRE + ph('dir', wrap(DIR, 'dir', 0) + SEP + PARAMS);
       });
     }
     /** Searches for control flow statements, formats them and replaces them with placeholders. */
@@ -242,7 +242,7 @@ function ctor_highlighter()
           if (m = PARAMS.match(new RegExp('^(' + r_s + '*\\(?)(,?' + r_s + '*[' + r_char + ']+?(?:' + r_s + '*,' + r_s + '*[' + r_char + ']+?)*' + r_s + '*,?' + r_s + '+)(in)(' + r_s + '.+?)(' + r_s + '*\\)?)$', 'i')))
           {
             link = index_data[syn[3].dict['for']][1];
-            out = wrap(CFS, 'cfs', link) + SEP + m[1] + expressions(m[2]) + wrap(m[3], 'cfs', link) + expressions(m[4]) + m[5];
+            out = wrap(CFS, 'cfs', link) + operators(SEP + m[1]) + expressions(m[2]) + wrap(m[3], 'cfs', link) + expressions(m[4]) + operators(m[5]);
             return PRE + ph('cfs', out);
           }
         }
@@ -252,17 +252,17 @@ function ctor_highlighter()
           if (m = PARAMS.match(new RegExp('^(' + r_s + '*\\(?)([' + r_char + ']+(?:' + r_s + '*,' + r_s + '*[' + r_char + ']+)*' + r_s + '+)?(as)(' + r_s + '+[' + r_char + ']+)(' + r_s + '*\\)?)$', 'i')))
           {
             link = index_data[syn[3].dict['catch']][1];
-            out = wrap(CFS, 'cfs', link) + SEP + m[1];
+            out = wrap(CFS, 'cfs', link) + operators(SEP + m[1]);
             if (m[2])
               out += expressions(m[2]);
-            out += wrap(m[3], 'cfs', link) + expressions(m[4]) + m[5];
+            out += wrap(m[3], 'cfs', link) + expressions(m[4]) + operators(m[5]);
             return PRE + ph('cfs', out);
           }
         }
         PARAMS = param_list_to_array(PARAMS);
         PARAMS = merge_excess_params(PARAMS, types);
         PARAMS = param_array_to_list(PARAMS, types);
-        return PRE + ph('cfs', wrap(CFS, 'cfs', 3) + SEP + PARAMS);
+        return PRE + ph('cfs', wrap(CFS, 'cfs', 3) + operators(SEP) + PARAMS);
       });
       // switch's case keyword:
       innerHTML = innerHTML.replace(new RegExp(r_pre + '\\b(case)\\b(' + r_s + '*,' + r_s + '*|' + r_s + '+)(.*?:(?!=).*?)(?=' + r_s + '*' + r_com + '|$)', 'gim'), function(ASIS, PRE, CFS, SEP, PARAMS)
@@ -295,14 +295,14 @@ function ctor_highlighter()
     /** Searches for hotstrings, formats them and replaces them with placeholders. */
     function hotstrings(innerHTML)
     {
-      return innerHTML.replace(new RegExp('^(' + r_s + '*)(:.*?:)(.*?)(::)(.*?(?=' + r_s + '+' + r_com + '(?!' + r_cont + ')|' + r_s + '*$)(?:(?:.*[\\n\\r]' + r_s + '*?(?:' + r_com + '|' + r_cont + ').*?(?=' + r_s + '*' + r_com + '|$)))*)', 'mg'), function(_, PRE, HS1, ABBR, HS2, REPL)
+      return innerHTML.replace(new RegExp('^(' + r_s + '*):(.*?):(.*?)::(.*?(?=' + r_s + '+' + r_com + '(?!' + r_cont + ')|' + r_s + '*$)(?:(?:.*[\\n\\r]' + r_s + '*?(?:' + r_com + '|' + r_cont + ').*?(?=' + r_s + '*' + r_com + '|$)))*)', 'mg'), function(_, PRE, OPTS, ABBR, REPL)
       {
-        var out = wrap(HS1, 'lab', null) + wrap(ABBR, 'str', null) + wrap(HS2, 'lab', null);
+        var out = wrap(':', 'opr', null) + (OPTS ? wrap(OPTS, 'opt', null) : '') + wrap(':', 'opr', null) + wrap(ABBR, 'hot', null) + wrap('::', 'opr', null);
         if (REPL != '')
         {
           if (REPL.match(new RegExp('^' + r_s + '*\\{$', 'm')))
-            out += REPL;
-          else if (resolve_placeholders(HS1, 'esc').match(/x/i)) // execute option
+            out += operators(REPL);
+          else if (resolve_placeholders(OPTS, 'esc').match(/x/i)) // execute option
             out += statements(REPL);
           else if (REPL.match(new RegExp(r_cont))) // continuation section
             out += string_with_cont_sections(REPL, true);
@@ -318,16 +318,20 @@ function ctor_highlighter()
       var key_names = '(?:L|R|M)Button|XButton[1-2]|Wheel(?:Down|Up|Left|Right)|CapsLock|Space|Tab|Enter|Escape|Esc|Backspace|BS|ScrollLock|Delete|Del|Insert|Ins|Home|End|PgUp|PgDn|Up|Down|Left|Right|Numpad(?:[0-9]|Dot|Ins|End|Down|PgDn|Left|Clear|Right|Home|Up|PgUp|Del|Div|Mult|Add|Sub|Enter)|NumLock|F(?:2[0-4]|1[0-9]|[1-9])|LWin|RWin|(?:L|R)?(?:Control|Ctrl|Shift|Alt)|Browser_(?:Back|Forward|Refresh|Stop|Search|Favorites|Home)|Volume_(?:Mute|Down|Up)|Media_(?:Next|Prev|Stop|Play_Pause)|Launch_(?:Mail|Media|App1|App2)|AppsKey|PrintScreen|CtrlBreak|Pause|Help|Sleep|SC[0-9a-f]{1,3}|VK[0-9a-f]{1,2}|(?:1[0-6]|[1-9])?Joy(?:3[0-2]|2[0-9]|1[0-9]|[1-9])|\\S|`;|&.+?;';
       return innerHTML.replace(new RegExp('^(' + r_s + '*)((?:(?:[#!^+*~$]|&lt;|&gt;)*(?:' + key_names + ')(?:' + r_s + '+up)?|~?(?:' + key_names + ')' + r_s + '+&amp;' + r_s + '+~?(?:' + key_names + ')(?:' + r_s + '+up)?))::(' + r_s + '*)(.*?)(?=' + r_s + '+' + r_com + '|$)', 'gim'), function(ASIS, PRE, HK, SPACE, ACTION)
       {
+        console.log(HK);
         var out = wrap(escape_sequences(HK, '`;'), 'hot', null) + wrap('::', 'opr', null) + SPACE;
         if (ACTION != '')
         {
+          console.log(ACTION);
           if ((ACTION.split(/"|'/).length - 1) == 1) // quote count
             return ASIS;
           if (ACTION == '{')
             out += operators(ACTION);
+          else if (ACTION == '`{')
+            out += wrap(escape_sequences(ACTION, '`\\{'), 'hot', null);
           else if (ACTION.match(/^(control|sleep)$/i))
             out += wrap(ACTION, 'hot', null);
-          else if (ACTION.match(/^(return|pause)$/i))
+          else if (ACTION.match(/^(pause)$/i))
             out += statements(ACTION);
           else if (ACTION.match(/^(AltTab|ShiftAltTab|AltTabMenu|AltTabAndMenu|AltTabMenuDismiss)$/i))
             out += wrap(ACTION, 'hot', null);
@@ -410,10 +414,16 @@ function ctor_highlighter()
     /** Searches for built-in functions, formats them and replaces them with placeholders. */
     function built_in_functions(innerHTML)
     {
-      return innerHTML.replace(new RegExp('\\b(' + syn[2].join('|') + ')\\b(?=$|\\(|' + r_s + '(?!' + r_s + '*' + r_op_assign + ')|' + r_cont + ')', 'gim'), function(_, BIF)
+      return innerHTML.replace(new RegExp('\\b(' + syn[2].join('|') + ')\\b(?=$|\\(|' + r_s + '(?!' + r_s + '*' + r_op_assign + ')|' + r_cont + ')', 'gim'), function(_, NAME)
       {
-        if (NAME.match('^(' + syn[2].join('|') + ')$', 'i'))
-          return ph('fun', wrap(NAME, 'fun', 2));
+        return ph('fun', wrap(NAME, 'fun', 2));
+      });
+    }
+    /** Searches for custom functions, formats them and replaces them with placeholders. */
+    function custom_functions(innerHTML)
+    {
+      return innerHTML.replace(new RegExp('\\b([' + r_char + ']+)(?=\\()', 'g'), function(_, NAME)
+      {
         return ph('fun', wrap(NAME, 'fun', null));
       });
     }
@@ -431,7 +441,7 @@ function ctor_highlighter()
         return ph('opr', wrap(OPR, 'opr', null));
       });
       // named operators:
-      innerHTML = innerHTML.replace(new RegExp('\\b(and|not|or)\\b', 'gi'), function(OPR)
+      innerHTML = innerHTML.replace(new RegExp('\\b(and|is|not|or)\\b', 'gi'), function(OPR)
       {
         return ph('opr', wrap(OPR, 'opr', 4));
       });
@@ -455,6 +465,8 @@ function ctor_highlighter()
       innerHTML = built_in_vars(innerHTML);
       innerHTML = built_in_classes(innerHTML);
       innerHTML = built_in_functions(innerHTML);
+      innerHTML = custom_functions(innerHTML);
+      innerHTML = operators(innerHTML);
       return innerHTML;
     }
     /** Converts a comma-separated list of parameters to an array.
