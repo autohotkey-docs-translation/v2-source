@@ -65,7 +65,7 @@
 <span id="Validation"></span><h3 id="Syntax_Errors">Syntax Errors</h3>
 <p>Certain syntax errors which were tolerated by AutoHotkey Basic are not tolerated by AutoHotkey_L.  Most such errors can be easily corrected once they are identified.  The following errors are detected immediately upon launching a script in AutoHotkey_L, and must be corrected for the script to run:</p>
 <ul>
-  <li>A space, tab or comma is required between each command and its parameters.  For example, <code>MsgBox&lt; foo</code> and <code>If!foo</code> are not tolerated.</li>
+  <li>A space, tab or comma is required between each command and its parameters.  For example, <code class="no-highlight">MsgBox&lt; foo</code> and <code class="no-highlight">If!foo</code> are not tolerated.</li>
   <li><code>Hotkey, If<i>Something</i></code>, where <i>Something</i> is invalid, is not tolerated.</li>
 </ul>
 <p>Some other syntax errors are detected while the script is running.  These cause an error message to be displayed prior to exiting the current thread:</p>
@@ -80,7 +80,7 @@
 </ul>
 
 <h3 id="FileRead">FileRead</h3>
-<p><a href="lib/FileRead.htm#Binary">FileRead</a> translates text between code pages in certain common cases and therefore might output corrupt binary data.  To avoid this, add the <code>*c</code> option or use <a href="lib/FileOpen.htm">FileOpen()</a> instead.</p>
+<p><a href="lib/FileRead.htm#Binary">FileRead</a> translates text between code pages in certain common cases and therefore might output corrupt binary data.  To avoid this, add the <code class="no-highlight">*c</code> option or use <a href="lib/FileOpen.htm">FileOpen()</a> instead.</p>
 
 <h3 id="Names">Variable and Function Names</h3>
 <p>The characters <code>[</code>, <code>]</code> and <code>?</code> are reserved for use in <a href="Variables.htm#Expressions">expressions</a>, so are no longer valid in variable names.  Consequently, <code>?</code> (used in <a href="Variables.htm#ternary">ternary operations</a>) no longer requires a space on either side.  See also <a href="Objects.htm#Syntax">object syntax</a>.</p>
@@ -129,7 +129,7 @@ MsgBox,, Title
 </pre>
 
 <h3 id="GuiOwner">Gui +Owner</h3>
-<p>Applying the <a href="lib/Gui.htm#Owner">+Owner</a> option to a Gui also removes the WS_CHILD style and sets the WS_POPUP style. This may break scripts which used <code>+Owner</code> to set the parent window of a Gui <em>after</em> setting the styles.</p>
+<p>Applying the <a href="lib/Gui.htm#Owner">+Owner</a> option to a Gui also removes the WS_CHILD style and sets the WS_POPUP style. This may break scripts which used <code class="no-highlight">+Owner</code> to set the parent window of a Gui <em>after</em> setting the styles.</p>
 
 <h3 id="VistaSound">Sound Commands on Windows Vista and later</h3>
 <p><a href="lib/SoundSet.htm">SoundSet</a>, <a href="lib/SoundGet.htm">SoundGet</a>, <a href="lib/SoundSetWaveVolume.htm">SoundSetWaveVolume</a> and <a href="lib/SoundGetWaveVolume.htm">SoundGetWaveVolume</a> have improved support for Windows Vista and later.  Typical changes in behaviour include:</p>
@@ -162,13 +162,13 @@ MsgBox,, Title
 <p><a href="lib/LoopReadFile.htm">Loop Read</a> and <a href="lib/FileReadLine.htm">FileReadLine</a> no longer interpret the character <kbd>Ctrl</kbd>+<kbd>Z</kbd> (0x1A) as an end-of-file marker.  Any <kbd>Ctrl</kbd>+<kbd>Z</kbd>, even one appearing at the very end of the file, is loaded as-is.  <a href="lib/FileRead.htm">FileRead</a> already ignored this character, so is not affected by this issue.</p>
 
 <h3 id="Compatibility_Mode">Compatibility Mode</h3>
-<p>If <a href="https://support.microsoft.com/windows/make-older-apps-or-programs-compatible-with-windows-783d6dd7-b439-bdb0-0490-54eea0f45938">Compatibility mode</a> is set to Windows 95, 98/ME or NT4 in the properties of the EXE file used to run the script, the script may not behave correctly.  This is because compatibility mode causes a specific version of Windows to be reported to the application, but AutoHotkey_L omits support for these versions.  For example, setting compatibility mode to Windows 95 or 98/ME will cause <code>MsgBox %A_OSVersion%</code> to report <code>WIN_NT4</code>.</p>
+<p>If <a href="https://support.microsoft.com/windows/make-older-apps-or-programs-compatible-with-windows-783d6dd7-b439-bdb0-0490-54eea0f45938">Compatibility mode</a> is set to Windows 95, 98/ME or NT4 in the properties of the EXE file used to run the script, the script may not behave correctly.  This is because compatibility mode causes a specific version of Windows to be reported to the application, but AutoHotkey_L omits support for these versions.  For example, setting compatibility mode to Windows 95 or 98/ME will cause <code>MsgBox %A_OSVersion%</code> to report <code class="no-highlight">WIN_NT4</code>.</p>
 
 <h3 id="IsCompiled">A_IsCompiled</h3>
 <p><a href="Variables.htm#IsCompiled">A_IsCompiled</a> is defined as an empty string if the script has not been compiled.  Previously it was left undefined, which meant that assignments such as <code>A_IsCompiled := 1</code> were valid if the script hadn't been compiled.  Now it is treated as a read-only built-in variable in all cases.</p>
 
 <h3 id="Escaped_Whitespace">Escaped Whitespace</h3>
-<p>Escaped whitespace characters such as <code>`t</code> and <code>` </code> are no longer trimmed from the beginning and end of each arg.  For example, <code>StringReplace s, s, `t</code> is now valid and will remove all tab characters from <em>s</em>.</p>
+<p>Escaped whitespace characters such as <code class="no-highlight">`t</code> and <code class="no-highlight">` </code> are no longer trimmed from the beginning and end of each arg.  For example, <code>StringReplace s, s, `t</code> is now valid and will remove all tab characters from <em>s</em>.</p>
 
 
 <h2 id="Format">Unicode vs ANSI</h2>

@@ -26,7 +26,7 @@
 <h2 id="intro">Introduction</h2>
 <p><strong>Limitation:</strong> AutoHotkey's remapping feature described below is generally not as pure and effective as remapping directly via the Windows registry. For the advantages and disadvantages of each approach, see <a href="#registry">registry remapping</a>.</p>
 <h2 id="Remap">Remapping the Keyboard and Mouse</h2>
-<p>The syntax for the built-in remapping feature is <code>OriginKey::DestinationKey</code>. For example, a <a href="../Scripts.htm">script</a> consisting only of the following line would make <kbd>A</kbd> behave like <kbd>B</kbd>:</p>
+<p>The syntax for the built-in remapping feature is <code class="no-highlight">OriginKey::DestinationKey</code>. For example, a <a href="../Scripts.htm">script</a> consisting only of the following line would make <kbd>A</kbd> behave like <kbd>B</kbd>:</p>
 <pre>a::b</pre>
 <p>The above example does not alter <kbd>B</kbd> itself. <kbd>B</kbd> would continue to send the "b" keystroke unless you remap it to something else as shown in the following example:</p>
 <pre>a::b
@@ -105,7 +105,7 @@ a::b  <em>; Makes the 'a' key send a 'b' key, but only in Notepad.</em>
   <li>The destination key or button is held down for as long as you continue to hold down the origin key. However, some games do not support remapping; in such cases, the keyboard and mouse will behave as though not remapped.</li>
   <li>Remapped keys will auto-repeat while being held down (except keys remapped to become mouse buttons).</li>
 </ul>
-<p id="HookHotkeys">Although a remapped key can trigger normal hotkeys, by default it cannot trigger mouse hotkeys or <a href="../lib/_UseHook.htm">hook hotkeys</a> (use <a href="../lib/ListHotkeys.htm">ListHotkeys</a> to discover which hotkeys are "hook"). For example, if the remapping <code>a::b</code> is in effect, pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> would trigger the <code>^!b</code> hotkey only if <code>^!b</code> is not a hook hotkey. If <code>^!b</code> is a hook hotkey, you can define <code>^!a</code> as a hotkey if you want <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> to perform the same action as <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>. For example:</p>
+<p id="HookHotkeys">Although a remapped key can trigger normal hotkeys, by default it cannot trigger mouse hotkeys or <a href="../lib/_UseHook.htm">hook hotkeys</a> (use <a href="../lib/ListHotkeys.htm">ListHotkeys</a> to discover which hotkeys are "hook"). For example, if the remapping <code>a::b</code> is in effect, pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> would trigger the <code class="no-highlight">^!b</code> hotkey only if <code class="no-highlight">^!b</code> is not a hook hotkey. If <code class="no-highlight">^!b</code> is a hook hotkey, you can define <code class="no-highlight">^!a</code> as a hotkey if you want <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> to perform the same action as <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>. For example:</p>
 <pre>a::b
 ^!a::
 ^!b::
@@ -132,7 +132,7 @@ Send {Blind}{b up}
 return</pre>
 <p>However, the above hotkeys vary under the following circumstances:</p>
 <ol>
-  <li>When the source key is the left <kbd>Ctrl</kbd> and the destination key is <kbd>Alt</kbd>, the line <code>Send {Blind}{LAlt DownR}</code> is replaced by <code>Send {Blind}<strong>{LCtrl up}</strong>{LAlt DownR}</code>. The same is true if the source is the right <kbd>Ctrl</kbd>, except that <code>{RCtrl up}</code> is used.</li>
+  <li>When the source key is the left <kbd>Ctrl</kbd> and the destination key is <kbd>Alt</kbd>, the line <code>Send {Blind}{LAlt DownR}</code> is replaced by <code>Send {Blind}<strong>{LCtrl up}</strong>{LAlt DownR}</code>. The same is true if the source is the right <kbd>Ctrl</kbd>, except that <code class="no-highlight">{RCtrl up}</code> is used.</li>
   <li>When a keyboard key is being remapped to become a mouse button (e.g. <code>RCtrl::RButton</code>), the hotkeys above use SetMouseDelay in place of SetKeyDelay. In addition, the first hotkey above is replaced by the following, which prevents the keyboard's auto-repeat feature from generating repeated mouse clicks:
     <pre>*RCtrl::
 SetMouseDelay -1
@@ -143,7 +143,7 @@ return</pre>
   <li>When the source is a <a href="../Hotkeys.htm#combo">custom combination</a> in <span class="ver">[v1.1.27.01+]</span>, the wildcard modifier (*) is omitted to allow the hotkeys to work.</li>
 </ol>
 <p>Prior to <span class="ver">[v1.1.27]</span>, <a href="../lib/Send.htm#DownTemp">DownTemp</a> was used instead of <a href="../lib/Send.htm#DownR">DownR</a>.</p>
-<p>Note that SetKeyDelay's second parameter (<a href="../lib/SetKeyDelay.htm#dur">press duration</a>) is omitted in the hotkeys above. This is because press-duration does not apply to down-only or up-only events such as <code>{b down}</code> and <code>{b up}</code>. However, it does apply to changes in the state of the modifier keys (Shift, Ctrl, Alt, and Win), which affects remappings such as <code>a::B</code> or <code>a::^b</code>. Consequently, any press-duration a script puts into effect via its <a href="../Scripts.htm#auto">auto-execute section</a> will apply to all such remappings.</p>
+<p>Note that SetKeyDelay's second parameter (<a href="../lib/SetKeyDelay.htm#dur">press duration</a>) is omitted in the hotkeys above. This is because press-duration does not apply to down-only or up-only events such as <code class="no-highlight">{b down}</code> and <code class="no-highlight">{b up}</code>. However, it does apply to changes in the state of the modifier keys (Shift, Ctrl, Alt, and Win), which affects remappings such as <code>a::B</code> or <code>a::^b</code>. Consequently, any press-duration a script puts into effect via its <a href="../Scripts.htm#auto">auto-execute section</a> will apply to all such remappings.</p>
 <p>Since remappings are translated into hotkeys as described above, the <a href="../lib/Suspend.htm">Suspend</a> command affects them. Similarly, the <a href="../lib/Hotkey.htm">Hotkey</a> command can disable or modify a remapping. For example, the following two commands would disable the remapping <code>a::b</code>.</p>
 <pre>Hotkey, *a, Off
 Hotkey, *a up, Off</pre>
@@ -153,7 +153,7 @@ Hotkey, *a up, Off</pre>
 <p>The following keys are not supported by the built-in remapping method:</p>
 <ul>
   <li>The mouse wheel (WheelUp/Down/Left/Right).</li>
-  <li>Pause and Break as destination key names (since they match the names of commands). <span class="ver">[v1.1.32+]</span>: <code>vk13</code> or the corresponding scan code can be used instead.</li>
+  <li>Pause and Break as destination key names (since they match the names of commands). <span class="ver">[v1.1.32+]</span>: <code class="no-highlight">vk13</code> or the corresponding scan code can be used instead.</li>
   <li>Curly braces {} as destination keys. Instead use the <a href="../lib/Send.htm#vk">VK/SC method</a>; e.g. <code>x::+sc01A</code> and <code>y::+sc01B</code>.</li>
   <li>A percent sign (%) as a destination key. Instead use the <a href="../lib/Send.htm#vk">VK/SC method</a>.</li>
   <li>"Return" as a destination key. Instead use "Enter".</li>

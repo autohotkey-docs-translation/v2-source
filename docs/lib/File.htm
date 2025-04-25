@@ -71,7 +71,7 @@
 <p>Reads a line of text from the file and advances the file pointer.</p>
 <pre class="Syntax">TextLine := File.<span class="func">ReadLine</span>()</pre>
 <h4 id="ReadLine_Return_Value">Return Value</h4>
-<p>This method returns a line of text.  This may include <code>`n</code>, <code>`r`n</code> or <code>`r</code> depending on the file and EOL flags used to open the file.</p>
+<p>This method returns a line of text.  This may include <code class="no-highlight">`n</code>, <code class="no-highlight">`r`n</code> or <code class="no-highlight">`r</code> depending on the file and EOL flags used to open the file.</p>
 <h4 id="ReadLine_Remarks">Remarks</h4>
 <p>Lines up to 65,534 characters long can be read. If the length of a line exceeds this, the remainder of the line is returned by subsequent calls to this method.</p></div>
 
@@ -81,7 +81,7 @@
 <h4 id="WriteLine_Parameters">Parameters</h4>
 <dl>
   <dt>String</dt>
-  <dd>If blank or omitted, an empty line will be written. Otherwise, specify the string to write, which is always followed by <code>`n</code> or <code>`r`n</code>, depending on the EOL flags used to open the file.</dd>
+  <dd>If blank or omitted, an empty line will be written. Otherwise, specify the string to write, which is always followed by <code class="no-highlight">`n</code> or <code class="no-highlight">`r`n</code>, depending on the EOL flags used to open the file.</dd>
 </dl>
 <h4 id="WriteLine_Return_Value">Return Value</h4>
 <p>This method returns the number of bytes (not characters) that were written.</p>
@@ -202,10 +202,10 @@ File.<span class="func">Position</span> := NewPos</pre>
   <ul>
 	<li><code class="no-highlight">UTF-8</code>: Unicode UTF-8, equivalent to CP65001.</li>
 	<li><code class="no-highlight">UTF-16</code>: Unicode UTF-16 with little endian byte order, equivalent to CP1200.</li>
-	<li><code>CP<i>nnn</i></code>: a code page with numeric identifier <i>nnn</i>.</li>
+	<li><code class="no-highlight">CP<i>nnn</i></code>: a code page with numeric identifier <i>nnn</i>.</li>
   </ul>
-  <p><em>CurrentEncoding</em> is never a value with the <code>-RAW</code> suffix, regardless of how the file was opened or whether it contains a byte order mark (BOM). Setting <em>NewEncoding</em> never causes a BOM to be added or removed, as the BOM is normally written to the file when it is first created.</p>
-  <p><span class="ver">[v1.1.15.04+]</span>: Setting <em>NewEncoding</em> to <code class="no-highlight">UTF-8-RAW</code> or <code class="no-highlight">UTF-16-RAW</code> is valid, but the <code>-RAW</code> suffix is ignored. In earlier versions, <code class="no-highlight">UTF-8-RAW</code> and <code class="no-highlight">UTF-16-RAW</code> behaved like an invalid 8-bit encoding, causing all non-ASCII characters to be discarded.  This only applies to <code>File.Encoding</code>, not <a href="FileOpen.htm">FileOpen()</a>.</p>
+  <p><em>CurrentEncoding</em> is never a value with the <code class="no-highlight">-RAW</code> suffix, regardless of how the file was opened or whether it contains a byte order mark (BOM). Setting <em>NewEncoding</em> never causes a BOM to be added or removed, as the BOM is normally written to the file when it is first created.</p>
+  <p><span class="ver">[v1.1.15.04+]</span>: Setting <em>NewEncoding</em> to <code class="no-highlight">UTF-8-RAW</code> or <code class="no-highlight">UTF-16-RAW</code> is valid, but the <code class="no-highlight">-RAW</code> suffix is ignored. In earlier versions, <code class="no-highlight">UTF-8-RAW</code> and <code class="no-highlight">UTF-16-RAW</code> behaved like an invalid 8-bit encoding, causing all non-ASCII characters to be discarded.  This only applies to <code>File.Encoding</code>, not <a href="FileOpen.htm">FileOpen()</a>.</p>
 </div>
 
 <a id="__Handle"></a><div class="methodShort" id="Handle"><h3>Handle / __Handle</h3>

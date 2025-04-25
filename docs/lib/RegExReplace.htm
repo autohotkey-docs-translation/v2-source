@@ -63,7 +63,7 @@
 <p>To improve performance, the 100 most recently used regular expressions are kept cached in memory (in compiled form).</p>
 <p>The <a href="../misc/RegEx-QuickRef.htm#Study">study option (S)</a> can sometimes improve the performance of a regular expression that is used many times (such as in a loop).</p>
 <h2 id="Remarks">Remarks</h2>
-<p>Most characters like abc123 can be used literally inside a regular expression. However, any of the characters in the set <code>\.*?+[{|()^$</code> must be preceded by a backslash to be seen as literal. For example, <span class="regex">\.</span> is a literal period and <span class="regex">\\</span> is a literal backslash. Escaping can be avoided by using \Q...\E. For example: <span class="regex">\QLiteral Text\E</span>.</p>
+<p>Most characters like abc123 can be used literally inside a regular expression. However, any of the characters in the set <code class="no-highlight">\.*?+[{|()^$</code> must be preceded by a backslash to be seen as literal. For example, <span class="regex">\.</span> is a literal period and <span class="regex">\\</span> is a literal backslash. Escaping can be avoided by using \Q...\E. For example: <span class="regex">\QLiteral Text\E</span>.</p>
 <p>Within a regular expression, special characters such as tab and newline can be escaped with either an accent (`) or a backslash (\). For example, <span class="regex">`t</span> is the same as <span class="regex">\t</span> except when the <a href="../misc/RegEx-QuickRef.htm#opt_x">x option</a> is used.</p>
 <p>To learn the basics of regular expressions (or refresh your memory of pattern syntax), see the <a href="../misc/RegEx-QuickRef.htm">RegEx Quick Reference</a>.</p>
 <h2 id="Related">Related</h2>

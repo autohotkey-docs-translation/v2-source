@@ -17,7 +17,7 @@
 HBITMAP:<i>BitmapHandle</i>
 HICON:<i>IconHandle</i>
 </pre>
-<p>Replace <em>BitmapHandle</em> or <em>IconHandle</em> with the actual handle value. For example, <code>hicon:%handle%</code> (or <code>"hicon:" handle</code> in an <a href="../Variables.htm#Expressions">expression</a>), where <em>handle</em> is a variable containing an icon handle.</p>
+<p>Replace <em>BitmapHandle</em> or <em>IconHandle</em> with the actual handle value. For example, <code class="no-highlight">hicon:%handle%</code> (or <code>"hicon:" handle</code> in an <a href="../Variables.htm#Expressions">expression</a>), where <em>handle</em> is a variable containing an icon handle.</p>
 <p>The following commands and functions support this syntax:</p>
 <ul>
   <li><a href="../lib/GuiControls.htm#Picture">Gui Add, Picture</a> (and <a href="../lib/GuiControl.htm">GuiControl</a> when setting a Picture control's content).</li>
@@ -29,7 +29,7 @@ HICON:<i>IconHandle</i>
   <li><a href="../lib/Progress.htm">SplashImage</a></li>
 </ul>
 <p>A bitmap or icon handle is a numeric value which identifies a bitmap or icon in memory. The majority of scripts never need to deal with handles, as in most cases AutoHotkey takes care of loading the image from file and freeing it when it is no longer needed. The syntax shown above is intended for use when the script obtains an icon or bitmap handle from another source, such as by sending the WM_GETICON message to a window. It can also be used in combination with <a href="../lib/LoadPicture.htm">LoadPicture()</a> to avoid loading an image from file multiple times.</p>
-<p>By default, AutoHotkey treats the handle as though it loaded the image from file - for example, a bitmap used on a Picture control is deleted when the GUI is destroyed, and an image will generally be deleted immediately if it needs to be resized. To avoid this, put an asterisk between the colon and handle. For example: <code>hbitmap:*%handle%</code> (or <code>"hbitmap:*" handle</code> in an expression). With the exception of ImageSearch, this forces the command to take a copy of the image.</p>
+<p>By default, AutoHotkey treats the handle as though it loaded the image from file - for example, a bitmap used on a Picture control is deleted when the GUI is destroyed, and an image will generally be deleted immediately if it needs to be resized. To avoid this, put an asterisk between the colon and handle. For example: <code class="no-highlight">hbitmap:*%handle%</code> (or <code>"hbitmap:*" handle</code> in an expression). With the exception of ImageSearch, this forces the command to take a copy of the image.</p>
 
 <h2 id="Examples">Examples</h2>
 <div class="ex" id="ExHICON">

@@ -45,12 +45,12 @@
     , %A_ProgramFiles%\SomeApplication\LogFile.txt  <em>; Comment.</em></pre>
 <p>Similarly, the following lines would get merged into a single line because the last two start with "and" or "or":</p>
 <pre>if (Color = "Red" or Color = "Green"  or Color = "Blue"   <em>; Comment.</em>
-    <strong>or</strong> Color = "Black" or Color = "Gray" or Color = "White")   <em>; Comment.</em>
-    <strong>and</strong> ProductIsAvailableInColor(Product, Color)   <em>; Comment.</em></pre>
+    or Color = "Black" or Color = "Gray" or Color = "White")   <em>; Comment.</em>
+    and ProductIsAvailableInColor(Product, Color)   <em>; Comment.</em></pre>
 <p>The <a href="Variables.htm#ternary">ternary operator</a> is also a good candidate:</p>
 <pre>ProductIsAvailable := (Color = "Red")
-    <strong>?</strong> false  <em>; We don't have any red products, so don't bother calling the function.</em>
-    <strong>:</strong> ProductIsAvailableInColor(Product, Color)</pre>
+    ? false  <em>; We don't have any red products, so don't bother calling the function.</em>
+    : ProductIsAvailableInColor(Product, Color)</pre>
 <p>Although the indentation used in the examples above is optional, it might improve clarity by indicating which lines belong to ones above them. Also, it is not necessary to include extra spaces for lines starting with the words "AND" and "OR"; the program does this automatically. Finally, blank lines or <a href="Language.htm#comments">comments</a> may be added between or at the end of any of the lines in the above examples.</p>
 <p id="continuation-section"><strong>Method #2:</strong> This method should be used to merge a large number of lines or when the lines are not suitable for Method #1. Although this method is especially useful for <a href="Hotstrings.htm">auto-replace hotstrings</a>, it can also be used with any command or <a href="Variables.htm#Expressions">expression</a>. For example:</p>
 <pre><em>; EXAMPLE #1:</em>
@@ -76,9 +76,9 @@ Line 1 of the text.
 Line 2 of the text. By default, a linefeed (`n) is present between lines.
 ), C:\My File.txt</pre>
 <p>In the examples above, a series of lines is bounded at the top and bottom by a pair of parentheses. This is known as a <em>continuation section</em>. Notice that the bottom line contains <a href="lib/FileAppend.htm">FileAppend</a>'s last parameter after the closing parenthesis. This practice is optional; it is done in cases like this so that the comma will be seen as a parameter-delimiter rather than a literal comma.</p>
-<p>The default behavior of a continuation section can be overridden by including one or more of the following options to the right of the section's opening parenthesis. If more than one option is present, separate each one from the previous with a space. For example: <code>( LTrim Join| %</code>.</p>
-<p id="Join"><strong>Join</strong><em>String</em>: Specifies how lines should be connected together. If this option is not used, each line except the last will be followed by a linefeed character (`n). If <em>String</em> is omitted, lines are connected directly to each other without any characters in between. Otherwise, specify for <em>String</em> a string of up to 15 characters. For example, <code>Join`s</code> would insert a space after each line except the last (<code>`s</code> indicates a literal space -- it is a special escape sequence recognized only by this option). Another example is <code>Join`r`n</code>, which inserts CR+LF between lines. Similarly, <code>Join|</code> inserts a pipe between lines. To have the final line in the section also ended by <em>String</em>, include a blank line immediately above the section's closing parenthesis.</p>
-<p>Known limitation: If <em>String</em>'s last character is a colon, it must not be the last option on the line. For example, <code>(Join:</code> is treated as the label "(Join" and <code>(LTrim Join:</code> is unsupported, but <code>(Join: C</code> is okay.</p>
+<p>The default behavior of a continuation section can be overridden by including one or more of the following options to the right of the section's opening parenthesis. If more than one option is present, separate each one from the previous with a space. For example: <code class="no-highlight">( LTrim Join| %</code>.</p>
+<p id="Join"><strong>Join</strong><em>String</em>: Specifies how lines should be connected together. If this option is not used, each line except the last will be followed by a linefeed character (`n). If <em>String</em> is omitted, lines are connected directly to each other without any characters in between. Otherwise, specify for <em>String</em> a string of up to 15 characters. For example, <code class="no-highlight">Join`s</code> would insert a space after each line except the last (<code class="no-highlight">`s</code> indicates a literal space -- it is a special escape sequence recognized only by this option). Another example is <code class="no-highlight">Join`r`n</code>, which inserts CR+LF between lines. Similarly, <code class="no-highlight">Join|</code> inserts a pipe between lines. To have the final line in the section also ended by <em>String</em>, include a blank line immediately above the section's closing parenthesis.</p>
+<p>Known limitation: If <em>String</em>'s last character is a colon, it must not be the last option on the line. For example, <code class="no-highlight">(Join:</code> is treated as the label "(Join" and <code class="no-highlight">(LTrim Join:</code> is unsupported, but <code class="no-highlight">(Join: C</code> is okay.</p>
 <p id="LTrim"><strong>LTrim:</strong> Omits spaces and tabs at the beginning of each line. This is primarily used to allow the continuation section to be indented. Also, this option may be turned on for multiple continuation sections by specifying <code>#LTrim</code> on a line by itself. The #LTrim directive is positional: it affects all continuation sections physically beneath it. The setting may be turned off via <code>#LTrim Off</code>.</p>
 <p><strong>RTrim0</strong> (RTrim followed by a zero): Turns off the omission of spaces and tabs from the end of each line.</p>
 <p id="CommentOption"><strong>Comments</strong> (or <strong>Comment</strong> or <strong>Com</strong> or <strong>C</strong>) <span class="ver">[v1.0.45.03+]</span>: Allows <a href="Language.htm#comments">semicolon comments</a> inside the continuation section (but not <code>/*..*/</code>). Such comments (along with any spaces and tabs to their left) are entirely omitted from the joined result rather than being treated as literal text. Each comment can appear to the right of a line or on a new line by itself.</p>
@@ -106,7 +106,7 @@ Var .= "`n  <em>; Add more text to the variable via another continuation section
 ...
 )"
 FileAppend, %Var%, C:\My File.txt</pre>
-<p>Since a closing parenthesis indicates the end of a continuation section, to have a line start with literal closing parenthesis, precede it with an accent/backtick: <code>`)</code>.</p>
+<p>Since a closing parenthesis indicates the end of a continuation section, to have a line start with literal closing parenthesis, precede it with an accent/backtick: <code class="no-highlight">`)</code>.</p>
 <p>A continuation section can be immediately followed by a line containing the open-parenthesis of another continuation section. This allows the options mentioned above to be varied during the course of building a single line.</p>
 <p>The piecemeal construction of a continuation section by means of <a href="lib/_Include.htm">#Include</a> is not supported.</p>
 
@@ -173,11 +173,11 @@ FileAppend, %Var%, C:\My File.txt</pre>
       </tr>
       <tr id="SlashGui">
         <td>/gui</td>
-        <td><span class="ver">[v1.1.33+]</span>: Shows the GUI instead of immediately compiling. The other parameters can be used to override the settings last saved in the GUI. <code>/in</code> is optional in this case.</td>
+        <td><span class="ver">[v1.1.33+]</span>: Shows the GUI instead of immediately compiling. The other parameters can be used to override the settings last saved in the GUI. <code class="no-highlight">/in</code> is optional in this case.</td>
       </tr>
       <tr id="SlashGuiSilent">
         <td>/silent [verbose]</td>
-        <td><span class="ver">[v1.1.33.10+]</span>: Disables all message boxes and instead outputs errors to the standard error stream (stderr); or to the standard output stream (stdout) if stderr fails. Other messages are also output to stdout. Optionally enter the word <code>verbose</code> to output status messages to stdout as well.</td>
+        <td><span class="ver">[v1.1.33.10+]</span>: Disables all message boxes and instead outputs errors to the standard error stream (stderr); or to the standard output stream (stdout) if stderr fails. Other messages are also output to stdout. Optionally enter the word <code class="no-highlight">verbose</code> to output status messages to stdout as well.</td>
       </tr>
       <tr id="SlashAhk">
         <td class="warning"><strong>Deprecated:</strong><br>/ahk <i>file_name</i></td>
@@ -223,13 +223,13 @@ FileAppend, %Var%, C:\My File.txt</pre>
 <p>See <a href="misc/Ahk2ExeDirectives.htm">Script Compiler Directives</a> for more details.</p>
 
 <h3 id="mpress">Compressing Compiled Scripts</h3>
-<p>Ahk2Exe optionally uses MPRESS or <span class="ver">[v1.1.33+]</span> UPX freeware to compress compiled scripts. If <strong>MPRESS.exe</strong> and/or <strong>UPX.exe</strong> has been copied to the "Compiler" subfolder where AutoHotkey was installed, either can be used to compress the .exe as directed by the <code>/compress</code> parameter or the GUI setting. </p>
+<p>Ahk2Exe optionally uses MPRESS or <span class="ver">[v1.1.33+]</span> UPX freeware to compress compiled scripts. If <strong>MPRESS.exe</strong> and/or <strong>UPX.exe</strong> has been copied to the "Compiler" subfolder where AutoHotkey was installed, either can be used to compress the .exe as directed by the <code class="no-highlight">/compress</code> parameter or the GUI setting. </p>
 <p><strong>MPRESS:</strong> <a href="https://www.autohotkey.com/mpress/mpress_web.htm">archived official website</a> (downloads and information) | <a href="https://www.autohotkey.com/mpress/mpress.219.zip">direct download</a> (95 KB)</p>
 <p><strong>UPX:</strong> <a href="https://upx.github.io/">official website</a> (downloads and information)</p>
 <p><strong>Note:</strong> While compressing the script executable prevents casual inspection of the script's source code using a plain text editor like Notepad or a PE resource editor, it does not prevent the source code from being extracted by tools dedicated to that purpose.</p>
 
 <h3 id="information">Background Information</h3>
- <p>In <span class="ver">[v1.1.33.10+]</span>, the following folder structure is supported, where the running version of <code>Ahk2Exe.exe</code> is in the first \Compiler directory shown below:</p>
+ <p>In <span class="ver">[v1.1.33.10+]</span>, the following folder structure is supported, where the running version of <code class="no-highlight">Ahk2Exe.exe</code> is in the first \Compiler directory shown below:</p>
 <pre class="no-highlight">\AutoHotkey 
    AutoHotkeyA32.exe 
    AutoHotkeyU32.exe
@@ -247,15 +247,15 @@ FileAppend, %Var%, C:\My File.txt</pre>
       AutoHotkey32.exe
       AutoHotkey64.exe</pre>
 <p>The base file search algorithm runs for a short amount of time when Ahk2Exe starts, and works as follows:</p>
-<p>Qualifying AutoHotkey .exe files and all .bin files are searched for in the compiler's directory, the compiler's parent directory, and any of the compiler's sibling directories with directory names that start with <code>AutoHotkey</code> or <code>V</code>, but do not start with <code>AutoHotkey_H</code>. The selected directories are searched recursively. Any AutoHotkey.exe files found are excluded, leaving files such as AutoHotkeyA32.exe, AutoHotkey64.exe, etc. plus all .bin files found. All .exe files that are included must have a name starting with <code>AutoHotkey</code> and a file description containing the word <code>AutoHotkey</code>, and  must have a version of <code class="no-highlight">1.1.34+</code> or <code class="no-highlight">2.0-a135+</code>.</p>
+<p>Qualifying AutoHotkey .exe files and all .bin files are searched for in the compiler's directory, the compiler's parent directory, and any of the compiler's sibling directories with directory names that start with <code class="no-highlight">AutoHotkey</code> or <code class="no-highlight">V</code>, but do not start with <code class="no-highlight">AutoHotkey_H</code>. The selected directories are searched recursively. Any AutoHotkey.exe files found are excluded, leaving files such as AutoHotkeyA32.exe, AutoHotkey64.exe, etc. plus all .bin files found. All .exe files that are included must have a name starting with <code class="no-highlight">AutoHotkey</code> and a file description containing the word <code class="no-highlight">AutoHotkey</code>, and  must have a version of <code class="no-highlight">1.1.34+</code> or <code class="no-highlight">2.0-a135+</code>.</p>
 <p>A version of the AutoHotkey interpreter is also needed (as a utility) for a successful compile, and one is selected using a similar algorithm. In most cases the version of the interpreter used will match the version of the base file selected by the user for the compile.</p>
 
 
 <h2 id="cmd">Passing Command Line Parameters to a Script</h2>
 <p>Scripts support command line parameters. The format is:</p>
-<pre>AutoHotkey.exe [<i>Switches</i>] [<i>Script Filename</i>] [<i>Script Parameters</i>]</pre>
+<pre class="no-highlight">AutoHotkey.exe [<i>Switches</i>] [<i>Script Filename</i>] [<i>Script Parameters</i>]</pre>
 <p>And for compiled scripts, the format is:</p>
-<pre>CompiledScript.exe [<i>Switches</i>] [<i>Script Parameters</i>]</pre>
+<pre class="no-highlight">CompiledScript.exe [<i>Switches</i>] [<i>Script Parameters</i>]</pre>
 <p><strong>Switches:</strong> Zero or more of the following:</p>
 <table class="info">
   <tr><th>Switch</th><th>Meaning</th><th class="wrap" abbr="Compiled?">Works compiled?</th></tr>
@@ -273,7 +273,7 @@ FileAppend, %Var%, C:\My File.txt</pre>
     <td>/ErrorStdOut<br><br>/ErrorStdOut=<em>Encoding</em></td>
     <td>
       <p>Send syntax errors that prevent a script from launching to the standard error stream (stderr) rather than displaying a dialog. See <a href="lib/_ErrorStdOut.htm">#ErrorStdOut</a> for details. This can be combined with /iLib to validate the script without running it.</p>
-      <p><span class="ver">[v1.1.33+]</span>: An <a href="lib/FileEncoding.htm">encoding</a> can optionally be specified. For example, <code>/ErrorStdOut=UTF-8</code> encodes messages as UTF-8 before writing them to stderr.</p>
+      <p><span class="ver">[v1.1.33+]</span>: An <a href="lib/FileEncoding.htm">encoding</a> can optionally be specified. For example, <code class="no-highlight">/ErrorStdOut=UTF-8</code> encodes messages as UTF-8 before writing them to stderr.</p>
     </td>
     <td>Yes</td>
   </tr>
@@ -286,7 +286,7 @@ FileAppend, %Var%, C:\My File.txt</pre>
     <td>/CP<i>n</i></td>
     <td>
       <p><span class="ver">[AHK_L 51+]</span>: Overrides the default codepage used to read script files. For more details, see <a href="#cp">Script File Codepage</a>.</p>
-      <p><span class="ver">[v1.1.33+]</span>: If "Default to UTF-8" is enabled in the installer, the ".ahk" file type is registered with a command line including <code>/CP65001</code>. This causes all scripts launched through the shell (Explorer) to default to UTF-8 in the absence of a UTF-16 byte order mark. Scripts launched by running AutoHotkey.exe directly still default to <code>CP0</code>, as the <code>/CP65001</code> switch is absent.</p>
+      <p><span class="ver">[v1.1.33+]</span>: If "Default to UTF-8" is enabled in the installer, the ".ahk" file type is registered with a command line including <code class="no-highlight">/CP65001</code>. This causes all scripts launched through the shell (Explorer) to default to UTF-8 in the absence of a UTF-16 byte order mark. Scripts launched by running AutoHotkey.exe directly still default to <code class="no-highlight">CP0</code>, as the <code class="no-highlight">/CP65001</code> switch is absent.</p>
     </td>
     <td>No</td>
   </tr>
@@ -296,7 +296,7 @@ FileAppend, %Var%, C:\My File.txt</pre>
       <p><span class="ver">[v1.0.47+]</span>: AutoHotkey loads the script but does not run it. For each script file which is auto-included via <a href="Functions.htm#lib">the library mechanism</a>, two lines are written to the file specified by <em>OutFile</em>. These lines are written in the following format, where <em>LibDir</em> is the full path of the Lib folder and <em>LibFile</em> is the filename of the library:</p>
 <pre>#Include LibDir\
 #IncludeAgain LibDir\LibFile.ahk</pre>
-      <p>If the output file exists, it is overwritten. <em>OutFile</em> can be <code>*</code> to write the output to stdout.</p>
+      <p>If the output file exists, it is overwritten. <em>OutFile</em> can be <code class="no-highlight">*</code> to write the output to stdout.</p>
       <p>If the script contains syntax errors, the output file may be empty. The process exit code can be used to detect this condition; if there is a syntax error, the exit code is 2. The /ErrorStdOut switch can be used to suppress or capture the error message.</p>
     </td>
     <td>No</td>
@@ -321,15 +321,15 @@ FileAppend, %Var%, C:\My File.txt</pre>
   </tr>
 </table>
 
-<p id="defaultfile"><strong>Script Filename:</strong> This can be omitted if there are no <em>Script Parameters</em>. If omitted (such as if you run AutoHotkey directly from the Start menu), the program looks for a script file called <code><i>AutoHotkey</i>.ahk</code> in the following locations, in this order:</p>
+<p id="defaultfile"><strong>Script Filename:</strong> This can be omitted if there are no <em>Script Parameters</em>. If omitted (such as if you run AutoHotkey directly from the Start menu), the program looks for a script file called <code class="no-highlight"><i>AutoHotkey</i>.ahk</code> in the following locations, in this order:</p>
 <ul>
   <li>The directory which contains the <a href="Variables.htm#AhkPath">AutoHotkey executable</a>.</li>
   <li>The current user's <a href="Variables.htm#MyDocuments">Documents</a> folder.</li>
 </ul>
-<p>The filename <code><i>AutoHotkey</i>.ahk</code> depends on the name of the executable used to run the script. For example, if you rename AutoHotkey.exe to MyScript.exe, it will attempt to find MyScript.ahk. If you run AutoHotkeyU32.exe without parameters, it will look for AutoHotkeyU32.ahk.</p>
+<p>The filename <code class="no-highlight"><i>AutoHotkey</i>.ahk</code> depends on the name of the executable used to run the script. For example, if you rename AutoHotkey.exe to MyScript.exe, it will attempt to find MyScript.ahk. If you run AutoHotkeyU32.exe without parameters, it will look for AutoHotkeyU32.ahk.</p>
 <p>Note: In old versions prior to <a href="AHKL_ChangeLog.htm#L51">revision 51</a>, the program looked for AutoHotkey.ini in the working directory or AutoHotkey.ahk in My Documents.</p>
 <p><span class="ver">[v1.1.17+]</span>: Specify an asterisk (*) for the filename to read the script text from standard input (stdin). For an example, see <a href="lib/Run.htm#ExecScript">ExecScript()</a>.</p>
-<p><span class="ver">[v1.1.34+]</span>: If the current executable file has <a href="Program.htm#embedded-scripts">embedded scripts</a>, this parameter can be an asterisk followed by the resource name or ID of an embedded script. For compiled scripts (i.e. if an embedded script with the ID #1 exists), this parameter must be preceded by the <code>/script</code> switch.</p>
+<p><span class="ver">[v1.1.34+]</span>: If the current executable file has <a href="Program.htm#embedded-scripts">embedded scripts</a>, this parameter can be an asterisk followed by the resource name or ID of an embedded script. For compiled scripts (i.e. if an embedded script with the ID #1 exists), this parameter must be preceded by the <code class="no-highlight">/script</code> switch.</p>
 <p id="cmd_args"><strong>Script Parameters:</strong> The string(s) you want to pass into the script, with each separated from the next by one or more spaces. Any parameter that contains spaces should be enclosed in quotation marks. If you want to pass an empty string as a parameter, specify two consecutive quotation marks. A literal quotation mark may be passed in by preceding it with a backslash (\"). Consequently, any trailing slash in a quoted parameter (such as "C:\My Documents<span class="red">\"</span>) is treated as a literal quotation mark (that is, the script would receive the string C:\My Documents<span class="red">"</span>). To remove such quotes, use <code><a href="lib/StringReplace.htm">StringReplace</a>, 1, 1, <span class="red">"</span>,, All</code>.</p>
 <p><span class="ver">[v1.1.27+]</span>: Incoming parameters, if present, are stored as an array in the built-in variable <strong>A_Args</strong>, and can be accessed using <a href="Objects.htm#Usage_Simple_Arrays">array syntax</a>. <code>A_Args[1]</code> contains the first parameter. The following example exits the script when too few parameters are passed to it:</p>
 <pre>if A_Args.Length() &lt; 3
@@ -379,7 +379,7 @@ FileAppend, %Var%, C:\My File.txt</pre>
 <ul>
   <li>If the file begins with a UTF-8 or UTF-16 (LE) byte order mark, the appropriate codepage is used and the <a href="#CPn">/CP<i>n</i></a> switch is ignored.</li>
   <li>If the <a href="#CPn">/CP<i>n</i></a> switch is passed on the command-line, codepage <i>n</i> is used. For a list of possible values, see <a href="https://learn.microsoft.com/windows/win32/intl/code-page-identifiers">Code Page Identifiers</a>.
-  <p class="note"><strong>Note:</strong> The "Default to UTF-8" option in the AutoHotkey <span class="ver">[v1.1.33+]</span> installer adds <code>/CP65001</code> to the command line for all scripts launched via the shell (Explorer).</p></li>
+  <p class="note"><strong>Note:</strong> The "Default to UTF-8" option in the AutoHotkey <span class="ver">[v1.1.33+]</span> installer adds <code class="no-highlight">/CP65001</code> to the command line for all scripts launched via the shell (Explorer).</p></li>
   <li>In all other cases, the system default ANSI codepage is used.</li>
 </ul>
 <p>Note that this applies only to script files loaded by AutoHotkey, not to file I/O within the script itself. <a href="lib/FileEncoding.htm">FileEncoding</a> controls the default encoding of files read or written by the script, while <a href="lib/IniRead.htm">IniRead</a> and <a href="lib/IniWrite.htm">IniWrite</a> always deal in UTF-16 or ANSI.</p>

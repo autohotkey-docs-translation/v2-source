@@ -47,7 +47,7 @@
 </tr>
 <tr id="str">
 <td>Str</td>
-<td><p>A string such as "Blue" or MyVar. If the called function modifies the string and the argument is a naked variable, its contents will be updated. For example, the following call would convert the contents of <em>MyVar</em> to uppercase: <code>DllCall("CharUpper", "Str", <i>MyVar</i>)</code>.</p>
+<td><p>A string such as "Blue" or MyVar. If the called function modifies the string and the argument is a naked variable, its contents will be updated. For example, the following call would convert the contents of <em>MyVar</em> to uppercase: <code>DllCall("CharUpper", "Str", MyVar)</code>.</p>
   <p>However, if the function is designed to store a string larger than a variable's current capacity, ensure that the variable is large enough before calling the function. This can be achieved by calling <code><a href="VarSetCapacity.htm">VarSetCapacity</a>(MyVar, 123)</code>, where 123 is the length that <em>MyVar</em> must be able to hold.</p>
   <p>A <em>Str</em> argument must not be an <a href="../Variables.htm#Expressions">expression</a> that evaluates to a number (such as <code>i+1</code>). If it is, the function is not called and ErrorLevel is set to -2.</p>
   <p>The <a href="#asterisk">asterisk variable</a> "Str*" is supported but rarely used. It can be used with functions that expect something like "TCHAR **" or "LPTSTR *".</p>
@@ -129,25 +129,25 @@ DllCall("DeleteFile", Ptr, &amp;filename) <em>; Omit the quote marks around Ptr.
 
 <h2 id="load">Performance</h2>
 <p>When making repeated calls to a DLL, performance can be dramatically improved by loading it explicitly (<em>this is not necessary for a <a href="#std">standard DLL</a> such as User32 because it is always resident</em>). This practice avoids the need for DllCall to internally call LoadLibrary and FreeLibrary each time. For example:</p>
-<pre>hModule := DllCall("<strong>LoadLibrary</strong>", "Str", "MyFunctions.dll", "Ptr")  <em>; Avoids the need for DllCall() in the loop to load the library.</em>
+<pre>hModule := DllCall("LoadLibrary", "Str", "MyFunctions.dll", "Ptr")  <em>; Avoids the need for DllCall() in the loop to load the library.</em>
 Loop, C:\My Documents\*.*, , 1
     result := DllCall("MyFunctions\BackupFile", "Str", A_LoopFileFullPath)
-DllCall("<strong>FreeLibrary</strong>", "Ptr", hModule)  <em>; To conserve memory, the DLL may be unloaded after using it.</em></pre>
+DllCall("FreeLibrary", "Ptr", hModule)  <em>; To conserve memory, the DLL may be unloaded after using it.</em></pre>
 <p><span class="ver">[v1.0.46.08+]</span>: Even faster performance can be achieved by looking up the function's address beforehand. For example:</p>
 <pre><em>; In the following example, if the DLL isn't yet loaded, use LoadLibrary in place of GetModuleHandle.</em>
-<strong>MulDivProc</strong> := DllCall("GetProcAddress", "Ptr", DllCall("GetModuleHandle", "Str", "<strong>kernel32</strong>", "Ptr"), "AStr", "<strong>MulDiv</strong>", "Ptr")
+MulDivProc := DllCall("GetProcAddress", "Ptr", DllCall("GetModuleHandle", "Str", "kernel32", "Ptr"), "AStr", "MulDiv", "Ptr")
 Loop 500
-    DllCall(<strong>MulDivProc</strong>, "Int", 3, "Int", 4, "Int", 3)</pre>
+    DllCall(MulDivProc, "Int", 3, "Int", 4, "Int", 3)</pre>
 <p><span class="ver">[AHK_L 31+]</span>: If DllCall's first parameter is a literal string such as <code>"MulDiv"</code> and the DLL containing the function is ordinarily loaded before the script starts, the string is automatically resolved to a function address. This built-in optimization is more effective than the example shown above.</p>
 <p>Also, adding the line <a href="_NoEnv.htm">#NoEnv</a> anywhere in the script improves DllCall's performance when unquoted parameter types are used (e.g. Int vs. "Int").</p>
-<p>Finally, when passing a string-variable to a function that will not change the length of the string, performance is improved by passing the variable <a href="../Variables.htm#amp">by address</a> (e.g. &amp;MyVar) rather than as a "<a href="#str">str</a>" (especially when the string is very long). The following example converts a string to uppercase: <code>DllCall("CharUpper", "<strong>Ptr</strong>", <strong>&amp;</strong>MyVar, "Ptr")</code>.</p>
+<p>Finally, when passing a string-variable to a function that will not change the length of the string, performance is improved by passing the variable <a href="../Variables.htm#amp">by address</a> (e.g. &amp;MyVar) rather than as a "<a href="#str">str</a>" (especially when the string is very long). The following example converts a string to uppercase: <code>DllCall("CharUpper", "Ptr", &amp;MyVar, "Ptr")</code>.</p>
 
 <h2 id="struct">Structures and Arrays</h2>
 <p>A structure is a collection of <em>members</em> (fields) stored adjacently in memory. Most members tend to be integers.</p>
 <p>Functions that accept the address of a structure (or a memory-block array) can be called by storing the structure's raw binary data in a normal variable. The following steps are generally used:</p>
 <p>1) Call <code><a href="VarSetCapacity.htm">VarSetCapacity</a>(MyStruct, 123, 0)</code> to ensure that the target variable is large enough to hold the structure's data. Replace 123 with a number that is at least as large as the size of the structure. Specifying zero as the last parameter is optional; it initializes all members to be binary zero, which is typically used to avoid calling NumPut() as often in the next step.</p>
 <p>2) If the target function uses the values initially in the structure, call <code><a href="NumPut.htm">NumPut</a>(123, MyStruct, 4, "UInt")</code> to initialize any members that should be non-zero. Replace <code>123</code> with the integer to be put into the target member (or specify <code>&amp;Var</code> to store the <a href="../Variables.htm#amp">address</a> of a variable). Replace <code>4</code> with the offset of the target member (see step #4 for description of "offset"). Replace <code>"UInt"</code> with the appropriate type or omit it if the member is a pointer or handle.</p>
-<p>3) Call the target function, passing the <a href="../Variables.htm#amp">address</a> of <em>MyStruct</em> as a UInt (or Ptr in <span class="ver">[AHK_L 42+]</span>) argument. For example, <code>DllCall("MyDll\MyFunc", "Ptr", <strong>&amp;</strong>MyStruct)</code>. The function will examine and/or change some of the members.</p>
+<p>3) Call the target function, passing the <a href="../Variables.htm#amp">address</a> of <em>MyStruct</em> as a UInt (or Ptr in <span class="ver">[AHK_L 42+]</span>) argument. For example, <code>DllCall("MyDll\MyFunc", "Ptr", &amp;MyStruct)</code>. The function will examine and/or change some of the members.</p>
 <p>4) Use <code>MyInteger := <a href="NumGet.htm">NumGet</a>(MyStruct, 4, "UInt")</code> to retrieve any desired integers from the structure. Replace <code>4</code> with the offset of the target member in the structure. The first member is always at offset 0. The second member is at offset 0 plus the size of the first member (typically 4). Members beyond the second are at the offset of the previous member plus the size of the previous member. Most members -- such as DWORD, Int, and <a href="#Int">other types of 32-bit integers</a> -- are 4 bytes in size. Replace <code>"UInt"</code> with the appropriate type or omit it if the member is a pointer or handle.</p>
 <p>See <a href="#ExStruct">Structure Examples</a> for actual usages.</p>
 <h2 id="limits">Known Limitations</h2>
@@ -177,7 +177,7 @@ MsgBox You pressed button #%WhichButton%.</pre>
 
 <div class="ex" id="ExWallpaper">
 <p><a class="ex_number" href="#ExWallpaper"></a> Changes the desktop wallpaper to the specified bitmap (.bmp) file.</p>
-<pre>DllCall("SystemParametersInfo", "UInt", 0x14, "UInt", 0, "Str", A_WinDir <strong>.</strong> "\winnt.bmp", "UInt", 1)</pre>
+<pre>DllCall("SystemParametersInfo", "UInt", 0x14, "UInt", 0, "Str", A_WinDir . "\winnt.bmp", "UInt", 1)</pre>
 </div>
 
 <div class="ex" id="ExIsWindowVisible">

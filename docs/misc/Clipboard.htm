@@ -15,7 +15,7 @@
 
 <p><em>Clipboard</em> is a built-in <a href="../Variables.htm">variable</a> that reflects the current contents of the Windows clipboard if those contents can be expressed as text. By contrast, <em><a href="#ClipboardAll">ClipboardAll</a></em> contains everything on the clipboard, such as pictures and formatting.</p>
 <p><span class="ver">[v1.1.35+]</span>: <code>A_Clipboard</code> is an alias of <code>Clipboard</code>.</p>
-<p id="CopiedFiles">Each line of text on <em>Clipboard</em> typically ends with carriage return and linefeed (CR+LF), which can be expressed in the script as <code>`r`n</code>. Files (such as those copied from an open Explorer window via <kbd>Ctrl</kbd>+<kbd>C</kbd>) are considered to be text: They are automatically converted to their filenames (with full path) whenever <em>Clipboard</em> is referenced in the script. To extract the files one by one, follow this example:</p>
+<p id="CopiedFiles">Each line of text on <em>Clipboard</em> typically ends with carriage return and linefeed (CR+LF), which can be expressed in the script as <code class="no-highlight">`r`n</code>. Files (such as those copied from an open Explorer window via <kbd>Ctrl</kbd>+<kbd>C</kbd>) are considered to be text: They are automatically converted to their filenames (with full path) whenever <em>Clipboard</em> is referenced in the script. To extract the files one by one, follow this example:</p>
 <pre><a href="../lib/LoopParse.htm">Loop, parse</a>, clipboard, `n, `r
 {
     MsgBox, 4, , File number %A_Index% is %A_LoopField%.`n`nContinue?
@@ -63,7 +63,7 @@ ClipSaved := ""   <em>; Free the memory in case the clipboard was very large.</e
 </ul>
 <p>Further limitations apply:</p>
 <ul>
-  <li>When binary clipboard data is assigned to a variable, the variable is marked with a hidden attribute. This attribute can only be set by <a href="../lib/FileRead.htm">FileRead</a> with the <code>*c</code> option, or by direct assignment from <em>ClipboardAll</em> (as shown above) or another variable which has the attribute.</li>
+  <li>When binary clipboard data is assigned to a variable, the variable is marked with a hidden attribute. This attribute can only be set by <a href="../lib/FileRead.htm">FileRead</a> with the <code class="no-highlight">*c</code> option, or by direct assignment from <em>ClipboardAll</em> (as shown above) or another variable which has the attribute.</li>
   <li>When used in ways other than those described above, binary clipboard data is usually interpreted as text and truncated at the first null character, which is typically at the beginning of the data. For instance, this occurs when one attempts to return the data from a function or assign it to a property or array element.</li>
   <li>The clipboard attribute is removed when the variable is freed or assigned any other value, even by indirect means such as <a href="../lib/StrReplace.htm">StrReplace()</a> or <a href="../lib/StringReplace.htm">StringReplace</a>.</li>
   <li>Variables without the clipboard attribute are treated as text when assigned to <em>Clipboard</em> or passed to FileAppend, even if the data is in the appropriate binary format.</li>

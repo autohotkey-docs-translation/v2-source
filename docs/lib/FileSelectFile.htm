@@ -38,7 +38,7 @@
   <dt>RootDir\Filename</dt>
   <dd><p>If blank or omitted, the starting directory will be a default that might depend on the OS version (it will likely be the directory most recently selected by the user during a prior use of FileSelectFile). Otherwise, specify one or both of the following:</p>
       <p><strong>RootDir:</strong> The root (starting) directory, which is assumed to be a subfolder in <a href="../Variables.htm#WorkingDir">%A_WorkingDir%</a> if an absolute path is not specified. <span class="ver">[v1.0.43.10+]</span>: On Windows XP/2003 and earlier, a <a href="../misc/CLSID-List.htm">CLSID</a> such as <code class="no-highlight">::{20D04FE0-3AEA-1069-A2D8-08002B30309D}</code> (i.e. This PC; formerly My Computer or Computer) may also be specified, in which case any subdirectory present after the CLSID should end in a backslash (otherwise, the string after the last backslash will be interpreted as the default filename, below).</p>
-      <p><strong>Filename:</strong> The default filename to initially show in the dialog's edit field. Only the naked filename (with no path) will be shown. To ensure that the dialog is properly shown, ensure that no illegal characters are present (such as <code>/&lt;|:"</code>).</p>
+      <p><strong>Filename:</strong> The default filename to initially show in the dialog's edit field. Only the naked filename (with no path) will be shown. To ensure that the dialog is properly shown, ensure that no illegal characters are present (such as <code class="no-highlight">/&lt;|:"</code>).</p>
       <p>Examples:</p>
       <pre class="no-highlight">C:\My Pictures\Default Image Name.gif  <em>; Both <i>RootDir</i> and <i>Filename</i> are present.</em>
 C:\My Pictures  <em>; Only <i>RootDir</i> is present.</em>
@@ -46,12 +46,12 @@ My Pictures  <em>; Only <i>RootDir</i> is present, and it's relative to the curr
 My File  <em>; Only <i>Filename</i> is present (but if "My File" exists as a folder, it is assumed to be <i>RootDir</i>).</em></pre></dd>
 
   <dt>Title</dt>
-  <dd><p>If blank or omitted, it defaults to <code>Select File - %A_ScriptName%</code> (i.e. the name of the current script). Otherwise, specify the title of the file-selection window.</p></dd>
+  <dd><p>If blank or omitted, it defaults to <code class="no-highlight">Select File - %A_ScriptName%</code> (i.e. the name of the current script). Otherwise, specify the title of the file-selection window.</p></dd>
 
   <dt>Filter</dt>
   <dd>
     <p>If blank or omitted, the dialog will show all type of files and provide the options "All Files (*.*)" and "Text Documents (*.txt)" in the "Files of type" drop-down list.</p>
-    <p>Otherwise, specify a string to indicate which types of files are shown by the dialog, e.g. <code>Documents (*.txt)</code>. To include more than one file extension in the filter, separate them with semicolons, e.g. <code>Audio (*.wav; *.mp2; *.mp3)</code>. In this case, the "Files of type" drop-down list has the specified string and "All Files (*.*)" as options.</p>
+    <p>Otherwise, specify a string to indicate which types of files are shown by the dialog, e.g. <code class="no-highlight">Documents (*.txt)</code>. To include more than one file extension in the filter, separate them with semicolons, e.g. <code class="no-highlight">Audio (*.wav; *.mp2; *.mp3)</code>. In this case, the "Files of type" drop-down list has the specified string and "All Files (*.*)" as options.</p>
   </dd>
 
 </dl>

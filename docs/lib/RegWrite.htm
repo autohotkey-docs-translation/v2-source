@@ -24,9 +24,9 @@
 
   <dt>KeyName</dt>
   <dd>
-    <p>The full name of the registry key, e.g. <code>HKLM\Software\SomeApplication</code>.</p>
+    <p>The full name of the registry key, e.g. <code class="no-highlight">HKLM\Software\SomeApplication</code>.</p>
     <p>This must start with HKEY_LOCAL_MACHINE (or HKLM), HKEY_USERS (or HKU), HKEY_CURRENT_USER (or HKCU), HKEY_CLASSES_ROOT (or HKCR), or HKEY_CURRENT_CONFIG (or HKCC).</p>
-    <p>To access a <a href="LoopReg.htm#remote">remote registry</a>, prepend the computer name and a colon (or in <span class="ver">[v1.1.21+]</span> a backslash), e.g. <code>\\workstation01\HKLM</code>.</p>
+    <p>To access a <a href="LoopReg.htm#remote">remote registry</a>, prepend the computer name and a colon (or in <span class="ver">[v1.1.21+]</span> a backslash), e.g. <code class="no-highlight">\\workstation01\HKLM</code>.</p>
   </dd>
 
   <dt>ValueName</dt>
@@ -50,11 +50,11 @@
   <dt>RootKey</dt>
   <dd>
     <p>Must be either HKEY_LOCAL_MACHINE (or HKLM), HKEY_USERS (or HKU), HKEY_CURRENT_USER (or HKCU), HKEY_CLASSES_ROOT (or HKCR), or HKEY_CURRENT_CONFIG (or HKCC).</p>
-    <p>To access a <a href="LoopReg.htm#remote">remote registry</a>, prepend the computer name and a colon (or in <span class="ver">[v1.1.21+]</span> a backslash), e.g. <code>\\workstation01\HKLM</code>.</p>
+    <p>To access a <a href="LoopReg.htm#remote">remote registry</a>, prepend the computer name and a colon (or in <span class="ver">[v1.1.21+]</span> a backslash), e.g. <code class="no-highlight">\\workstation01\HKLM</code>.</p>
   </dd>
 
   <dt>SubKey</dt>
-  <dd><p>The name of the subkey, e.g. <code>Software\SomeApplication</code>. If <em>SubKey</em> does not exist, it is created (along with its ancestors, if necessary). If <em>SubKey</em> is left blank, the value is written directly into <em>RootKey</em> (though some operating systems might refuse to write in HKEY_CURRENT_USER's top level).</p></dd>
+  <dd><p>The name of the subkey, e.g. <code class="no-highlight">Software\SomeApplication</code>. If <em>SubKey</em> does not exist, it is created (along with its ancestors, if necessary). If <em>SubKey</em> is left blank, the value is written directly into <em>RootKey</em> (though some operating systems might refuse to write in HKEY_CURRENT_USER's top level).</p></dd>
   
   <dt>ValueName</dt>
   <dd><p>If blank or omitted, <em>SubKey</em>'s default value will be used, which is the value displayed as "(Default)" by RegEdit. Otherwise, specify the name of the value that will be written to.</p></dd>

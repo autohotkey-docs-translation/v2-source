@@ -64,7 +64,7 @@ CopyOfVar := Var</pre>
 <pre>CaseSensitive := false
 ContinueSearch := true</pre>
 <p><strong>Integers and floating point:</strong> Within an expression, numbers are considered to be floating point if they contain a decimal point; otherwise, they are integers. For most operators -- such as addition and multiplication -- if either of the inputs is a floating point number, the result will also be a floating point number.</p>
-<p>Within expressions and non-expressions alike, integers may be written in either hexadecimal or decimal format. Hexadecimal numbers all start with the prefix 0x. For example, <code>Sleep 0xFF</code> is equivalent to <code>Sleep 255</code>. <span class="ver">[v1.0.46.11+]</span>: Floating point numbers written in scientific notation are recognized; but only if they contain a decimal point (e.g. <code>1<strong>.</strong>0e4</code> and <code>-2<strong>.</strong>1E-4</code>).</p>
+<p>Within expressions and non-expressions alike, integers may be written in either hexadecimal or decimal format. Hexadecimal numbers all start with the prefix 0x. For example, <code>Sleep 0xFF</code> is equivalent to <code>Sleep 255</code>. <span class="ver">[v1.0.46.11+]</span>: Floating point numbers written in scientific notation are recognized; but only if they contain a decimal point (e.g. <code>1.0e4</code> and <code>-2.1E-4</code>).</p>
 <p id="percent-space"><strong>Force an expression:</strong> An expression can be used in a parameter that does not directly support it (except OutputVar parameters) by preceding the expression with a percent sign and a space or tab. In <span class="ver">[v1.1.21+]</span>, this prefix can be used in the InputVar parameters of all commands except the legacy IF commands (use <a href="lib/IfExpression.htm">If (expression)</a> instead). This technique is often used to access <a href="misc/Arrays.htm">arrays</a>. For example:</p>
 <pre><a href="lib/FileAppend.htm">FileAppend</a>, % MyArray[i], My File.txt
 <a href="lib/FileAppend.htm">FileAppend</a>, % MyPseudoArray%i%, My File.txt
@@ -118,7 +118,7 @@ ContinueSearch := true</pre>
     ~<br>
     &amp; *</td>
     <td><p><strong>Unary minus (-):</strong> Although it uses the same symbol as the subtract operator, unary minus applies to only a single item or sub-expression as shown twice in this example: <code><strong>-</strong>(3 / <strong>-</strong>x)</code>. On a related note, any unary plus signs (+) within an expression are ignored.</p>
-      <p><strong>Logical-not (!):</strong> If the operand is blank or 0, the result of applying logical-not is 1, which means "true". Otherwise, the result is 0 (false). For example: <code>!x or !(y and z)</code>. Note: The word NOT is synonymous with <strong>!</strong> except that <strong>!</strong> has a higher precedence. <span class="ver">[v1.0.46+]</span>: Consecutive unary operators such as <code><strong>!!</strong>Var</code> are allowed because they are evaluated in right-to-left order.</p>
+      <p><strong>Logical-not (!):</strong> If the operand is blank or 0, the result of applying logical-not is 1, which means "true". Otherwise, the result is 0 (false). For example: <code>!x or !(y and z)</code>. Note: The word NOT is synonymous with <strong>!</strong> except that <strong>!</strong> has a higher precedence. <span class="ver">[v1.0.46+]</span>: Consecutive unary operators such as <code>!!Var</code> are allowed because they are evaluated in right-to-left order.</p>
       <p><strong>Bitwise-not (~):</strong> This inverts each bit of its operand. If the operand is a floating point value, it is truncated to an integer prior to the calculation. If the operand  is between 0 and 4294967295 (0xffffffff), it will be treated as an <u>unsigned</u> 32-bit value. Otherwise, it is treated as a <u>signed</u> 64-bit value. For example, <code>~0xf0f</code> evaluates to 0xfffff0f0 (4294963440).</p>
       <p id="amp"><strong>Address (&amp;):</strong> <code>&amp;MyVar</code> retrieves the address of <em>MyVar</em>'s contents in memory, which is typically used with <a href="lib/DllCall.htm#struct">DllCall structures</a>. <code>&amp;MyVar</code> also disables the caching of binary numbers in that variable, which can slow down its performance if it is ever used for math or numeric comparisons. Caching is re-enabled for a variable whenever its address changes (e.g. via <a href="lib/VarSetCapacity.htm">VarSetCapacity()</a>).</p>
       <p><strong>Dereference (*):</strong> <code>*Expression</code> assumes that <code>Expression</code> resolves to a numeric memory address; it retrieves the byte at that address as a number between 0 and 255 (0 is always retrieved if the address is 0; but any other invalid address must be avoided because it might crash the script). However, <a href="lib/NumGet.htm">NumGet()</a> generally performs much better when retrieving binary numbers.</p></td>
@@ -160,10 +160,10 @@ ContinueSearch := true</pre>
   </tr>
   <tr id="concat">
     <td class="center bold">.</td>
-    <td><p><strong>Concatenate</strong>. A period (dot) with at least one space or tab on each side is used to combine two items into a single string. You may also omit the period to achieve the same result (except where ambiguous such as <code>x <strong>-</strong>y</code>, or when the item on the right side has a leading ++ or --). When the period is omitted, there must be at least one space or tab between the items to be merged.</p>
-    <pre>Var := "The color is " <strong>.</strong> FoundColor  <em>; Explicit concat</em>
+    <td><p><strong>Concatenate</strong>. A period (dot) with at least one space or tab on each side is used to combine two items into a single string. You may also omit the period to achieve the same result (except where ambiguous such as <code>x -y</code>, or when the item on the right side has a leading ++ or --). When the period is omitted, there must be at least one space or tab between the items to be merged.</p>
+    <pre>Var := "The color is " . FoundColor  <em>; Explicit concat</em>
 Var := "The color is " FoundColor    <em>; Auto-concat</em></pre>
-    <p>Sub-expressions can also be concatenated. For example: <code>Var := "The net price is " <strong>.</strong>  Price * (1 - Discount/100)</code>.</p>
+    <p>Sub-expressions can also be concatenated. For example: <code>Var := "The net price is " .  Price * (1 - Discount/100)</code>.</p>
     <p>A line that begins with a period (or any other operator) is automatically <a href="Scripts.htm#continuation">appended to</a> the line above it.</p></td>
   </tr>
   <tr id="regex">
@@ -192,7 +192,7 @@ Var := "The color is " FoundColor    <em>; Auto-concat</em></pre>
   </tr>
   <tr id="not">
     <td class="center bold">NOT</td>
-    <td><strong>Logical-NOT</strong>. Except for its lower precedence, this is the same as the <strong>!</strong> operator. For example, <code>not (x = 3 or y = 3)</code> is the same as <code><strong>!</strong>(x = 3 or y = 3)</code>.</td>
+    <td><strong>Logical-NOT</strong>. Except for its lower precedence, this is the same as the <strong>!</strong> operator. For example, <code>not (x = 3 or y = 3)</code> is the same as <code>!(x = 3 or y = 3)</code>.</td>
   </tr>
   <tr id="and">
     <td class="center bold">AND<br>
@@ -223,7 +223,7 @@ Var := "The color is " FoundColor    <em>; Auto-concat</em></pre>
         &lt;&lt;=<br>
         &gt;&gt;&gt;=
     </td>
-    <td><p><strong>Assign</strong>. Performs an operation on the contents of a variable and stores the result back in the same variable (but in versions prior to 1.0.46, these could only be used as the leftmost operator on a line, and only the first five operators were supported). The simplest assignment operator is <a href="lib/SetExpression.htm">colon-equal (:=)</a>, which stores the result of an expression in a variable. For a description of what the other operators do, see their related entries in this table. For example, <code>Var //= 2</code> performs <a href="#FloorDivide">floor division</a> to divide <em>Var</em> by 2, then stores the result back in <em>Var</em>. Similarly, <code>Var <strong>.=</strong> "abc"</code> is a shorthand way of writing <code>Var := Var <strong>.</strong> "abc"</code>.</p>
+    <td><p><strong>Assign</strong>. Performs an operation on the contents of a variable and stores the result back in the same variable (but in versions prior to 1.0.46, these could only be used as the leftmost operator on a line, and only the first five operators were supported). The simplest assignment operator is <a href="lib/SetExpression.htm">colon-equal (:=)</a>, which stores the result of an expression in a variable. For a description of what the other operators do, see their related entries in this table. For example, <code>Var //= 2</code> performs <a href="#FloorDivide">floor division</a> to divide <em>Var</em> by 2, then stores the result back in <em>Var</em>. Similarly, <code>Var .= "abc"</code> is a shorthand way of writing <code>Var := Var . "abc"</code>.</p>
       <p>Unlike most other operators, assignments are evaluated from right to left. Consequently, a line such as <code>Var1 := Var2 := 0</code> first assigns 0 to <em>Var2</em> then assigns <em>Var2</em> to <em>Var1</em>.</p>
     <p>If an assignment is used as the input for some other operator, its value is the variable itself. For example,  the expression <code>(Var+=2) &gt; 50</code> is true if the newly-increased value in <em>Var</em> is greater than 50. This also allows an assignment to be passed <a href="Functions.htm#ByRef">ByRef</a>, or its <a href="#amp">address</a> taken; for example: <code>&amp;(x:="abc")</code>.</p>
     <p>The precedence of the assignment operators is automatically raised when it would avoid a syntax error or provide more intuitive behavior. For example: <code>not x:=y</code> is evaluated as <code>not (x:=y)</code>. Also, <code class="no-highlight">x==y &amp;&amp; z:=1</code> is evaluated as <code class="no-highlight">x==y &amp;&amp; (z:=1)</code>, which <a href="Functions.htm#ShortCircuit">short-circuits</a> when x doesn't equal y. Similarly, <code>++Var := X</code> is evaluated as <code>++(Var := X)</code>; and <code>Z&gt;0 ? X:=2 : Y:=2</code> is evaluated as <code>Z&gt;0 ? (X:=2) : (Y:=2)</code>.</p>
@@ -232,7 +232,7 @@ Var := "The color is " FoundColor    <em>; Auto-concat</em></pre>
   </tr>
   <tr id="comma">
     <td class="center bold">,</td>
-    <td><p><strong>Comma (multi-statement)</strong> <span class="ver">[v1.0.46+]</span>. Commas may be used to write multiple sub-expressions on a single line. This is most commonly used to group together multiple assignments or function calls.  For example: <code>x:=1<strong>,</strong> y+=2<strong>,</strong> ++index, MyFunc()</code>. Such statements are executed in order from left to right.</p>
+    <td><p><strong>Comma (multi-statement)</strong> <span class="ver">[v1.0.46+]</span>. Commas may be used to write multiple sub-expressions on a single line. This is most commonly used to group together multiple assignments or function calls.  For example: <code>x:=1, y+=2, ++index, MyFunc()</code>. Such statements are executed in order from left to right.</p>
       <p class="note"><strong>Note:</strong> A line that begins with a comma (or any other operator) is automatically <a href="Scripts.htm#continuation">appended to</a> the line above it. See also: <a href="#CommaPerf">comma performance</a>.</p>
       <p><span class="ver">[v1.0.46.01+]</span>: When a comma is followed immediately by a variable and an equal sign, that equal sign is automatically treated as an <a href="lib/SetExpression.htm">assignment (:=)</a>. For example, all of the following are assignments: <code>x:=1, y=2, a=b=c</code>. New scripts should not rely on this behavior as it may change. The rule applies only to plain variables and not <a href="#ref">double-derefs</a>, so the following contains only one assignment: <code>x:=1, %y%=2</code></p>
       <p id="CommaPerf"><span class="ver">[v1.0.48+]</span>: The comma operator usually performs better than writing separate expressions, especially when assigning one variable to another (e.g. <code>x:=y, a:=b</code>). Performance continues to improve as more and more expressions are combined into a single expression; for example, it may be 35&nbsp;% faster to combine five or ten simple expressions into a single expression.</p>
@@ -824,13 +824,13 @@ if A_OSVersion in WIN_NT4,WIN_95,WIN_98,WIN_ME  <em>; Note: No spaces around com
   </tr>
   <tr id="WinDir">
     <td>A_WinDir</td>
-    <td>The Windows directory. For example: <code>C:\Windows</code></td>
+    <td>The Windows directory. For example: <code class="no-highlight">C:\Windows</code></td>
   </tr>
   <tr id="ProgramFiles">
     <td>A_ProgramFiles<br>
     or ProgramFiles</td>
     <td>
-      <p>The Program Files directory (e.g. <code>C:\Program Files</code> or <code>C:\Program Files (x86)</code>). This is usually the same as the <em>ProgramFiles</em> <a href="Concepts.htm#environment-variables">environment variable</a>.</p>
+      <p>The Program Files directory (e.g. <code class="no-highlight">C:\Program Files</code> or <code class="no-highlight">C:\Program Files (x86)</code>). This is usually the same as the <em>ProgramFiles</em> <a href="Concepts.htm#environment-variables">environment variable</a>.</p>
       <p>On <a href="#Is64bitOS">64-bit systems</a> (and not 32-bit systems), the following applies:</p>
       <ul>
         <li>If the executable (EXE) that is running the script is 32-bit, A_ProgramFiles returns the path of the "Program Files (x86)" directory.</li>
@@ -915,7 +915,7 @@ if A_OSVersion in WIN_NT4,WIN_95,WIN_98,WIN_ME  <em>; Note: No spaces around com
   <tr id="MyDocuments">
     <td>A_MyDocuments</td>
     <td>
-      <p>The full path and name of the current user's "My Documents" folder. Unlike most of the similar variables, if the folder is the root of a drive, the final backslash is not included (e.g. it would contain <code>M:</code> rather than <code>M:\</code>). For example:</p>
+      <p>The full path and name of the current user's "My Documents" folder. Unlike most of the similar variables, if the folder is the root of a drive, the final backslash is not included (e.g. it would contain <code class="no-highlight">M:</code> rather than <code class="no-highlight">M:\</code>). For example:</p>
       <pre class="NoIndent no-highlight">C:\Users\&lt;UserName&gt;\Documents</pre>
   </td>
   </tr>

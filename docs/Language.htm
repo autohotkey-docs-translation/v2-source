@@ -118,7 +118,7 @@ MsgBox, This line is commented out.
 <p class="note">For a more general explanation of strings, see <a href="Concepts.htm#strings">Strings</a>.</p>
 <p>A <em>string</em>, or <em>string of characters</em>, is just a text value. In an expression, literal text must be enclosed in quotation marks to differentiate it from a variable name or some other expression. This is often referred to as a <em>quoted literal string</em>, or just <em>quoted string</em>. For example, <code>"This is a quoted string."</code>.</p>
 <p>To include an <em>actual</em> quote character inside a quoted string, specify two consecutive quotes as shown twice in this example: <code>"She said, ""An apple a day."""</code>.</p>
-<p>Quoted strings can contain <a href="misc/EscapeChar.htm">escape sequences</a> such as <code>`t</code> (tab), <code>`n</code> (linefeed), and <code>`r</code> (carriage return). Unlike <a href="#unquoted-text">unquoted text</a>, it is not necessary to escape commas or percent signs, as quoted strings cannot contain variables. The use of the <code>`"</code> escape sequence to produce a literal quote-character is currently not supported; instead, use two consecutive quotes as shown above.</p>
+<p>Quoted strings can contain <a href="misc/EscapeChar.htm">escape sequences</a> such as <code class="no-highlight">`t</code> (tab), <code class="no-highlight">`n</code> (linefeed), and <code class="no-highlight">`r</code> (carriage return). Unlike <a href="#unquoted-text">unquoted text</a>, it is not necessary to escape commas or percent signs, as quoted strings cannot contain variables. The use of the <code class="no-highlight">`"</code> escape sequence to produce a literal quote-character is currently not supported; instead, use two consecutive quotes as shown above.</p>
 
 <h3 id="variables">Variables</h3>
 <p class="note">For a basic explanation and general details about variables, see <a href="Concepts.htm#variables">Variables</a>.</p>
@@ -181,7 +181,7 @@ MsgBox, This line is commented out.
 <p id="unquoted-text"><em>Unquoted text</em> is simply text, not enclosed in quote marks, just straight up. Since the text has no explicit start and end marks, it ends at the end of the line or the end of the parameter. Leading and trailing spaces and tabs are ignored. Within unquoted text, the following characters have special meaning:</p>
 <ul>
   <li>
-<p><code>%</code>: Enclose a variable name in percent signs to include the contents of that variable. For example, <code>The year is %A_Year%.</code></p>
+<p><code>%</code>: Enclose a variable name in percent signs to include the contents of that variable. For example, <code class="no-highlight">The year is %A_Year%.</code></p>
 <p class="warning"><strong>Note:</strong> Variable names are not <em>always</em> enclosed in percent signs; they are required only within unquoted text. Percent signs should not be used anywhere else, except to create a <a href="#dynamic-variables">dynamic variable reference</a> or <a href="Functions.htm#DynCall">dynamic function call</a>.</p>
 <p class="warning"><strong>Note:</strong> Only a plain variable name can be used. <a href="Objects.htm#Usage_Simple_Arrays">Array elements</a>, <a href="Objects.htm#Usage_Objects">properties</a> and other <a href="#expressions">expressions</a> are not supported.</p>
 </li>
@@ -189,7 +189,7 @@ MsgBox, This line is commented out.
 <p><code>,</code>: Comma is used to delimit (separate) the parameters of a command, with <a href="#escape-comma">some exceptions</a>. It has no special meaning when used in an assignment or comparison, so is interpreted literally in such cases.</p>
 </li>
   <li>
-<p><code>`</code>: An <a href="misc/EscapeChar.htm">escape character</a> is usually used to indicate that the character immediately following it should be interpreted differently than it normally would. For example, <code>`%</code> produces a literal percent sign and <code>`,</code> produces a literal comma. Some other common escape sequences produce special characters, such as <code>`t</code> (tab), <code>`n</code> (linefeed), and <code>`r</code> (carriage return).</p>
+<p><code class="no-highlight">`</code>: An <a href="misc/EscapeChar.htm">escape character</a> is usually used to indicate that the character immediately following it should be interpreted differently than it normally would. For example, <code class="no-highlight">`%</code> produces a literal percent sign and <code class="no-highlight">`,</code> produces a literal comma. Some other common escape sequences produce special characters, such as <code class="no-highlight">`t</code> (tab), <code class="no-highlight">`n</code> (linefeed), and <code class="no-highlight">`r</code> (carriage return).</p>
 </li>
 </ul>
 <p><a href="#commands">Commands</a> accept a mixture of <a href="#text-parameters">unquoted text</a>, <a href="#outputvar-and-inputvar-parameters">variable names</a> and <a href="#numeric-parameters">numeric expressions</a>.</p>
@@ -238,7 +238,7 @@ StringReplace, NewStr, OldStr, %A_Space%, +, All</pre>
 <h3 id="text-parameters">Text Parameters</h3>
 <p>Text parameters accept <a href="#unquoted-text">unquoted text</a>. For example:</p>
 <pre>MsgBox, The time is %A_Hour% o'clock.</pre>
-<p id="escape-comma">Since commas and percent signs have special meaning, use the <a href="misc/EscapeChar.htm">escape sequence</a> <code>`,</code> to specify a literal comma and <code>`%</code> to specify a literal percent sign. For clarity, it is best to always escape any comma which is intended to be literal, but escaping comma is optional in the following cases:</p>
+<p id="escape-comma">Since commas and percent signs have special meaning, use the <a href="misc/EscapeChar.htm">escape sequence</a> <code class="no-highlight">`,</code> to specify a literal comma and <code class="no-highlight">`%</code> to specify a literal percent sign. For clarity, it is best to always escape any comma which is intended to be literal, but escaping comma is optional in the following cases:</p>
 <ul>
   <li>In the last parameter of any command.</li>
   <li>In the <em>Text</em> parameter of MsgBox, which has smart comma handling.</li>
@@ -253,7 +253,7 @@ StringReplace, NewStr, OldStr, %A_Space%, +, All</pre>
 Sleep %m%     <em>; Sleep for m milliseconds.</em>
 </pre>
 <p>To perform a <a href="#dynamic-variables">double-deref</a> in such cases, enclose the expression in parentheses: <code>Sleep (%m%)</code></p>
-<p>Note that mixed-type parameters such as <a href="lib/SetTimer.htm">SetTimer's</a> second parameter, which sometimes accepts a number and sometimes accepts a string such as <code>On</code> or <code>Off</code>, are actually Text parameters, and as such, they do not accept expressions unless the <a href="#-expression">percent prefix</a> is used.</p>
+<p>Note that mixed-type parameters such as <a href="lib/SetTimer.htm">SetTimer's</a> second parameter, which sometimes accepts a number and sometimes accepts a string such as <code class="no-highlight">On</code> or <code class="no-highlight">Off</code>, are actually Text parameters, and as such, they do not accept expressions unless the <a href="#-expression">percent prefix</a> is used.</p>
 <p>Numeric parameters allow and ignore the <a href="#-expression">percent prefix</a>.</p>
 
 <h3 id="-expression">% Expression</h3>
@@ -415,7 +415,7 @@ if Var1 between %Low% and %High%
 <p>These are some common points of confusion related to legacy If statements:</p>
 <ul>
   <li>Variable names must be enclosed in percent signs <em>only</em> on the right-hand side of the operator.</li>
-  <li><code>between</code>, <code>in</code>, <code>contains</code> and <code>is</code> are only valid in this context; they cannot be used in <a href="#expressions">expressions</a>.</li>
+  <li><code class="no-highlight">between</code>, <code class="no-highlight">in</code>, <code class="no-highlight">contains</code> and <code class="no-highlight">is</code> are only valid in this context; they cannot be used in <a href="#expressions">expressions</a>.</li>
   <li>Multiple conditions cannot be written on the same line (such as with the <code>and</code> operator).</li>
   <li>None of the parameters are expressions.</li>
 </ul>
@@ -562,7 +562,7 @@ MsgBox, Left: %WALeft% -- Top: %WATop% -- Right: %WARight% -- Bottom: %WABottom%
 <p>There are several commands which create associative pseudo-arrays:</p>
 <ul>
   <li><a href="lib/GuiControlGet.htm">GuiControlGet Pos</a>.</li>
-  <li><a href="lib/RegExMatch.htm">RegExMatch</a>, except when given the <code>O)</code> option, which causes it to output a single object containing all match information.</li>
+  <li><a href="lib/RegExMatch.htm">RegExMatch</a>, except when given the <code class="no-highlight">O)</code> option, which causes it to output a single object containing all match information.</li>
   <li><a href="lib/SysGet.htm">SysGet Monitor/MonitorWorkArea</a>, as demonstrated above.</li>
   <li><a href="lib/StringSplit.htm">StringSplit</a>. New scripts should use <a href="lib/StrSplit.htm">StrSplit()</a> instead, as it creates a <a href="Objects.htm#Usage_Simple_Arrays">normal array</a>.</li>
   <li><a href="lib/WinGet.htm">WinGet List</a>.</li>
@@ -581,7 +581,7 @@ MsgBox, Left: %WALeft% -- Top: %WATop% -- Right: %WARight% -- Bottom: %WABottom%
 <p>Generally, aside from whitespace and comments, no other code can be written on the same line as a label. However:</p>
 <ul>
   <li>A hotkey label can be directly followed by a command or other statement to create a <em>one-line</em> hotkey. In other words, if a command, assignment or expression is present on the same line as a hotkey label, it acts as though followed by <code>return</code>.</li>
-  <li>A hotkey with a <a href="KeyList.htm">key name</a> written to the right of the double-colon is actually a <a href="misc/Remap.htm"><em>remapping</em></a>, which is shorthand for <a href="misc/Remap.htm#actually">a pair of hotkeys</a>. For example, <code>a::b</code> creates hotkeys and labels for <code>*a</code> and <code>*a Up</code>, and does not create a label named <code>a</code>.</li>
+  <li>A hotkey with a <a href="KeyList.htm">key name</a> written to the right of the double-colon is actually a <a href="misc/Remap.htm"><em>remapping</em></a>, which is shorthand for <a href="misc/Remap.htm#actually">a pair of hotkeys</a>. For example, <code>a::b</code> creates hotkeys and labels for <code class="no-highlight">*a</code> and <code class="no-highlight">*a Up</code>, and does not create a label named <code class="no-highlight">a</code>.</li>
   <li>A hotstring with text written to the right of the final double-colon is an <em>auto-replace</em> hotstring. Auto-replace hotstrings do not act as labels.</li>
 </ul>
 <p>For more details, see <a href="misc/Labels.htm">Labels</a>.</p>

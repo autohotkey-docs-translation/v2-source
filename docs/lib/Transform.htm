@@ -76,15 +76,15 @@ return</pre>
 
 <h3 id="HTML">HTML</h3>
 <p class="warning"><strong>Deprecated:</strong> Not recommended for use in new scripts. Use a custom function such as <a href="../scripts/index.htm#HTML_Entities_Encoding">EncodeHTML()</a> instead.</p>
-<p>Converts the specified string into its HTML equivalent by translating characters whose ASCII values are above 127 to their HTML names (e.g. <code>&pound;</code> becomes <code>&amp;pound;</code>).</p>
+<p>Converts the specified string into its HTML equivalent by translating characters whose ASCII values are above 127 to their HTML names (e.g. <code class="no-highlight">&pound;</code> becomes <code class="no-highlight">&amp;pound;</code>).</p>
 <pre class="Syntax"><span class="func">Transform</span>, OutputVar, HTML, String <span class="optional">, Flags</span></pre>
-<p>In addition, the four characters <code>"&amp;&lt;&gt;</code> are translated to <code>&amp;quot;&amp;amp;&amp;lt;&amp;gt;</code>. Finally, each linefeed (<code>`n</code>) is translated to <code>&lt;br&gt;`n</code> (i.e. <code>&lt;br&gt;</code> followed by a linefeed). The <em>Flags</em> parameter is ignored.</p>
+<p>In addition, the four characters <code class="no-highlight">"&amp;&lt;&gt;</code> are translated to <code class="no-highlight">&amp;quot;&amp;amp;&amp;lt;&amp;gt;</code>. Finally, each linefeed (<code class="no-highlight">`n</code>) is translated to <code class="no-highlight">&lt;br&gt;`n</code> (i.e. <code class="no-highlight">&lt;br&gt;</code> followed by a linefeed). The <em>Flags</em> parameter is ignored.</p>
 <p><strong>For Unicode executables:</strong> In addition of the functionality above, <em>Flags</em> can be zero or a combination (sum) of the following values. If blank or omitted, it defaults to 1.</p>
 <ul>
-<li>1: Converts certain characters to named expressions. e.g. <code>&euro;</code> is converted to <code>&amp;euro;</code></li>
-<li>2: Converts certain characters to numbered expressions. e.g. <code>&#8364;</code> is converted to <code class="no-highlight">&amp;#8364;</code></li>
+<li>1: Converts certain characters to named expressions. e.g. <code class="no-highlight">&euro;</code> is converted to <code class="no-highlight">&amp;euro;</code></li>
+<li>2: Converts certain characters to numbered expressions. e.g. <code class="no-highlight">&#8364;</code> is converted to <code class="no-highlight">&amp;#8364;</code></li>
 </ul>
-<p>Only non-ASCII characters are affected. If <i>Flags</i> is the number 3, numbered expressions are used only where a named expression is not available. The following characters are always converted: <code>&lt;&gt;"&amp;</code> and <code>`n</code> (line feed).</p>
+<p>Only non-ASCII characters are affected. If <i>Flags</i> is the number 3, numbered expressions are used only where a named expression is not available. The following characters are always converted: <code class="no-highlight">&lt;&gt;"&amp;</code> and <code class="no-highlight">`n</code> (line feed).</p>
 
 <h3 id="Asc">Asc</h3>
 <p class="warning"><strong>Deprecated:</strong> Not recommended for use in new scripts. Use <a href="Asc.htm">Asc()</a> instead.</p>

@@ -105,7 +105,7 @@ Send, My First Script
 return</pre>
     <p>We will get more in-depth later on. Until then, here's an explanation of the above code:</p>
     <ul>
-        <li>The first line: <code>^j::</code> is the hotkey. <code>^</code> means <kbd>Ctrl</kbd>, <code>j</code> is the letter <kbd>J</kbd>. Anything to the <u>left</u> of <code>::</code> are the keys you need to press.</li>
+        <li>The first line: <code>^j::</code> is the hotkey. <code class="no-highlight">^</code> means <kbd>Ctrl</kbd>, <code class="no-highlight">j</code> is the letter <kbd>J</kbd>. Anything to the <u>left</u> of <code class="no-highlight">::</code> are the keys you need to press.</li>
         <li>The second line: <code>Send, My First Script</code> is how you <u>send</u> keystrokes. <code>Send</code> is the command, anything after the comma (,) will be typed.</li>
         <li>The third line: <code>return</code>. This will become your best friend. It literally <u>stops</u> code from going any further, to the lines below. This will prevent many issues when you start having a lot of stuff in your scripts.</li>
     </ul>
@@ -149,7 +149,7 @@ return</pre>
 <p>What is a hotstring? Hotstrings are mainly used to expand abbreviations as you type them (auto-replace), they can also be used to launch any scripted action. For example:</p>
 <pre>::ftw::Free the whales</pre>
 <p>The difference between the two examples is that the hotkey will be triggered when you press <kbd>Ctrl</kbd>+<kbd>J</kbd> while the hotstring will convert your typed "ftw" into "Free the whales".</p>
-<p><i>"So, how exactly does a person such as myself create a hotkey?"</i> Good question. A hotkey is created by using a single pair of colons. The key or key combo needs to go on the <u>left</u> of the <code>::</code>. And the content needs to go below, followed by a <code>return</code>.</p>
+<p><i>"So, how exactly does a person such as myself create a hotkey?"</i> Good question. A hotkey is created by using a single pair of colons. The key or key combo needs to go on the <u>left</u> of the <code class="no-highlight">::</code>. And the content needs to go below, followed by a <code>return</code>.</p>
 <p class="note"><strong>Note:</strong> There are exceptions, but those tend to cause confusion a lot of the time. So it won't be covered in the tutorial, at least, not right now.</p>
 <pre>Esc::
 MsgBox, Escape!!!!
@@ -300,7 +300,7 @@ return  <em>; This ends the hotkey. The code below this will not be executed whe
     </tr>
     <tr>
         <td class="center bold">!</td>
-        <td>Sends <kbd>Alt</kbd>. For example, <code>Send, This is text!a</code> would send the keys "This is text" and then press <kbd>Alt</kbd>+<kbd>A</kbd>. <strong>Note:</strong> <code>!A</code> produces a different effect in some programs than <code>!a</code>. This is because <code>!A</code> presses <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> and <code>!a</code> presses <kbd>Alt</kbd>+<kbd>A</kbd>. If in doubt, use lowercase.</td>
+        <td>Sends <kbd>Alt</kbd>. For example, <code>Send, This is text!a</code> would send the keys "This is text" and then press <kbd>Alt</kbd>+<kbd>A</kbd>. <strong>Note:</strong> <code class="no-highlight">!A</code> produces a different effect in some programs than <code class="no-highlight">!a</code>. This is because <code class="no-highlight">!A</code> presses <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> and <code class="no-highlight">!a</code> presses <kbd>Alt</kbd>+<kbd>A</kbd>. If in doubt, use lowercase.</td>
     </tr>
     <tr>
         <td class="center bold">+</td>
@@ -308,14 +308,14 @@ return  <em>; This ends the hotkey. The code below this will not be executed whe
     </tr>
     <tr>
         <td class="center bold">^</td>
-        <td>Sends <kbd>Ctrl</kbd>. For example, <code>Send, ^!a</code> would press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd>, and <code>Send, ^{Home}</code> would send <kbd>Ctrl</kbd>+<kbd>Home</kbd>. <strong>Note:</strong> <code>^A</code> produces a different effect in some programs than <code>^a</code>. This is because <code>^A</code> presses <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> and <code>^a</code> presses <kbd>Ctrl</kbd>+<kbd>A</kbd>. If in doubt, use lowercase.</td>
+        <td>Sends <kbd>Ctrl</kbd>. For example, <code>Send, ^!a</code> would press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd>, and <code>Send, ^{Home}</code> would send <kbd>Ctrl</kbd>+<kbd>Home</kbd>. <strong>Note:</strong> <code class="no-highlight">^A</code> produces a different effect in some programs than <code class="no-highlight">^a</code>. This is because <code class="no-highlight">^A</code> presses <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> and <code class="no-highlight">^a</code> presses <kbd>Ctrl</kbd>+<kbd>A</kbd>. If in doubt, use lowercase.</td>
     </tr>
     <tr>
         <td class="center bold">#</td>
         <td>Sends <kbd>Win</kbd> (the key with the Windows logo) therefore <code>Send #e</code> would hold down <kbd>Win</kbd> and then press <kbd>E</kbd>.</td>
     </tr>
 </table>
-<p>The <a href="lib/Send.htm">gigantic table on the Send page</a> shows pretty much every special key built-in to AHK. For example: <code>{Enter}</code> and <code>{Space}</code>.</p>
+<p>The <a href="lib/Send.htm">gigantic table on the Send page</a> shows pretty much every special key built-in to AHK. For example: <code class="no-highlight">{Enter}</code> and <code class="no-highlight">{Space}</code>.</p>
 <p class="warning"><strong>Caution:</strong> This table <u>does not</u> apply to <a href="Hotkeys.htm">hotkeys</a>. Meaning, you do not wrap <kbd>Ctrl</kbd> or <kbd>Enter</kbd> (or any other key) inside curly brackets when making a hotkey.</p>
 <p>An example showing what shouldn't be done to a hotkey:</p>
 <pre><em>; When making a hotkey...
@@ -328,7 +328,7 @@ return
 LCtrl::
 Send, AutoHotkey
 return</pre>
-<p>A common issue lots of people have is, they assume that the curly brackets are put in the documentation pages just for fun. But in fact <u>they are needed</u>. It's how AHK knows that <code>{!}</code> means "exclamation point" and not "press <kbd>Alt</kbd>". So please remember to check the table on the <a href="lib/Send.htm">Send</a> page and make sure you have your brackets in the right places. For example:</p>
+<p>A common issue lots of people have is, they assume that the curly brackets are put in the documentation pages just for fun. But in fact <u>they are needed</u>. It's how AHK knows that <code class="no-highlight">{!}</code> means "exclamation point" and not "press <kbd>Alt</kbd>". So please remember to check the table on the <a href="lib/Send.htm">Send</a> page and make sure you have your brackets in the right places. For example:</p>
 <pre>Send, This text has been typed{!} <em>; Notice the ! between the curly brackets? That's because if it wasn't, AHK would press the ALT key.</em>
 </pre>
 <pre><em>; Same as above, but with the ENTER key. AHK would type out "Enter" if
@@ -336,7 +336,7 @@ return</pre>
 Send, Multiple Enter lines have Enter been sent. <em>; WRONG</em>
 Send, Multiple{Enter}lines have{Enter}been sent. <em>; CORRECT</em>
 </pre>
-<p>Another common issue is that people think that <u>everything</u> needs to be wrapped in brackets with the Send command. That is FALSE. If it's not in the chart, it does not need brackets. You do <u>not</u> need to wrap common letters, numbers or even some symbols such as <code>.</code> (period) in curly brackets. Also, with the Send commands you are able to send more than one letter, number or symbol at a time. So no need for a bunch of Send commands with one letter each. For example:</p>
+<p>Another common issue is that people think that <u>everything</u> needs to be wrapped in brackets with the Send command. That is FALSE. If it's not in the chart, it does not need brackets. You do <u>not</u> need to wrap common letters, numbers or even some symbols such as <code class="no-highlight">.</code> (period) in curly brackets. Also, with the Send commands you are able to send more than one letter, number or symbol at a time. So no need for a bunch of Send commands with one letter each. For example:</p>
 <pre>Send, {a}       <em>; WRONG</em>
 Send, {b}       <em>; WRONG</em>
 Send, {c}       <em>; WRONG</em>
@@ -398,7 +398,7 @@ Run, https://www.google.com</pre>
 <p class="note">A list of all commands and built-in functions can be found <a href="lib/index.htm">here</a>.</p>
 <h3 id="Commands">Commands</h3>
 <p>You can tell what a command is by looking at its syntax (the way it looks). Commands do not use parentheses around the parameters like functions do. So a command would look like this:</p>
-<pre>Command, Parameter1, Parameter2, Parameter3</pre>
+<pre class="highlight"><span class="cmd">Command</span>, <span class="str">Parameter1</span>, <span class="str">Parameter2</span>, <span class="str">Parameter3</span></pre>
 <p>When using commands, you cannot squish other commands onto the same line as a previous command (exception: <a href="lib/IfEqual.htm">IfEqual</a>). You cannot put commands inside the parameters of other commands. For example:</p>
 <pre>MsgBox, Hello Run, notepad.exe   <em>; Wrong</em>
 MsgBox, Hello, Run, notepad.exe  <em>; Wrong</em>
@@ -406,8 +406,8 @@ MsgBox, Hello, Run, notepad.exe  <em>; Wrong</em>
 MsgBox, Hello      <em>; Correct</em>
 Run, notepad.exe</pre>
 
-<p>Commands also differ from function in that they use "legacy syntax". This means that you <u>need</u> percent signs around a variable, such as <code>%Var%</code>, and that any text and numbers do not need to be in quotation marks, such as <code>This is some text</code>. Additionally, you cannot do math in the parameters, unlike functions.</p>
-<p class="note">You can do math in parameters if you force an expression with a single <code>%</code>, but that will not be covered.</p>
+<p>Commands also differ from function in that they use "legacy syntax". This means that you <u>need</u> percent signs around a variable, such as <code>%Var%</code>, and that any text and numbers do not need to be in quotation marks, such as <code class="no-highlight">This is some text</code>. Additionally, you cannot do math in the parameters, unlike functions.</p>
+<p class="note">You can do math in parameters if you force an expression with a single <code class="no-highlight">%</code>, but that will not be covered.</p>
 <h3 id="Functions">Functions</h3>
 <p>As stated above, functions are different because they use parentheses. A typical function looks like:</p>
 <pre>Function(Parameter1, Parameter2, Parameter3)</pre>
@@ -429,7 +429,7 @@ SubStr(A_Hour - 12, 2)</pre>
 </ol>
 
 <p>A function usually return a value differently than a command does. Commands need an <i>OutputVar</i> parameter, functions do not. The most common way assigning the return value of a function to a variable is like so:</p>
-<pre><span style="color:#ff4400"><b>MyVar</b></span> := SubStr("I'm scripting, awesome!", 16)</pre>
+<pre>MyVar := SubStr("I'm scripting, awesome!", 16)</pre>
 <p class="note">This isn't the only way, but the most common. You are using <code>MyVar</code> to store the return value of the function that is to the right of the <code>:=</code> operator. See <a href="Functions.htm">Functions</a> for more details.</p>
 <p>In short:</p>
 <pre><em>; These are commands:</em>
@@ -510,11 +510,11 @@ MsgBox, We are now 'outside' of the if-statement. We did not need curly brackets
 </ul>
 <p>When <u>not</u> to use percent signs:</p>
 <ul>
-    <li>In parameters that are input or output variables. For example: <code>StringLen, <strong>OutputVar</strong>, <strong>InputVar</strong></code></li>
-    <li>On the left side of an assignment: <code><strong>Var</strong> = 123abc</code></li>
-    <li>On the left side of legacy (non-expression) if-statements: <code>if <strong>Var1</strong> &lt; %Var2%</code></li>
+    <li>In parameters that are input or output variables. For example: <code class="no-highlight">StringLen, <strong>OutputVar</strong>, <strong>InputVar</strong></code></li>
+    <li>On the left side of an assignment: <code class="no-highlight"><strong>Var</strong> = 123abc</code></li>
+    <li>On the left side of legacy (non-expression) if-statements: <code class="no-highlight">if <strong>Var1</strong> &lt; %Var2%</code></li>
     <li>Everywhere in expressions. For example:
-      <pre>
+      <pre class="no-highlight">
   if (<strong>Var1</strong> != <strong>Var2</strong>)
   <strong>Var1</strong> := <strong>Var2</strong> + 100</pre></li>
 </ul>
@@ -613,7 +613,7 @@ if Var1 &lt; %Var2%  <em>; Without parentheses, the IF is legacy. However, only 
     <dt>Bracket notation</dt>
     <dd>
         <pre class="NoIndent">Value := Banana["Color"]</pre>
-        <p>This allows you to use an expression as the key to get the value from your object. In this case, I used the simple expression <code>"Color"</code>, which is (unsurprisingly) the key <code>Color</code>. You will get a message box with the word "Yellow", because that is what we set the key <code>Color</code> to in the <a href="#s71">previous section</a>.</p>
+        <p>This allows you to use an expression as the key to get the value from your object. In this case, I used the simple expression <code>"Color"</code>, which is (unsurprisingly) the key <code class="no-highlight">Color</code>. You will get a message box with the word "Yellow", because that is what we set the key <code class="no-highlight">Color</code> to in the <a href="#s71">previous section</a>.</p>
     </dd>
     <dt>Dot notation</dt>
     <dd>
@@ -681,13 +681,13 @@ if Var1 &lt; %Var2%  <em>; Without parentheses, the IF is legacy. However, only 
 <p>On the <a href="lib/ControlGetText.htm">ControlGetText</a> page you will see this:</p>
 <pre class="Syntax"><span class="func">ControlGetText</span>, OutputVar <span class="optional">, Control, WinTitle, WinText, ExcludeTitle, ExcludeText</span></pre>
 <p>So you could simply do this if you wanted:</p>
-<pre>ControlGetText, OutputVar</pre>
+<pre class="no-highlight">ControlGetText, OutputVar</pre>
 <p>Or add in some more details:</p>
-<pre>ControlGetText, OutputVar, Control, WinTitle</pre>
+<pre class="no-highlight">ControlGetText, OutputVar, Control, WinTitle</pre>
 <p>What if you wanted to use <em>ExcludeTitle</em> but not fill in <em>WinText</em> or <em>WinTitle</em>? Simple!</p>
-<pre>ControlGetText, OutputVar, Control,,, ExcludeTitle</pre>
-<p>Please note that you cannot IGNORE parameters, but you can leave them blank. If you were to ignore <code>WinTitle, WinText</code>, it would look like this and cause issues:</p>
-<pre>ControlGetText, OutputVar, Control, ExcludeTitle</pre>
+<pre class="no-highlight">ControlGetText, OutputVar, Control,,, ExcludeTitle</pre>
+<p>Please note that you cannot IGNORE parameters, but you can leave them blank. If you were to ignore <code class="no-highlight">WinTitle, WinText</code>, it would look like this and cause issues:</p>
+<pre class="no-highlight">ControlGetText, OutputVar, Control, ExcludeTitle</pre>
 
 <h3 id="s82">b. Finding your AHK version</h3>
 <p>Run this code to see your AHK version:</p>

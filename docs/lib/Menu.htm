@@ -15,7 +15,7 @@
 
 <p>Creates, deletes, modifies and displays menus and menu items. Changes the <a href="../Program.htm#tray-icon">tray icon</a> and its tooltip. Controls whether the <a href="../Program.htm#main-window">main window</a> of a <a href="../Scripts.htm#ahk2exe">compiled script</a> can be opened.</p>
 <pre class="Syntax"><span class="func">Menu</span>, MenuName, <a href="#SubCommands">SubCommand</a> <span class="optional">, Value1, Value2, Value3, Value4</span></pre>
-<p>The <em>MenuName</em> parameter can be <code>Tray</code> or the name of any custom menu. A custom menu is automatically created the first time its name is used with the <a href="#Add">Add</a> sub-command. For example: <code>Menu, MyMenu, Add, Item1</code>. Once created, a custom menu can be displayed with the <a href="#Show">Show</a> sub-command. It can also be attached as a submenu to one or more other menus via the <a href="#Add">Add</a> sub-command.</p>
+<p>The <em>MenuName</em> parameter can be <code class="no-highlight">Tray</code> or the name of any custom menu. A custom menu is automatically created the first time its name is used with the <a href="#Add">Add</a> sub-command. For example: <code>Menu, MyMenu, Add, Item1</code>. Once created, a custom menu can be displayed with the <a href="#Show">Show</a> sub-command. It can also be attached as a submenu to one or more other menus via the <a href="#Add">Add</a> sub-command.</p>
 <p>The <em>SubCommand</em>, <em>Value1</em>, <em>Value2</em>, <em>Value3</em> and <em>Value4</em> parameters are dependent on each other their usage is described below.</p>
 
 <h2 id="toc">Table of Contents</h2>
@@ -64,7 +64,7 @@
 <p>To add a menu separator line, omit all three parameters.</p>
 <p>The label subroutine is run as a new <a href="../misc/Threads.htm">thread</a> when the user selects the menu item (similar to <a href="Gosub.htm">Gosub</a> and <a href="../Hotkeys.htm">hotkey subroutines</a>). If <em>LabelOrSubmenu</em> is omitted, <em>MenuItemName</em> will be used as both the label and the menu item's name.</p>
 <p id="Functor"><span class="ver">[v1.1.20+]</span>: If it is not the name of an existing label, <em>LabelOrSubmenu</em> can be the name of a function, or a single variable reference containing a <a href="../misc/Functor.htm">function object</a>. For example, <code>%FuncObj%</code> or <code>% FuncObj</code>. See <a href="#ExBoundFunc">example #5</a> for a fully functional demonstration. Other expressions which return objects are currently unsupported. The function can optionally define parameters as shown below:</p>
-<pre><i>FunctionName</i>(ItemName, ItemPos, MenuName)</pre>
+<pre>FunctionName(ItemName, ItemPos, MenuName)</pre>
 <p>To have <em>MenuItemName</em> become a submenu -- which is a menu item that opens a new menu when selected -- specify for <em>LabelOrSubmenu</em> a colon followed by the <em>MenuName</em> of an existing custom menu. For example:</p>
 <pre>Menu, MySubmenu, Add, Item1
 Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
@@ -76,7 +76,7 @@ Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
     </tr>
     <tr>
         <td>P<em>n</em></td>
-        <td>Specify for <em>n</em> the menu item's <a href="../misc/Threads.htm">thread priority</a>, e.g. <code>P1</code>. If this option is omitted when adding a menu item, the priority will be 0, which is the standard default. If omitted when updating a menu item, the item's priority will not be changed. Use a decimal (not hexadecimal) number as the priority.</td>
+        <td>Specify for <em>n</em> the menu item's <a href="../misc/Threads.htm">thread priority</a>, e.g. <code class="no-highlight">P1</code>. If this option is omitted when adding a menu item, the priority will be 0, which is the standard default. If omitted when updating a menu item, the item's priority will not be changed. Use a decimal (not hexadecimal) number as the priority.</td>
     </tr>
     <tr>
         <td>+Radio</td>
@@ -95,7 +95,7 @@ Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
         <td><span class="ver">[v1.1.23+]</span>: As above, but with a dividing line between columns.</td>
     </tr>
 </table>
-<p>The plus sign (+) is optional and can be replaced with minus (-) to remove the option, as in <code>-Radio</code>. Options are not case-sensitive.</p>
+<p>The plus sign (+) is optional and can be replaced with minus (-) to remove the option, as in <code class="no-highlight">-Radio</code>. Options are not case-sensitive.</p>
 <p>To change an existing item's options without affecting its label or submenu, simply omit the <em>LabelOrSubmenu</em> parameter.</p>
 
 <h3 id="Insert">Insert <span class="ver">[v1.1.23+]</span></h3>
@@ -117,7 +117,7 @@ Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
 <h3 id="Rename">Rename</h3>
 <p>Renames the specified menu item to <em>NewName</em>.</p>
 <pre class="Syntax"><span class="func">Menu</span>, MenuName, Rename, MenuItemName <span class="optional">, NewName</span></pre>
-<p>If <em>NewName</em> is blank, the specified menu item will be converted into a separator line. <em>MenuItemName</em> is the name or position of a menu item (see <a href="#MenuItemName">MenuItemName</a> for details). The menu item's current target label or submenu is unchanged. <span class="ver">[v1.1.23+]</span>: A separator line can be converted to a normal menu item by specifying the position of the separator such as <code>1&</code> for <em>MenuItemName</em> and a non-blank name for <em>NewName</em>, and then using the <a href="#Add">Add</a> sub-command to give the menu item a label or submenu.</p>
+<p>If <em>NewName</em> is blank, the specified menu item will be converted into a separator line. <em>MenuItemName</em> is the name or position of a menu item (see <a href="#MenuItemName">MenuItemName</a> for details). The menu item's current target label or submenu is unchanged. <span class="ver">[v1.1.23+]</span>: A separator line can be converted to a normal menu item by specifying the position of the separator such as <code class="no-highlight">1&</code> for <em>MenuItemName</em> and a non-blank name for <em>NewName</em>, and then using the <a href="#Add">Add</a> sub-command to give the menu item a label or submenu.</p>
 
 <h3 id="Check">Check</h3>
 <p>Adds a visible checkmark in the menu next to the specified menu item (if there isn't one already).</p>
@@ -192,7 +192,7 @@ Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
 <p>Currently it is necessary to specify "actual size" when setting the icon to preserve transparency on Windows Vista and later, e.g. <code>Menu, MyMenu, Icon, Item1, Filename.png,, 0</code>.</p>
 
 <p>Known limitation: Icons on Gui menu bars are positioned incorrectly on Windows XP and older.</p>
-<p><span class="ver">[v1.1.23+]</span>: A <a href="../misc/ImageHandles.htm">bitmap or icon handle</a> can be used instead of a filename. For example, <code>HBITMAP:%handle%</code>.</p>
+<p><span class="ver">[v1.1.23+]</span>: A <a href="../misc/ImageHandles.htm">bitmap or icon handle</a> can be used instead of a filename. For example, <code class="no-highlight">HBITMAP:%handle%</code>.</p>
 
 
 <h3 id="NoIcon">NoIcon</h3>
@@ -211,8 +211,8 @@ Menu, Tray, Add, This menu item is a submenu, :MySubmenu</pre>
 <h3 id="Tip">Tip</h3>
 <p>Changes the <a href="../Program.htm#tray-icon">tray icon</a>'s tooltip.</p>
 <pre class="Syntax"><span class="func">Menu</span>, Tray, Tip <span class="optional">, Text</span></pre>
-<p>The tray icon's tooltip is displayed when the mouse hovers over it. To create a multi-line tooltip, use the linefeed character (`n) in between each line, e.g. <code>Line1`nLine2</code>. Only the first 127 characters of <em>Text</em> are displayed, and <em>Text</em> is truncated at the first tab character, if present. If <em>Text</em> is omitted, the tooltip is restored to its default text. The built-in variable <strong>A_IconTip</strong> contains the current text of the tooltip (blank if the text is at its default).</p>
-<p>On Windows 10 and earlier, to display tooltip text containing ampersands (&amp;), escape each ampersand with two additional ampersands. For example, specifying <code>A &amp;&amp;&amp; B</code> would display "A &amp; B" in the tooltip.</p>
+<p>The tray icon's tooltip is displayed when the mouse hovers over it. To create a multi-line tooltip, use the linefeed character (`n) in between each line, e.g. <code class="no-highlight">Line1`nLine2</code>. Only the first 127 characters of <em>Text</em> are displayed, and <em>Text</em> is truncated at the first tab character, if present. If <em>Text</em> is omitted, the tooltip is restored to its default text. The built-in variable <strong>A_IconTip</strong> contains the current text of the tooltip (blank if the text is at its default).</p>
+<p>On Windows 10 and earlier, to display tooltip text containing ampersands (&amp;), escape each ampersand with two additional ampersands. For example, specifying <code class="no-highlight">A &amp;&amp;&amp; B</code> would display "A &amp; B" in the tooltip.</p>
 
 <h3 id="Show">Show</h3>
 <p>Displays <em>MenuName</em>.</p>

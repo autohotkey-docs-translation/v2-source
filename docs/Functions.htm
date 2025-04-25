@@ -225,7 +225,7 @@ MsgBox % Join("`n", <b class="blue">substrings*</b>)</pre>
 <p>Static variables are always implicitly local, but differ from locals because their values are remembered between calls. For example:</p>
 <pre>LogToFile(TextToLog)
 {
-    <strong>static</strong> LoggedLines := 0
+    static LoggedLines := 0
     LoggedLines += 1  <em>; Maintain a tally locally (its value is remembered between calls).</em>
     global LogFileName
     FileAppend, %LoggedLines%: %TextToLog%`n, %LogFileName%
@@ -235,7 +235,7 @@ MsgBox % Join("`n", <b class="blue">substrings*</b>)</pre>
 <p id="AssumeStatic"><strong>Assume-static mode</strong> <span class="ver">[v1.0.48+]</span>: A function may be defined to assume that all its variables are static (except its parameters) by making its first line the word "static". For example:</p>
 <pre>GetFromStaticArray(WhichItemNumber)
 {
-    <strong>static</strong>
+    static
     static FirstCallToUs := true  <em>; A static declaration's initializer still runs only once (upon startup).</em>
     if FirstCallToUs  <em>; Create a static array during the first call, but not on subsequent calls.</em>
     {
@@ -284,7 +284,7 @@ static TotalAttempts := 0, PrevResult</pre>
 <p>In the example above, the FindColor() function never gets called if the <em>ColorName</em> variable is empty. This is because the left side of the <em>AND</em> would be <em>false</em>, and thus its right side would be incapable of making the final outcome <em>true</em>.</p>
 <p>Because of this behavior, it's important to realize that any side-effects produced by a function (such as altering a global variable's contents) might never occur if that function is called on the right side of an <em>AND</em> or <em>OR</em>.</p>
 <p>It should also be noted that short-circuit evaluation cascades into nested <em>AND</em>s and <em>OR</em>s. For example, in the following expression, only the leftmost comparison occurs whenever <em>ColorName</em> is blank. This is because the left side would then be enough to determine the final answer with certainty:</p>
-<pre>if (ColorName = "" <u>OR</u> FindColor(ColorName, Region1) <u>OR</u> FindColor(ColorName, Region2))
+<pre>if (ColorName = "" OR FindColor(ColorName, Region1) OR FindColor(ColorName, Region2))
     break   <em>; Nothing to search for, or a match was found.</em></pre>
 <p>As shown by the examples above, any expensive (time-consuming) functions should generally be called on the right side of an <em>AND</em> or <em>OR</em> to enhance performance. This technique can also be used to prevent a function from being called when one of its parameters would be passed a value it considers inappropriate, such as an empty string.</p>
 <p><span class="ver">[v1.0.46+]</span>: The <a href="Variables.htm#ternary">ternary conditional operator (?:)</a> also short-circuits by not evaluating the losing branch.</p>
@@ -319,10 +319,10 @@ static TotalAttempts := 0, PrevResult</pre>
 <p>Explanation: When the script's flow of execution encounters a function definition, it jumps over it (using an instantaneous method) and resumes execution at the line after its closing brace. Consequently, execution can never fall into a function from above, nor does the presence of one or more functions at the very top of a script affect the <a href="Scripts.htm#auto">auto-execute section</a>.</p>
 <h2 id="lib">Libraries of Functions: Standard Library and User Library <span class="ver">[v1.0.47+]</span></h2>
 <p>A script may call a function in an external file without having to use <a href="lib/_Include.htm">#Include</a>. For this to work, a file of the same name as the function must exist in one of the following library directories:</p>
-<pre><a href="Variables.htm#ScriptDir">%A_ScriptDir%</a>\Lib\  <em>; Local library - requires <span class="ver">[AHK_L 42+]</span>.</em>
+<pre class="no-highlight"><a href="Variables.htm#ScriptDir">%A_ScriptDir%</a>\Lib\  <em>; Local library - requires <span class="ver">[AHK_L 42+]</span>.</em>
 <a href="Variables.htm#MyDocuments">%A_MyDocuments%</a>\AutoHotkey\Lib\  <em>; User library.</em>
 directory-of-the-currently-running-AutoHotkey.exe\Lib\  <em>; Standard library.</em></pre>
-<p>For example, if a script calls a nonexistent function <code>MyFunc()</code>, the program searches for a file named "MyFunc.ahk" in the user library. If not found there, it searches for it in the standard library. If a match is still not found and the function's name contains an underscore (e.g. <code>MyPrefix_MyFunc</code>), the program searches both libraries for a file named <code>MyPrefix.ahk</code> and loads it if it exists. This allows <code>MyPrefix.ahk</code> to contain both the function <code>MyPrefix_MyFunc</code> and other related functions whose names start with <code>MyPrefix_</code>.</p>
+<p>For example, if a script calls a nonexistent function <code>MyFunc()</code>, the program searches for a file named "MyFunc.ahk" in the user library. If not found there, it searches for it in the standard library. If a match is still not found and the function's name contains an underscore (e.g. <code class="no-highlight">MyPrefix_MyFunc</code>), the program searches both libraries for a file named <code class="no-highlight">MyPrefix.ahk</code> and loads it if it exists. This allows <code class="no-highlight">MyPrefix.ahk</code> to contain both the function <code class="no-highlight">MyPrefix_MyFunc</code> and other related functions whose names start with <code class="no-highlight">MyPrefix_</code>.</p>
 <p><span class="ver">[AHK_L 42+]</span>: The local library is supported and is searched before the user library and standard library.</p>
 <p>Only a direct function call such as <code>MyFunc()</code> can cause a library to be auto-included. If the function is only called dynamically or indirectly, such as by a timer or GUI event, the library must be explicitly included in the script.  For example: <code><a href="lib/_Include.htm">#Include</a> &lt;MyFunc&gt;</code></p>
 <p>Although a library file generally contains only a single function of the same name as its filename, it may also contain private functions and subroutines that are called only by it. However, such functions should have fairly distinct names because they will still be in the global namespace; that is, they will be callable from anywhere in the script.</p>

@@ -278,7 +278,7 @@ other.test()</pre>
     }
 }
 </pre>
-<p>When the script is loaded, this constructs an object and stores it in the global (or in <span class="ver">[v1.1.05+]</span> <a href="Functions.htm#SuperGlobal">super-global</a>) variable <i>ClassName</i>. To reference this class inside a <a href="Functions.htm#ForceLocal">force-local</a> function (or an assume-local or assume-static function prior to <span class="ver">[v1.1.05]</span>), a declaration such as <code>global ClassName</code> is required. If <code>extends BaseClassName</code> is present, <i>BaseClassName</i> must be the full name of another class (but as of <span class="ver">[v1.1.11]</span>, the order that they are defined in does not matter). The full name of each class is stored in <code><i>object</i>.__Class</code>.</p>
+<p>When the script is loaded, this constructs an object and stores it in the global (or in <span class="ver">[v1.1.05+]</span> <a href="Functions.htm#SuperGlobal">super-global</a>) variable <i>ClassName</i>. To reference this class inside a <a href="Functions.htm#ForceLocal">force-local</a> function (or an assume-local or assume-static function prior to <span class="ver">[v1.1.05]</span>), a declaration such as <code>global ClassName</code> is required. If <code class="no-highlight">extends BaseClassName</code> is present, <i>BaseClassName</i> must be the full name of another class (but as of <span class="ver">[v1.1.11]</span>, the order that they are defined in does not matter). The full name of each class is stored in <code><i>object</i>.__Class</code>.</p>
 <p>Because the class is referenced via a variable, the class name cannot be used to both reference the class and create a separate variable (such as to hold an instance of the class) in the same context. For example, <code>box := new Box</code> would replace the class object in <em>Box</em> with an instance of itself. <span class="ver">[v1.1.27+]</span>: <a href="lib/_Warn.htm#ClassOverwrite">#Warn ClassOverwrite</a> enables a warning to be shown at load time for each attempt to overwrite a class.</p>
 <p>Within this documentation, the word "class" on its own usually means a class object constructed with the <code>class</code> keyword.</p>
 <p>Class definitions can contain variable declarations, method definitions and nested class definitions.</p>
@@ -341,7 +341,7 @@ Method()
 <p><a href="#Meta_Functions">Meta-functions</a> provide a broader way of controlling access to properties and methods of an object, but are more complicated and error-prone.</p>
 
 <h3 id="Custom_NewDelete">Construction and Destruction</h3>
-<p>Whenever a derived object is created with the <code>new</code> keyword in <span class="ver">[v1.1.00+]</span>, the <code>__New</code> method defined by its base object is called. This method can accept parameters, initialize the object and override the result of the <code>new</code> operator by returning a value. When an object is destroyed, <code>__Delete</code> is called. For example:</p>
+<p>Whenever a derived object is created with the <code>new</code> keyword in <span class="ver">[v1.1.00+]</span>, the __New method defined by its base object is called. This method can accept parameters, initialize the object and override the result of the <code>new</code> operator by returning a value. When an object is destroyed, __Delete is called. For example:</p>
 <pre>m1 := new GMem(0, 20)
 m2 := {base: GMem}.__New(0, 30)
 
@@ -515,7 +515,7 @@ class Color
 }</pre>
 
 <h4 id="Subclassing_aoa">Subclassing Arrays of Arrays</h4>
-<p>When a <a href="#Usage_Arrays_of_Arrays">multi-parameter assignment</a> such as <code>table[x, y] := content</code> implicitly causes a new object to be created, the new object ordinarily has no base and therefore no custom methods or special behaviour.  <code>__Set</code> may be used to initialize these objects, as demonstrated below.</p>
+<p>When a <a href="#Usage_Arrays_of_Arrays">multi-parameter assignment</a> such as <code>table[x, y] := content</code> implicitly causes a new object to be created, the new object ordinarily has no base and therefore no custom methods or special behaviour.  <code class="no-highlight">__Set</code> may be used to initialize these objects, as demonstrated below.</p>
 <pre>x := {base: {addr: Func("x_Addr"), __Set: Func("x_Setter")}}
 
 <em>; Assign value, implicitly calling x_Setter to create sub-objects.</em>
@@ -531,7 +531,7 @@ x_Setter(x, p1, p2, p3) {
 x_Addr(x) {
     return &amp;x
 }</pre>
-<p>Since <code>x_Setter</code> has four mandatory parameters, it will only be called when there are two or more key parameters.  When the assignment above occurs, the following takes place:</p>
+<p>Since <code class="no-highlight">x_Setter</code> has four mandatory parameters, it will only be called when there are two or more key parameters.  When the assignment above occurs, the following takes place:</p>
 <ul>
   <li><code>x[1]</code> does not exist, so <code>x_Setter(x,1,2,3)</code> is called (<code>"..."</code> is not passed as there are too few parameters).
   <ul>
@@ -543,7 +543,7 @@ x_Addr(x) {
     <li><code>x[1][2]</code> is assigned a new object with the same base as <code>x[1]</code>.</li>
     <li>No value is returned &ndash; the assignment continues.</li>
   </ul></li>
-  <li><code>x[1][2][3]</code> does not exist, but since <code>x_Setter</code> requires four parameters and there are only three (<code>x[1][2], 3, "..."</code>), it is not called and the assignment completes as normal.</li>
+  <li><code>x[1][2][3]</code> does not exist, but since <code class="no-highlight">x_Setter</code> requires four parameters and there are only three (<code>x[1][2], 3, "..."</code>), it is not called and the assignment completes as normal.</li>
 </ul>
 
 <h2 id="Default_Base_Object">Default Base Object</h2>
