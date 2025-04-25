@@ -77,8 +77,8 @@
 <p class="note"><strong>Note:</strong> On Windows 11, some of these options are usually relegated to a submenu that can be accessed by selecting "Show more options".</p>
 <p>Sometimes these options are overridden by settings in the current user's profile, such as if <em>Open With</em> has been used to change the default program for opening .ahk files. This can be fixed by deleting the following registry key:</p>
 <pre class="no-highlight">HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ahk\UserChoice</pre>
-<p>This can be done by applying <a href="misc/remove-userchoice.reg" download="remove-userchoice.reg">this registry patch</a> or by running <code>UX\reset-assoc.ahk</code> from the AutoHotkey installation directory.</p>
-<p>It may also be necessary to repair the default registry values, either by reinstalling AutoHotkey or by running <code>UX\install.ahk</code> from the AutoHotkey installation directory.</p>
+<p>This can be done by applying <a href="misc/remove-userchoice.reg" download="remove-userchoice.reg">this registry patch</a> or by running <code class="no-highlight">UX\reset-assoc.ahk</code> from the AutoHotkey installation directory.</p>
+<p>It may also be necessary to repair the default registry values, either by reinstalling AutoHotkey or by running <code class="no-highlight">UX\install.ahk</code> from the AutoHotkey installation directory.</p>
 
 <h3 id="vista">Why doesn't my script work on Windows <em>xxx</em> even though it worked on a previous version?</h3>
 <p>There are many variations of this problem, such as:</p>

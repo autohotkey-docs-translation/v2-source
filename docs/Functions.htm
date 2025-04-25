@@ -239,15 +239,15 @@ MsgBox Join("`n", <b class="blue">substrings*</b>)</pre>
 <p>Otherwise, to refer to an existing global variable inside a function (or create a new one), declare the variable as global prior to using it. For example:</p>
 <pre>SetDataDir(Dir)
 {
-    <strong>global</strong> LogFileName
+    global LogFileName
     LogFileName := Dir . "\My.log"
-    <strong>global</strong> DataDir := Dir  <em>; Declaration combined with assignment, described <a href="#DeclareInit">below</a>.</em>
+    global DataDir := Dir  <em>; Declaration combined with assignment, described <a href="#DeclareInit">below</a>.</em>
 }
 </pre>
 <p id="AssumeGlobal"><strong>Assume-global mode:</strong> If a function needs to access or create a large number of global variables, it can be defined to assume that all its variables are global (except its parameters) by making its first line the word "global". For example:</p>
 <pre>SetDefaults()
 {
-    <strong>global</strong>
+    global
     MyGlobal := 33  <em>; Assigns 33 to a global variable, first creating the variable if necessary.</em>
     local x, y:=0, z  <em>; Local variables must be declared in this mode, otherwise they would be assumed global.</em>
 }</pre>
