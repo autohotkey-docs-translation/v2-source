@@ -490,9 +490,7 @@ function ctor_highlighter()
     {
       return innerHTML.replace(new RegExp('\\b([' + r_char + ']+)(?=\\()', 'g'), function(_, NAME)
       {
-        if (NAME.match('^(' + syn[2].join('|') + ')$', 'i'))
-          return ph('fun', wrap(NAME, 'fun', 2));
-        return ph('fun', wrap(NAME, 'fun', null));
+        return ph('fun', wrap(NAME, 'fun', syn[2].dict[NAME.toLowerCase()] ? 2 : null));
       });
     }
     /** Searches for operators, formats them and replaces them with placeholders. */
