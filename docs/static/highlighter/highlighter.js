@@ -165,17 +165,12 @@ function ctor_highlighter()
         var allow_escape_sequences = (opts.indexOf('`') == -1);
         if (!allow_comments)
           CONT = resolve_placeholders(CONT, 'em|sct');
+        if (allow_escape_sequences)
+          CONT = escape_sequences(CONT);
         if (is_literal)
-        {
-          if (allow_escape_sequences)
-            CONT = escape_sequences(CONT);
           CONT = (has_var_refs) ? string_with_var_refs(CONT) : wrap(CONT, 'str', null);
-        }
         else
-        {
-          CONT = strings(CONT, allow_escape_sequences);
-          CONT = expressions(CONT);
-        }
+          CONT = expressions(strings(CONT, false));
         return ph('cont', wrap(OPEN, 'opr', null) + wrap(OPTS, 'opt', null) + CONT + wrap(CLOSE, 'opr', null), ASIS);
       });
     }
