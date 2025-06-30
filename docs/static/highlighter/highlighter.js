@@ -40,7 +40,7 @@ function ctor_highlighter()
     // Traverse pre elements:
     for (var i = 0; i < codes.length; i++)
     {
-      var pre = codes[i], code = pre, els = {order: []}, els_raw = {};
+      var pre = codes[i], code = pre, els = {order: []};
       // Skip pre.no-highlight elements:
       if (pre.className.indexOf('no-highlight') != -1)
         continue;
@@ -73,7 +73,8 @@ function ctor_highlighter()
           var index = els.order.length;
           var tagName = 'em' + index;
           code.replaceChild(document.createElement('em' + index), child);
-          els[tagName] = child.outerHTML; els.order.push(tagName);
+          els[tagName] = {repl: child.outerHTML, raw: null};
+          els.order.push(tagName);
         }
         else if (child.href && child.getAttribute('href').substring(0, 4) != 'http')
         {
@@ -84,7 +85,8 @@ function ctor_highlighter()
         {
           var index = els.order.length;
           var tagName = 'various' + index;
-          els[tagName] = child.outerHTML; els.order.push(tagName);
+          els[tagName] = {repl: child.outerHTML, raw: null};
+          els.order.push(tagName);
           code.replaceChild(document.createElement('various' + index), child);
         }
       }
@@ -118,7 +120,7 @@ function ctor_highlighter()
         var tagName = els.order[k];
         var child = code.querySelector(tagName);
         if (child)
-          child.outerHTML = els[tagName];
+          child.outerHTML = els[tagName].repl;
       }
       // Add line numbers:
       if (pre.tagName == 'PRE' && pre.className.indexOf('line-numbers') != -1)
@@ -167,7 +169,7 @@ function ctor_highlighter()
         var allow_escape_sequences = (opts.indexOf('`') == -1);
         var allow_var_refs = (opts.indexOf('%') == -1);
         if (!allow_comments)
-          CONT = resolve_placeholders(CONT, 'em|sct');
+          CONT = resolve_placeholders(CONT, 'em|sct', true);
         if (is_inside_quotes)
         {
           CONT = escape_sequences(CONT, allow_escape_sequences ? '`""|""|`.' : '""');
@@ -200,12 +202,12 @@ function ctor_highlighter()
     {
       innerHTML = innerHTML.replace(new RegExp('\\b(' + syn[5].join('|') + ')(?=' + r_s + '+[' + r_char + ']+|' + r_s + '+' + r_com + '|$)', 'gim'), function(_, DEC)
       {
-        return ph('dec', wrap(DEC, 'dec', 5));
+        return ph('dec', wrap(DEC, 'dec', 5), DEC);
       });
       // class declarations:
       innerHTML = innerHTML.replace(new RegExp('(<dec\\d+></dec\\d+>)(' + r_s + '+)([' + r_char + ']+)(' + r_s + '+)(extends)(' + r_s + '+)([' + r_char + ']+)', 'gim'), function(ASIS, CLASS, SPACE1, NAME1, SPACE2, EXTENDS, SPACE3, NAME2)
       {
-        if (resolve_placeholders(CLASS, 'dec').toLowerCase() != 'class')
+        if (resolve_placeholders(CLASS, 'dec', true).toLowerCase() != 'class')
           return ASIS;
         var link = index_data[syn[5].dict['class']][1];
         return ph('dec', wrap(CLASS, 'dec', link) + SPACE1 + expressions(NAME1) + SPACE2 + wrap(EXTENDS, 'dec', link) + SPACE3 + expressions(NAME2));
@@ -457,7 +459,7 @@ function ctor_highlighter()
         while (m = regex.exec(string))
         {
           out += wrap(string.slice(lastIndex, m.index), 'str', null)
-          out += continuation_sections(els_raw[m[1]], '', true);
+          out += continuation_sections(els[m[1]].raw, '', true);
           lastIndex = regex.lastIndex;
         }
         out += wrap(string.slice(lastIndex), 'str', null);
@@ -663,35 +665,28 @@ function ctor_highlighter()
      * Replaces specific syntax with a resolvable placeholder to facilitate syntax detection.
      * @param {string} abbr - The abbreviation of the syntax element, e.g. 'str' for strings.
      * @param {string} repl - The replacement for the placeholder when resolving.
-     * @param {string} [raw] - The unformatted syntax.
+     * @param {string} raw - The unformatted syntax.
      * @returns {string} The placeholder, e.g. `<str12></str12>`.
      */
     function ph(abbr, repl, raw)
     {
       var tagName = abbr + els.order.length;
-      els[tagName] = repl; els.order.push(tagName);
-      if (raw)
-        els_raw[tagName] = raw;
+      els[tagName] = {repl: repl, raw: raw};
+      els.order.push(tagName);
       return '<' + tagName + '></' + tagName + '>';
     }
     /**
-     * Attempts to resolve placeholders to their original content.
+     * Resolve placeholders.
      * @param {string} string - The string containing placeholders.
      * @param {string} phs - A pipe-delimited list of placeholders to resolve (regex).
-     * @returns {string} The original string.
+     * @param {boolean} to_original - Resolve to original content.
+     * @returns {string} The string containing resolved placeholders.
      */
-    function resolve_placeholders(string, phs)
+    function resolve_placeholders(string, phs, to_original)
     {
       return string.replace(new RegExp('<((?:' + phs + ')\\d+)></\\1>', 'gi'), function(_, TAG)
       {
-        if (els_raw[TAG])
-          return els_raw[TAG];
-        else
-        {
-          var div = document.createElement('div');
-          div.innerHTML = els[TAG];
-          return div.textContent || div.innerText;
-        }
+        return to_original ? els[TAG].raw : els[TAG].repl;
       });
     }
     /**
@@ -785,7 +780,7 @@ function ctor_highlighter()
         part = string.slice(lastIndex, m.index);
         if (part != '')
           out += is_literal ? wrap(part, 'str', null) : string_with_var_refs(part);
-        out += continuation_sections(els_raw[m[1]], is_literal ? '%' : '', false, true);
+        out += continuation_sections(els[m[1]].raw, is_literal ? '%' : '', false, true);
         lastIndex = regex.lastIndex;
       }
       part = string.slice(lastIndex);
