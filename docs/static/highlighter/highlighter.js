@@ -189,7 +189,7 @@ function ctor_highlighter()
         }
         else
         {
-          CONT = strings(CONT, allow_escape_sequences);
+          CONT = strings(CONT, !allow_escape_sequences, true, !(CONT.split('"').length % 2));
           CONT = expressions(CONT);
         }
         return ph('cont', wrap(OPEN, 'opr', null) + wrap(OPTS, 'opt', null) + CONT + wrap(CLOSE, 'opr', null), ASIS);
@@ -215,7 +215,7 @@ function ctor_highlighter()
     /** Searches for directives, formats them and replaces them with placeholders. */
     function directives(innerHTML)
     {
-      return innerHTML.replace(new RegExp(r_pre + '(' + syn[0].join('|') + ')\\b($|[\\t ,])(.*?)(?=' + r_com + '|$)', 'gim'), function(_, PRE, DIR, SEP, PARAMS)
+      return innerHTML.replace(new RegExp(r_pre + '(' + syn[0].join('|') + ')\\b($|[\\t ,]|' + r_s + '*(?=' + r_cont + '))(.*?)(?=' + r_com + '|$)', 'gim'), function(_, PRE, DIR, SEP, PARAMS)
       {
         var dir = DIR.toLowerCase();
         var types = index_data[syn[0].dict[dir]][3]; // parameter types
@@ -228,8 +228,7 @@ function ctor_highlighter()
     /** Searches for control flow statements and commands, formats them and replaces them with placeholders. */
     function command_alikes(innerHTML)
     {
-      innerHTML = innerHTML.replace(new RegExp(r_pre + '\\b(?:(' + syn[3].join('|') + ')|(' + syn[6].join('|') + '))\\b(' + r_s + '*,|\\(|\\{|$|' + r_s + '(?!' + r_s + '*' + r_op_assign + '))(.*?(?=' + r_s + '*' + r_com + '(?!' + r_cont + ')|$)(?:(?:.*[\\n\\r]' + r_s + '*?(?:,|' + r_com + '(?:\\s*,)?|' + r_cont + ').+?(?=' + r_s + '*' + r_com + '|$)))*)', 'gim'), function(ASIS, PRE, CFS, CMD, SEP, PARAMS)
-
+      innerHTML = innerHTML.replace(new RegExp(r_pre + '\\b(?:(' + syn[3].join('|') + ')|(' + syn[6].join('|') + '))\\b(' + r_s + '*,|\\(|\\{|$|' + r_s + '(?!' + r_s + '*' + r_op_assign + ')|' + r_s + '*(?=' + r_cont + '))(.*?(?=' + r_s + '*' + r_com + '(?!' + r_cont + ')|$)(?:(?:.*[\\n\\r]' + r_s + '*?(?:,|' + r_com + '(?:\\s*,)?|' + r_cont + ').+?(?=' + r_s + '*' + r_com + '|$)))*)', 'gim'), function(ASIS, PRE, CFS, CMD, SEP, PARAMS)
       {
         if (CFS) // control flow statements:
         {
@@ -435,23 +434,35 @@ function ctor_highlighter()
       });
     }
     /** Searches for strings, formats them and replaces them with placeholders. */
-    function strings(innerHTML, escape)
+    function strings(innerHTML, prevent_escape, multiline, uneven)
     {
-      var escape = (typeof escape == 'undefined') ? true : escape;
-      return innerHTML.replace(new RegExp('((")[\\s\\S]*?\\2)+', 'gm'), function(STRING)
+      innerHTML = innerHTML.replace(new RegExp('([' + (uneven ? '^"' : '"') + ']' + (multiline ? '[\\s\\S]' : '.') + '*?")+', 'gm'), function(STRING)
       {
+        return ph('str', process_string(STRING, prevent_escape));
+      });
+      // unterminated strings: v1 allows v := "(...") sections
+      innerHTML = innerHTML.replace(new RegExp('".*?(?=' + r_cont + ')', 'g'), function(STRING)
+      {
+        return ph('str', process_string(STRING, prevent_escape, true));
+      });
+      return innerHTML;
+
+      function process_string(string, prevent_escape, ignore_cont_sections)
+      {
+        string = escape_sequences(string, prevent_escape ? '(?!^)""(?!$)' : '`""|(?!^)""(?!$)|`.');
+        if (ignore_cont_sections)
+          return wrap(string, 'str', null);
         var out = '', lastIndex = 0, m;
-        STRING = escape_sequences(STRING, escape ? '`""|(?!^)""(?!$)|`.' : '(?!^)""(?!$)');
         var regex = /<(cont\d+)><\/\1>/g;
-        while (m = regex.exec(STRING))
+        while (m = regex.exec(string))
         {
-          out += wrap(STRING.slice(lastIndex, m.index), 'str', null)
+          out += wrap(string.slice(lastIndex, m.index), 'str', null)
           out += continuation_sections(els_raw[m[1]], '', true);
           lastIndex = regex.lastIndex;
         }
-        out += wrap(STRING.slice(lastIndex), 'str', null);
-        return ph('str', out);
-      });
+        out += wrap(string.slice(lastIndex), 'str', null);
+        return out;
+      }
     }
     /** Searches for numeric values, formats them and replaces them with placeholders. */
     function numeric_values(innerHTML)
