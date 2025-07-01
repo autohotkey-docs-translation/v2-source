@@ -175,16 +175,8 @@ function ctor_highlighter()
           CONT = comments_single(CONT);
         if (is_inside_quotes)
         {
-          CONT = escape_sequences(CONT, allow_escape_sequences ? '`""|""|`.' : '""');
-          if (CONT.indexOf('"') != -1 && (c = CONT.split('"')).length % 2)
-          {
-            var first = wrap(c.shift() + '"', 'str', null);
-            var last = wrap('"' + c.pop(), 'str', null);
-            var middle = expressions(c.join('"'));
-            CONT = first + middle + last;
-          }
-          else
-            CONT = wrap(CONT, 'str', null);
+          CONT = strings(CONT, !allow_escape_sequences, true, true);
+          CONT = expressions(CONT);
         }
         else if (is_literal)
         {
@@ -439,9 +431,9 @@ function ctor_highlighter()
       });
     }
     /** Searches for strings, formats them and replaces them with placeholders. */
-    function strings(innerHTML, prevent_escape, multiline, uneven)
+    function strings(innerHTML, prevent_escape, multiline, reverse)
     {
-      innerHTML = innerHTML.replace(new RegExp('((' + (uneven ? '^|"' : '"') + ')' + (multiline ? '[\\s\\S]' : '.') + '*?")+', 'gm'), function(STRING)
+      innerHTML = innerHTML.replace(new RegExp('((' + (reverse ? '^|"' : '"') + ')' + (multiline ? '[\\s\\S]' : '.') + '*?(' + (reverse ? '$|"' : '"') + '))+', 'g'), function(STRING)
       {
         return ph('str', process_string(STRING, prevent_escape));
       });
