@@ -455,7 +455,7 @@ function ctor_highlighter()
     /** Searches for expressions, formats them and replaces them with placeholders. */
     function expressions(innerHTML)
     {
-      innerHTML = strings(innerHTML, false, true);
+      innerHTML = strings(innerHTML);
       innerHTML = methods(innerHTML);
       innerHTML = numeric_values(innerHTML);
       innerHTML = properties(innerHTML);
