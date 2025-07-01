@@ -93,9 +93,8 @@ function ctor_highlighter()
       // Search for syntax elements, format them and replace them with placeholders:
       try
       {
-        innerHTML = comments_multi(innerHTML);
         innerHTML = continuation_sections(innerHTML);
-        innerHTML = comments_single(innerHTML);
+        innerHTML = comments(innerHTML);
         innerHTML = hotkeys(innerHTML);
         innerHTML = escape_sequences(innerHTML);
         innerHTML = hotstrings(innerHTML);
@@ -137,6 +136,7 @@ function ctor_highlighter()
     {
       return innerHTML.replace(new RegExp('(^' + r_s + '*\\/\\*[\\s\\S]*?(^\\s*\\*\\/|\\*\\/\\s*$|$(?![\\r\\n])))', 'gm'), function(COMMENT)
       {
+        COMMENT = resolve_placeholders(COMMENT, 'cont', true);
         return ph('mct', wrap(COMMENT, 'cmt', null));
       });
     }
@@ -442,6 +442,13 @@ function ctor_highlighter()
       {
         return ph('opr', wrap(OPR, 'opr', 4));
       });
+      return innerHTML;
+    }
+    /** Searches for comments, formats them and replaces them with placeholders. */
+    function comments(innerHTML)
+    {
+      innerHTML = comments_multi(innerHTML);
+      innerHTML = comments_single(innerHTML);
       return innerHTML;
     }
     /** Searches for statements, formats them and replaces them with placeholders. */
