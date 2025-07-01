@@ -93,8 +93,9 @@ function ctor_highlighter()
       // Search for syntax elements, format them and replace them with placeholders:
       try
       {
-        innerHTML = comments(innerHTML);
+        innerHTML = comments_multi(innerHTML);
         innerHTML = continuation_sections(innerHTML);
+        innerHTML = comments_single(innerHTML);
         innerHTML = hotkeys(innerHTML);
         innerHTML = escape_sequences(innerHTML);
         innerHTML = hotstrings(innerHTML);
@@ -131,20 +132,21 @@ function ctor_highlighter()
         code.appendChild(span);
       }
     }
-    /** Searches for comments, formats them and replaces them with placeholders. */
-    function comments(innerHTML)
+    /** Searches for multi-line comments, formats them and replaces them with placeholders. */
+    function comments_multi(innerHTML)
     {
-      // single-line comments:
-      innerHTML = innerHTML.replace(new RegExp('(' + r_s + '|^)(;.*?)$', 'gm'), function(_, PRE, COMMENT)
-      {
-        return PRE + ph('sct', wrap(COMMENT, 'cmt', null), COMMENT);
-      });
-      // multi-line comments:
-      innerHTML = innerHTML.replace(new RegExp('(^' + r_s + '*\\/\\*[\\s\\S]*?(^\\s*\\*\\/|\\*\\/\\s*$|$(?![\\r\\n])))', 'gm'), function(COMMENT)
+      return innerHTML.replace(new RegExp('(^' + r_s + '*\\/\\*[\\s\\S]*?(^\\s*\\*\\/|\\*\\/\\s*$|$(?![\\r\\n])))', 'gm'), function(COMMENT)
       {
         return ph('mct', wrap(COMMENT, 'cmt', null));
       });
-      return innerHTML;
+    }
+    /** Searches for single-line comments, formats them and replaces them with placeholders. */
+    function comments_single(innerHTML)
+    {
+      return innerHTML.replace(new RegExp('(' + r_s + '|^)(;.*?(\\r?\\n' + r_s + '*;.*?)*)(?=$|' + r_cont + ')', 'gm'), function(_, PRE, COMMENT)
+      {
+        return PRE + ph('sct', wrap(COMMENT, 'cmt', null), COMMENT);
+      });
     }
     /** Searches for escape sequences, formats them and replaces them with placeholders. */
     function escape_sequences(innerHTML, regex)
@@ -159,14 +161,15 @@ function ctor_highlighter()
     {
       return innerHTML.replace(new RegExp('([\\r\\n]*?^' + r_s + '*\\()(.*)([\\s\\S]*?)(^' + r_s + '*\\))', 'gm'), function(ASIS, OPEN, OPTS, CONT, CLOSE)
       {
+        OPTS = comments_single(OPTS);
         var opts = OPTS + (forced_opts ? ' ' + forced_opts : '');
         opts = opts.replace(new RegExp('(^|' + r_s + '+)(join\\S*|(l|r)trim0?|' + r_com + ')|', 'gi'), '');
         if (opts.indexOf('(') != -1 || opts.indexOf(')') != -1)
           return OPEN + OPTS + continuation_sections(CONT + CLOSE);
         var allow_comments = (opts.indexOf('c') != -1 || opts.indexOf('C') != -1);
         var allow_escape_sequences = (opts.indexOf('`') == -1);
-        if (!allow_comments)
-          CONT = resolve_placeholders(CONT, 'em|sct', true);
+        if (allow_comments)
+          CONT = comments_single(CONT);
         if (allow_escape_sequences)
           CONT = escape_sequences(CONT);
         if (is_literal)
