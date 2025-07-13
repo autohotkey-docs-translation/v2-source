@@ -883,7 +883,7 @@ indexData = [
   ["Name method/property (Match)","lib/RegExMatch.htm#MatchObject",8],
   ["Name property (Func)","lib/Func.htm#Name",8],
   ["names","Concepts.htm#names"],
-  ["new","Variables.htm#new",5],
+  ["new","Variables.htm#new",4],
   ["New (Gui)","lib/Gui.htm#New",7],
   ["Next method (Enumerator)","lib/Enumerator.htm#Next",8],
   ["NoDefault (Menu)","lib/Menu.htm#NoDefault",7],

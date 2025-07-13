@@ -515,9 +515,9 @@ function ctor_highlighter()
         return ph('opr', wrap(OPR, 'opr', null));
       });
       // named operators:
-      innerHTML = innerHTML.replace(new RegExp('\\b(and|not|or)\\b', 'gi'), function(OPR)
+      innerHTML = innerHTML.replace(new RegExp('\\b(and|not|or|new)\\b', 'gi'), function(OPR)
       {
-        return ph('opr', wrap(OPR, 'opr', 4));
+        return ph('opr', wrap(OPR, OPR.match(/new/i) ? 'dec' : 'opr', 4));
       });
       return innerHTML;
     }
