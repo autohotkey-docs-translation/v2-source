@@ -68,10 +68,10 @@ GroupAdd "MyGroup", "ahk_class WordPadClass"
 <p>To create hotkey or hotstring variants dynamically (while the script is running), see <a href="HotIf.htm">HotIf</a>.</p>
 
 <h2 id="expression-evaluation">Expression Evaluation</h2>
-<p>When the hotkey's key, mouse or controller button combination is pressed or the hotstring's abbreviation is typed, the #HotIf expression is evaluated to determine if the hotkey or hotstring should activate.</p>
+<p>When the hotkey's key, mouse or controller button combination is pressed or the hotstring's abbreviation is typed, the #HotIf expression is evaluated to determine if the hotkey/hotstring should activate.</p>
 <p class="warning"><strong>Note:</strong> Scripts should not assume that the expression is only evaluated when the hotkey's key is pressed (see below).</p>
 <p>The expression may also be evaluated whenever the program needs to know whether the hotkey is active. For example, the #HotIf expression for a custom combination like <code>a &amp; b::</code> might be evaluated when the prefix key (<code class="no-highlight">a</code> in this example) is pressed, to determine whether it should act as a custom modifier key.</p>
-<p class="warning" id="lag"><strong>Note:</strong> Use of #HotIf in an unresponsive script may cause input lag or break hotkeys and hotstrings (see below).</p>
+<p class="warning" id="lag"><strong>Note:</strong> Use of #HotIf in an unresponsive script may cause input lag or break hotkeys/hotstrings (see below).</p>
 <p>There are several more caveats to the #HotIf directive:</p>
 <ul>
   <li>Keyboard or mouse input is typically buffered (delayed) until expression evaluation completes or <a href="_HotIfTimeout.htm">times out</a>.</li>
