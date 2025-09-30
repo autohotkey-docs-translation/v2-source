@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>#If - Syntax &amp; Usage | AutoHotkey v1</title>
-<meta name="description" content="The #If directive creates context-sensitive hotkeys and hotstrings. Such hotkeys perform a different action (or none at all) depending on the result of an expression." />
+<meta name="description" content="The #If directive creates context-sensitive hotkeys and hotstrings. They perform a different action (or none at all) depending on the result of an expression." />
 <meta name="ahk:equiv-v2" content="lib/_HotIf.htm" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
 
 <h1>#If <span class="ver">[AHK_L 4+]</span></h1>
 
-<p>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. Such hotkeys perform a different action (or none at all) depending on the result of an expression.</p>
+<p>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. They perform a different action (or none at all) depending on the result of an expression.</p>
 
 <pre class="Syntax"><span class="func">#If</span> <span class="optional">Expression</span></pre>
 <h2 id="Parameters">Parameters</h2>
@@ -26,19 +26,21 @@
 </dl>
 
 <h2 id="Basic_Operation">Basic Operation</h2>
-<p>Any valid expression may be used to define the context in which a hotkey should be active. For example:</p>
+<p>Any valid expression may be used to define the context in which a hotkey or hotstring should be active. For example:</p>
 <pre>#If WinActive("ahk_class Notepad") or WinActive(MyWindowTitle)
-#Space::MsgBox You pressed Win+Spacebar in Notepad or %MyWindowTitle%.</pre>
-<p>Like the #IfWin directives, #If is positional: it affects all hotkeys and hotstrings physically beneath it in the script. #If and #IfWin are also mutually exclusive; that is, only the most recent #If or #IfWin will be in effect.</p>
+#Space::MsgBox You pressed Win+Spacebar in Notepad or %MyWindowTitle%
+:X:btw::MsgBox You typed btw in Notepad or %MyWindowTitle%</pre>
+<p>Like the <a href="_IfWinActive.htm">#IfWin</a> directives, #If is positional: it affects all hotkeys and hotstrings physically beneath it in the script. #If and #IfWin are also mutually exclusive; that is, only the most recent #If or #IfWin will be in effect.</p>
+<p>#If is intended to be used for hotkeys and hotstrings defined via the double-colon syntax, such as <code>#space::</code> or <code>::btw::</code>. For hotkeys and hotstrings created via the <a href="Hotkey.htm">Hotkey</a> command or <a href="Hotstring.htm">Hotstring</a> function, use <a href="Hotkey.htm#IfWin">Hotkey If</a>. However, if <em>Hotkey If</em> is never used by a script, the bottommost use of #If (if any) will be in effect for the Hotkey command or Hotstring function.</p>
 <p>To turn off context sensitivity, specify #If or any #IfWin directive but omit all the parameters. For example:</p>
 <pre>#If</pre>
 <p>Like other directives, #If cannot be executed conditionally.</p>
 
 <h2 id="General_Remarks">General Remarks</h2>
-<p>When the key, mouse or controller button combination which forms a hotkey is pressed, the #If expression is evaluated to determine if the hotkey should activate.</p>
-<p class="warning"><strong>Note:</strong> Scripts should not assume that the expression is only evaluated when the key is pressed (see below).</p>
+<p>When the hotkey's key, mouse or controller button combination is pressed or the hotstring's abbreviation is typed, the #If expression is evaluated to determine if the hotkey/hotstring should activate.</p>
+<p class="warning"><strong>Note:</strong> Scripts should not assume that the expression is only evaluated when the hotkey's key is pressed (see below).</p>
 <p>The expression may also be evaluated whenever the program needs to know whether the hotkey is active. For example, the #If expression for a custom combination like <code>a &amp; b::</code> might be evaluated when the prefix key (<code class="no-highlight">a</code> in this example) is pressed, to determine whether it should act as a custom modifier key.</p>
-<p class="warning"><strong>Note:</strong> Use of #If in an unresponsive script may cause input lag or break hotkeys (see below).</p>
+<p class="warning"><strong>Note:</strong> Use of #If in an unresponsive script may cause input lag or break hotkeys/hotstrings (see below).</p>
 <p>There are several more caveats to the #If directive:</p>
 <ul>
   <li>Keyboard or mouse input is typically buffered (delayed) until expression evaluation completes or <a href="_IfTimeout.htm">times out</a>.</li>
@@ -46,7 +48,7 @@
   <li>If the <a href="_IfTimeout.htm#LowLevelHooksTimeout">system-defined timeout</a> is reached, the system may stop notifying the script of keyboard or mouse input (see #IfTimeout for details).</li>
   <li>Sending keystrokes or mouse clicks while the expression is being evaluated (such as from a function which it calls) may cause complications and should be avoided.</li>
 </ul>
-<p><span class="ver">[AHK_L 53+]</span>: <a href="../Variables.htm#ThisHotkey">A_ThisHotkey</a> and <a href="../Variables.htm#TimeSinceThisHotkey">A_TimeSinceThisHotkey</a> are set based on the hotkey for which the current #If expression is being evaluated.</p>
+<p><span class="ver">[AHK_L 53+]</span>: <a href="../Variables.htm#ThisHotkey">A_ThisHotkey</a> and <a href="../Variables.htm#TimeSinceThisHotkey">A_TimeSinceThisHotkey</a> are set based on the hotkey or non-auto-replace hotstring for which the current #If expression is being evaluated.</p>
 <p><span class="ver">[v1.0.95.00+]</span>: <a href="../Variables.htm#PriorHotkey">A_PriorHotkey</a> and <a href="../Variables.htm#TimeSincePriorHotkey">A_TimeSincePriorHotkey</a> temporarily contain the previous values of the corresponding "This" variables.</p>
 
 <h2 id="Related">Related</h2>

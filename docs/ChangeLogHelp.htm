@@ -486,7 +486,7 @@ return</pre>
 <p>Improved the Hotkey command to support <a href="lib/Hotkey.htm#UseErrorLevel">UseErrorLevel</a> and context-sensitive hotkeys (via <a href="lib/Hotkey.htm#IfWin">Hotkey IfWinActive/Exist</a>).</p>
 <p>Improved <a href="lib/_IfWinActive.htm">#IfWinActive/Exist</a> to support Windows 9x. In addition, the <a href="lib/_InstallKeybdHook.htm">keyboard hook</a> is now avoided whenever possible. Finally, #IfWin now sets the <a href="misc/WinTitle.htm#LastFoundWindow">Last Found Window</a>.</p>
 <p>Improved the following commands to support TListBox/TComboBox and possibly others: <a href="lib/Control.htm">Control</a> (Add/Delete/Choose/ChooseString); and <a href="lib/ControlGet.htm">ControlGet</a> (FindString/Choice/List).</p>
-<p>Added support for hotkey and hotstring <a href="lib/_IfWinActive.htm#variant">variants</a> (duplicates). Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists.</p>
+<p>Added support for hotkey and hotstring <a href="lib/_IfWinActive.htm#variant">variants</a> (duplicates). They perform a different action (or none at all) depending on the type of window that is active or exists.</p>
 
 <h2 id="v1.0.41.02">1.0.41.02 - February 1, 2006</h2>
 <p>Changed <a href="lib/GuiControl.htm#Move">GuiControl Move</a> to reduce flickering when resizing or moving controls [thanks Serenity]. However, this may cause painting artifacts for some control types under certain circumstances. <strong>If so, please update your scripts to use <a href="lib/GuiControl.htm#MoveDraw">GuiControl MoveDraw</a> instead.</strong></p>
