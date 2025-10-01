@@ -227,7 +227,7 @@ return</pre>
 <p>If the <a href="#Tilde">tilde (~) symbol</a> is used with a <a href="#prefix">prefix key</a> even once, it changes the behavior of that prefix key for all combinations. For example, in both of the below hotkeys, the active window will receive all right-clicks even though only one of the definitions contains a tilde:</p>
 <pre>~RButton &amp; LButton::MsgBox You pressed the left mouse button while holding down the right.
 RButton &amp; WheelUp::MsgBox You turned the mouse wheel up while holding down the right button.</pre>
-<p>The <a href="lib/Suspend.htm">Suspend</a> command can temporarily disable all hotkeys except for ones you make exempt. For greater selectivity, use <a href="lib/_IfWinActive.htm">#IfWinActive/Exist</a>.</p>
+<p>The <a href="lib/Suspend.htm">Suspend</a> command can temporarily disable all hotkeys except for ones you make exempt. For greater selectivity, use <a href="lib/_IfWinActive.htm">#IfWinActive/Exist</a> or <a href="lib/_If.htm">#If</a>.</p>
 <p>By means of the <a href="lib/Hotkey.htm">Hotkey</a> command, hotkeys can be created dynamically while the script is running. The Hotkey command can also modify, disable, or enable the script's existing hotkeys individually.</p>
 <p>Controller hotkeys do not currently support modifier prefixes such as ^ (Ctrl) and # (Win). However, you can use <a href="lib/GetKeyState.htm">GetKeyState</a> to mimic this effect as shown in the following example:</p>
 <pre>Joy2::
