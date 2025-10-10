@@ -422,8 +422,10 @@ function ctor_highlighter()
     /** Searches for custom functions, formats them and replaces them with placeholders. */
     function custom_functions(innerHTML)
     {
-      return innerHTML.replace(new RegExp('\\b([' + r_char + ']+)(?=\\()', 'g'), function(_, NAME)
+      return innerHTML.replace(new RegExp('\\b([' + r_char + ']+)(?=\\()', 'g'), function(ASIS, NAME)
       {
+        if (NAME.match(/^(and|is|not|or)$/i))
+          return ASIS;
         return ph('fun', wrap(NAME, 'fun', null));
       });
     }
