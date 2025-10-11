@@ -37,7 +37,7 @@ function ctor_highlighter()
     var r_cont = '<cont\\d+></cont\\d+>'; // continuation section
     var r_s = '(?: |\\t|&nbsp;)'; // space
     var r_pre = '(^' + r_s + '*(?:[{}]' + r_s + '*)*)'; // prefix
-    var r_suf = '(?=' + r_s + '*($|' + r_com + '))'; // suffix
+    var r_suf = '(?=' + r_s + '*(?:$|' + r_com + '))'; // suffix
     // Traverse pre elements:
     for (var i = 0; i < codes.length; i++)
     {
