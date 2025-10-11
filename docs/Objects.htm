@@ -446,11 +446,11 @@ MsgBox obj["base"]                  <em>; 10</em>
 
 <h3 id="Custom_NewDelete">Construction and Destruction</h3>
 <p>Whenever an object is created by the default implementation of <a href="lib/Class.htm#Call"><em>ClassName</em>()</a>, the new object's __New method is called in order to allow custom initialization. Any parameters passed to <code><i>ClassName</i>()</code> are forwarded to __New, so can affect the object's initial content or how it is constructed. When an object is destroyed, __Delete is called. For example:</p>
-<pre>m1 := GMem(0, 10)
+<pre id="GMem">m1 := GMem(0, 10)
 m2 := {base: GMem.Prototype}, m2.__New(0, 30)
 
 <em>; Note: For general memory allocations, use <a href="lib/Buffer.htm">Buffer</a>() instead.</em>
-class GMem<span id="GMem"></span>
+class GMem
 {
     __New(aFlags, aSize)
     {
