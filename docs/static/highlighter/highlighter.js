@@ -393,8 +393,6 @@ function ctor_highlighter()
         var out = wrap(escape_sequences(HK, '`;'), 'hot', null) + wrap('::', 'opr', null) + SPACE;
         if (ACTION != '')
         {
-          if ((ACTION.split('"').length - 1) == 1) // quote count
-            return ASIS;
           if (ACTION == '{')
             out += operators(ACTION);
           else if (ACTION.match(/^(control|sleep)$/i))
