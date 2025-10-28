@@ -60,7 +60,7 @@
 <p>Fixed Click to not return an integer.</p>
 <p>Fixed detection of <code class="no-highlight"><i>key</i>::try {</code> as an error.</p>
 <p>Fixed <code>:B0*O:XY::Z</code> to produce XYZ rather than XZ (suppressing Y).</p>
-<p>Fixed Send to leave any prior <code>{<i>modifier</i> Down}</code> in effect even if the key happens to be physically held down.</p>
+<p>Fixed Send to leave any prior <code class="no-highlight">{<i>modifier</i> Down}</code> in effect even if the key happens to be physically held down.</p>
 <p>Improved the reliability of the script taking focus when a menu popup is shown.</p>
 
 <p><strong>Debugger improvements:</strong></p>
@@ -69,7 +69,7 @@
 <p>Fixed corrupted results from property_get when a property returns a temporary object with a string, such as <code>x.y.z</code> where <code>y =&gt; {z:"a"}</code>.</p>
 <p>Fixed crashes when an asynchronous command is received during the processing of another command.</p>
 <p>Fixed exceptions not being deleted after they are suppressed via property_set.</p>
-<p>Fixed <code class="no-highlight">property_get -c 0 -d 0</code> to allow global variables, as already allowed by <code>-d 1</code>.</p>
+<p>Fixed <code class="no-highlight">property_get -c 0 -d 0</code> to allow global variables, as already allowed by <code class="no-highlight">-d 1</code>.</p>
 <p>Fixed property_get paging enumerated items incorrectly.</p>
 
 <p>Improved property_get to support property getters with one parameter (previously only the implicit __Item property supported this).</p>
@@ -88,7 +88,7 @@
 <p>Fixed debugger to safely handle property deletion during enumeration.</p>
 <p>Fixed OLE clipboard content (e.g. error dialog text) being lost on exit.</p>
 <p>Fixed detection of invalid suffix on a hotkey, such as <code>Hotkey "a pu"</code>.</p>
-<p>Fixed DllCall <code>AStr*</code> arg type to copy back only if address changes.</p>
+<p>Fixed DllCall <code class="no-highlight">AStr*</code> arg type to copy back only if address changes.</p>
 <p>Fixed #Include to correctly "close" any built-in variable it reads (no known impact on real-world scripts).</p>
 <p>Fixed WinTitles with two different ahk_id values to yield no match.</p>
 
