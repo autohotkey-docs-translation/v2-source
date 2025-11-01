@@ -41,6 +41,16 @@
 <pre>KeyWait Control  <em>; Wait for both Control and Alt to be released.</em>
 KeyWait Alt</pre>
 <p>To wait for any one key among a set of keys to be pressed down, see <a href="Input.htm#ExAnyKey">Input example #1</a>.</p>
+<p>Modifier key hotkeys (<code>Ctrl::</code>, <code>Control::</code>, <code>Alt::</code>, and <code>Shift::</code>), <a href="../Hotkeys.htm#prefix">prefix key</a> hotkeys, and <a href="../Hotkeys.htm#keyup">key-up</a> hotkeys fire upon release rather than press-down. So, when waiting for their trigger key within their definition, the result may differ from what is expected, especially if the timeout option is used. For example, the following code does not work as intended because KeyWait only sees the release of <kbd>Alt</kbd>, so it will never time out:</p>
+<pre>Alt::  <em>; Replace this with ~Alt:: to make it work as intended.</em>
+KeyWait Alt, T0.3
+if ErrorLevel
+    MsgBox Held
+else
+    MsgBox Pressed
+return</pre>
+<p>This code always shows "Pressed" no matter how long you hold the key. To account for this, you would need to add the <a href="../Hotkeys.htm#Tilde">tilde prefix (~)</a> to make the modifier key fire upon press-down instead. In other words, replace <code>Alt::</code> with <code>~Alt::</code> to make it work as intended.</p>
+
 <h2 id="Related">Related</h2>
 <p><a href="GetKeyState.htm">GetKeyState</a>, <a href="../KeyList.htm">Key List</a>, <a href="Input.htm">Input</a>, <a href="KeyHistory.htm">KeyHistory</a>, <a href="_InstallKeybdHook.htm">#InstallKeybdHook</a>, <a href="_InstallMouseHook.htm">#InstallMouseHook</a>, <a href="ClipWait.htm">ClipWait</a>, <a href="WinWait.htm">WinWait</a></p>
 <h2 id="Examples">Examples</h2>
