@@ -1849,7 +1849,13 @@ function ctor_features()
     self.content.appendChild(div);
 
     var isVisible = false;
-    $('#right').add(window).on('scroll', function() {
+    $('#right').add(window).on('scroll', showBackButton); showBackButton();
+
+    $('div.back-to-top').on('click', function() {
+      $(document.body).add(document.documentElement).add('#right').animate({scrollTop: 0}, 100);
+    });
+
+    function showBackButton() {
       var scrollTop = $(this).scrollTop();
       if (scrollTop > 20 && !isVisible) {
         isVisible = true;
@@ -1858,11 +1864,7 @@ function ctor_features()
         isVisible = false;
         $('div.back-to-top').fadeOut();
       }
-    });
-
-    $('div.back-to-top').on('click', function() {
-      $(document.body).add(document.documentElement).add('#right').animate({scrollTop: 0}, 100);
-    });
+    }
   };
 
   // --- Ensure setting right scroll position when traversing history ---
