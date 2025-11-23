@@ -13,7 +13,7 @@ var user = {
   fontSize: 1.0,
   clickTab: 0,
   displaySidebar: true,
-  colorTheme: 0,
+  colorScheme: null,
   collapseQuickRef: false
 }
 
@@ -24,7 +24,7 @@ var user = {
 // Note: CHM doesn't support window.localStorage/sessionStorage or cookies.
 
 var cache = {
-  colorTheme: user.colorTheme,
+  colorScheme: user.colorScheme,
   scriptDir: scriptDir,
   fontSize: user.fontSize,
   forceNoFrame: false,
@@ -151,9 +151,8 @@ var isPhone = (document.documentElement.clientWidth <= 600);
     // font size
     if (!isFrameCapable && cache.fontSize != 1)
       $('head').append('<style>#right .area {font-size:' + cache.fontSize + 'em}</style>');
-    // color theme
-    if (cache.colorTheme)
-      structure.setTheme(cache.colorTheme);
+    // color scheme
+    structure.setScheme(cache.colorScheme);
   }
 
   // Exit the script on sites which doesn't need the sidebar:
@@ -176,7 +175,7 @@ var isPhone = (document.documentElement.clientWidth <= 600);
         cache.set('toc_clickItemTemp', null);
       }
       normalizeParentURL(); $(window).on('hashchange', normalizeParentURL);
-      structure.setTheme(cache.colorTheme);
+      structure.setScheme(cache.colorScheme);
       structure.addShortcuts();
       structure.addAnchorFlash();
       structure.saveCacheBeforeLeaving();
@@ -208,8 +207,8 @@ var isPhone = (document.documentElement.clientWidth <= 600);
           search.scrollToMatch(data[1]);
           break;
 
-          case 'setTheme':
-          structure.setTheme(data[1]);
+          case 'setScheme':
+          structure.setScheme(data[1]);
           break;
         }
       });
@@ -893,7 +892,7 @@ function ctor_structure()
 {
   var self = this;
   self.metaViewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';
-  self.template = '<div id="head" role="banner"><button onclick="structure.focusContent();" class="skip-nav" data-translate aria-label="data-content" data-content="Skip navigation"></button><div class="h-area"><div class="h-tabs"><ul><li><button data-translate title="Shortcut: ALT+C" aria-label="Content tab" data-content="C̲ontent"></button></li><li><button data-translate title="Shortcut: ALT+N" aria-label="Index tab" data-content="In̲dex"></button></li><li><button data-translate title="Shortcut: ALT+S" aria-label="Search tab" data-content="S̲earch"></button></li></ul></div><div class="h-tools sidebar"><ul><li class="sidebar"><button title="Hide or show the sidebar" data-translate aria-label="title">&#926;</button></li></ul></div><div class="h-tools online"><ul><li class="home"><a href="{0}" title="Go to the homepage" data-translate aria-label="title">&#916;</a></li><li class="language"><button data-translate title="Change the language" data-translate aria-label="title" data-content="en"></button><ul class="dropdown languages selected"><li><a href="#" title="English" aria-label="title" data-content="en"></a></li><li><a href="#" title="Deutsch (German)" data-content="de" aria-label="title"></a></li><li><a href="#" title="&#x65e5;&#x672c;&#x8a9e; (Japanese)" data-content="ja" aria-label="title"></a></li><li><a href="#" title="&#xD55C;&#xAD6D;&#xC5B4 (Korean)" aria-label="title" data-content="ko"></a></li><li><a href="#" title="Português (Portuguese)" data-content="pt" aria-label="title"></a></li><li><a href="#" title="&#x4E2D;&#x6587; (Chinese)" aria-label="title" data-content="zh"></a></li></ul></li><li class="version"><button title="Change the version" data-translate aria-label="title" data-content="v1"></button><ul class="dropdown versions selected"><li><a href="#" title="AHK v1.1" aria-label="title" data-content="v1"></a></li><li><a href="#" title="AHK v2.0" aria-label="title" data-content="v2"></a></li></ul></li><li class="edit"><a href="#" title="Edit this document on GitHub" data-translate=2 aria-label="title" data-content="E"></a></li></ul></div><div class="h-tools chm"><ul><li class="back"><button title="Go back" data-translate=2 aria-label="title">&#9668;</button></li><li class="forward"><button title="Go forward" data-translate=2 aria-label="title">&#9658;</button></li><li class="zoom"><button title="Change the font size" data-translate=2 aria-label="title" data-content="Z"></button></li><li class="print"><button title="Print this document" data-translate=2 aria-label="title" data-content="P"></button></li><li class="browser"><a href="#" target="_blank" title="Open this document in the default browser (requires internet connection). Middle-click to copy the link address." data-translate aria-label="title">¬</a></li></ul></div><div class="h-tools main visible"><ul><li class="color"><button title="Use the dark or light theme" data-translate=2 aria-label="title" data-content="C"></button></li><li class="settings"><button title="Open the help settings" data-translate=2 aria-label="title">&#1029;</button></li></ul></div></div></div><div id="main"><div id="left" role="navigation"><div class="tab toc"></div><div class="tab index"><div class="input"><input type="search" placeholder="Search" data-translate=2 /></div><div class="select"><select size="1" class="empty"><option value="-1" class="empty" selected data-translate>Filter</option><option value="0" data-translate>Directives</option><option value="1" data-translate>Built-in Variables</option><option value="2" data-translate>Built-in Functions</option><option value="3" data-translate>Control Flow Statements</option><option value="4" data-translate>Operators</option><option value="5" data-translate>Declarations</option><option value="6" data-translate>Built-in Classes</option><option value="7" data-translate>Built-in Methods/Properties</option><option value="99" data-translate>Ahk2Exe Compiler</option></select></div><div class="list"></div></div><div class="tab search"><div class="input"><input type="search" placeholder="Search" data-translate=2 /></div><div class="checkbox"><input type="checkbox" id="highlightWords"><label for="highlightWords" data-translate>Highlight keywords</label><div class="updown" title="Go to previous/next occurrence" data-translate aria-label="title"><div class="up"><div class="triangle-up"></div></div><div class="down"><div class="triangle-down"></div></div></div></div><div class="list"></div></div><div class="load"><div class="lds-dual-ring"></div></div><div class="quick"><button class="header" title="Collapse or uncollapse the quick reference" data-translate aria-label="title"><div class="chevron"></div><span data-translate data-content="Quick reference"></span></button><div class="main"></div></div></div><div class="dragbar"></div><div id="right" tabIndex="-1"><div class="load"><div class="lds-dual-ring"></div></div><iframe class="hidden" frameBorder="0" id="frame" src="" role="main">';
+  self.template = '<div id="head" role="banner"><button onclick="structure.focusContent();" class="skip-nav" data-translate aria-label="data-content" data-content="Skip navigation"></button><div class="h-area"><div class="h-tabs"><ul><li><button data-translate title="Shortcut: ALT+C" aria-label="Content tab" data-content="C̲ontent"></button></li><li><button data-translate title="Shortcut: ALT+N" aria-label="Index tab" data-content="In̲dex"></button></li><li><button data-translate title="Shortcut: ALT+S" aria-label="Search tab" data-content="S̲earch"></button></li></ul></div><div class="h-tools sidebar"><ul><li class="sidebar"><button title="Hide or show the sidebar" data-translate aria-label="title">&#926;</button></li></ul></div><div class="h-tools online"><ul><li class="home"><a href="{0}" title="Go to the homepage" data-translate aria-label="title">&#916;</a></li><li class="language"><button data-translate title="Change the language" data-translate aria-label="title" data-content="en"></button><ul class="dropdown languages selected"><li><a href="#" title="English" aria-label="title" data-content="en"></a></li><li><a href="#" title="Deutsch (German)" data-content="de" aria-label="title"></a></li><li><a href="#" title="&#x65e5;&#x672c;&#x8a9e; (Japanese)" data-content="ja" aria-label="title"></a></li><li><a href="#" title="&#xD55C;&#xAD6D;&#xC5B4 (Korean)" aria-label="title" data-content="ko"></a></li><li><a href="#" title="Português (Portuguese)" data-content="pt" aria-label="title"></a></li><li><a href="#" title="&#x4E2D;&#x6587; (Chinese)" aria-label="title" data-content="zh"></a></li></ul></li><li class="version"><button title="Change the version" data-translate aria-label="title" data-content="v1"></button><ul class="dropdown versions selected"><li><a href="#" title="AHK v1.1" aria-label="title" data-content="v1"></a></li><li><a href="#" title="AHK v2.0" aria-label="title" data-content="v2"></a></li></ul></li><li class="edit"><a href="#" title="Edit this document on GitHub" data-translate=2 aria-label="title" data-content="E"></a></li></ul></div><div class="h-tools chm"><ul><li class="back"><button title="Go back" data-translate=2 aria-label="title">&#9668;</button></li><li class="forward"><button title="Go forward" data-translate=2 aria-label="title">&#9658;</button></li><li class="zoom"><button title="Change the font size" data-translate=2 aria-label="title" data-content="Z"></button></li><li class="print"><button title="Print this document" data-translate=2 aria-label="title" data-content="P"></button></li><li class="browser"><a href="#" target="_blank" title="Open this document in the default browser (requires internet connection). Middle-click to copy the link address." data-translate aria-label="title">¬</a></li></ul></div><div class="h-tools main visible"><ul><li class="color"><button title="Use the dark or light scheme" data-translate=2 aria-label="title" data-content="C"></button></li><li class="settings"><button title="Open the help settings" data-translate=2 aria-label="title">&#1029;</button></li></ul></div></div></div><div id="main"><div id="left" role="navigation"><div class="tab toc"></div><div class="tab index"><div class="input"><input type="search" placeholder="Search" data-translate=2 /></div><div class="select"><select size="1" class="empty"><option value="-1" class="empty" selected data-translate>Filter</option><option value="0" data-translate>Directives</option><option value="1" data-translate>Built-in Variables</option><option value="2" data-translate>Built-in Functions</option><option value="3" data-translate>Control Flow Statements</option><option value="4" data-translate>Operators</option><option value="5" data-translate>Declarations</option><option value="6" data-translate>Built-in Classes</option><option value="7" data-translate>Built-in Methods/Properties</option><option value="99" data-translate>Ahk2Exe Compiler</option></select></div><div class="list"></div></div><div class="tab search"><div class="input"><input type="search" placeholder="Search" data-translate=2 /></div><div class="checkbox"><input type="checkbox" id="highlightWords"><label for="highlightWords" data-translate>Highlight keywords</label><div class="updown" title="Go to previous/next occurrence" data-translate aria-label="title"><div class="up"><div class="triangle-up"></div></div><div class="down"><div class="triangle-down"></div></div></div></div><div class="list"></div></div><div class="load"><div class="lds-dual-ring"></div></div><div class="quick"><button class="header" title="Collapse or uncollapse the quick reference" data-translate aria-label="title"><div class="chevron"></div><span data-translate data-content="Quick reference"></span></button><div class="main"></div></div></div><div class="dragbar"></div><div id="right" tabIndex="-1"><div class="load"><div class="lds-dual-ring"></div></div><iframe class="hidden" frameBorder="0" id="frame" src="" role="main">';
   self.build = function() { // Write HTML before DOM is loaded to prevent flickering.
     var template = self.template;
     template = template.format(location.protocol + '//' + location.host);
@@ -998,10 +997,14 @@ function ctor_structure()
       structure.openSite(scriptDir + '/../settings.htm');
     });
     $main.find('li.color').on('click', function() {
-      cache.set('colorTheme', cache.colorTheme ? 0 : 1);
-      structure.setTheme(cache.colorTheme);
+      if (cache.colorScheme == 'dark'
+      || (cache.colorScheme == null && window.matchMedia('(prefers-color-scheme: dark)').matches))
+        cache.set('colorScheme', 'light');
+      else
+        cache.set('colorScheme', 'dark');
+      structure.setScheme(cache.colorScheme);
       if (isFrameCapable)
-        postMessageToFrame('setTheme', [cache.colorTheme]);
+        postMessageToFrame('setScheme', [cache.colorScheme]);
     });
 
     // --- Online tools (only visible if help is not CHM) ---
@@ -1448,13 +1451,12 @@ function ctor_structure()
   self.addAnchorFlash = function() {
     $(window).on('load hashchange', function() {
       if (location.hash)
-        anchor = document.getElementById(location.hash.substr(1));
+        anchor = document.getElementById(location.hash.slice(1));
       else
         return;
-      $(anchor).css("backgroundColor", cache.colorTheme ? "#3e2f23" : "#ff9632");
+      $(anchor).removeClass('anchor_transition').addClass('anchor_highlight');
       setTimeout( function() {
-        $(anchor).css("backgroundColor", "")
-                 .css("transition", "background-color 1s"); // CSS3 only
+        $(anchor).addClass('anchor_transition').removeClass('anchor_highlight');
       }, 200);
     });
   }
@@ -1479,16 +1481,18 @@ function ctor_structure()
       window.location = url;
     }
   }
-  // Set color theme:
-  self.themes = [null, 'dark'];
-  self.setTheme = function(id) {
-    $('#current-theme').remove();
-    if (id > 0 && id < self.themes.length) {
+  // Set color scheme:
+  self.setScheme = function(scheme) {
+    $('#dark_css').remove();
+    if (scheme == 'dark' || scheme == null)
+    {
       var link = document.createElement('link');
-      link.href = workingDir + 'static/' + self.themes[id] + '.css';
+      link.href = workingDir + 'static/dark.css';
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.id = 'current-theme';
+      link.id = 'dark_css';
+      if (scheme == null)
+        link.media = '(prefers-color-scheme: dark)';
       $('head').append(link);
     }
   };
@@ -1849,7 +1853,13 @@ function ctor_features()
     self.content.appendChild(div);
 
     var isVisible = false;
-    $('#right').add(window).on('scroll', function() {
+    $('#right').add(window).on('scroll', showBackButton); showBackButton();
+
+    $('div.back-to-top').on('click', function() {
+      $(document.body).add(document.documentElement).add('#right').animate({scrollTop: 0}, 100);
+    });
+
+    function showBackButton() {
       var scrollTop = $(this).scrollTop();
       if (scrollTop > 20 && !isVisible) {
         isVisible = true;
@@ -1858,11 +1868,7 @@ function ctor_features()
         isVisible = false;
         $('div.back-to-top').fadeOut();
       }
-    });
-
-    $('div.back-to-top').on('click', function() {
-      $(document.body).add(document.documentElement).add('#right').animate({scrollTop: 0}, 100);
-    });
+    }
   };
 
   // --- Ensure setting right scroll position when traversing history ---
@@ -2070,6 +2076,16 @@ function addPolyfills() {
   if (!Array.isArray) { // for IE8
     Array.isArray = function(obj) {
       return Object.prototype.toString.call(obj) === '[object Array]';
+    };
+  }
+  if (!window.matchMedia) { // for IE9 and lower
+    window.matchMedia = function(query) {
+      return {
+        media: query,
+        matches: false,
+        addListener: function () {},
+        removeListener: function () {}
+      };
     };
   }
 }
