@@ -315,7 +315,7 @@ indexData = [
   ["Capacity property (Array)","lib/Array.htm#Capacity",7],
   ["Capacity property (Map)","lib/Map.htm#Capacity",7],
   ["CaretGetPos","lib/CaretGetPos.htm",2],
-  ["Case","lib/Switch.htm",3,"E"],
+  ["Case","lib/Switch.htm",3,"E",true],
   ["CaseSense property (Map)","lib/Map.htm#CaseSense",7],
   ["CaseSensitive property (InputHook)","lib/InputHook.htm#CaseSensitive",7],
   ["Catch","lib/Catch.htm",3,"E"],
