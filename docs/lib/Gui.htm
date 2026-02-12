@@ -239,7 +239,7 @@ MyGui.Show()</pre>
 
 <div class="methodShort" id="Flash">
 <h3>Flash</h3>
-<p>Blinks the window's button in the taskbar.</p>
+<p>Blinks the window and its taskbar button.</p>
 <pre class="Syntax">MyGui.<span class="func">Flash</span>(<span class="optional">Blink</span>)</pre>
 <h4 id="Flash_Parameters">Parameters</h4>
 <dl>
@@ -247,16 +247,17 @@ MyGui.Show()</pre>
   <dd>
     <p>Type: <a href="../Concepts.htm#boolean">Boolean</a></p>
     <p>If omitted, it defaults to true.</p>
-    <p>If <strong>true</strong>, the window's button in the taskbar will blink. This is done by inverting the color of the window's title bar and/or taskbar button (if it has one).</p>
-    <p>If <strong>false</strong>, the original colors of the title bar and taskbar button will be restored (but the actual behavior might vary depending on OS version).</p>
+    <p>If <strong>true</strong>, the window and its taskbar button will blink. This is done by briefly changing the window's appearance as if it were switching between active and inactive state, and highlighting its taskbar button (if it has one).</p>
+    <p>If <strong>false</strong>, the window and its taskbar button will return to their original colors (but the actual behavior might vary depending on OS version).</p>
   </dd>
 </dl>
 <h4 id="Flash_Remarks">Remarks</h4>
-<p>In the below example, the window will blink three times because each pair of flashes inverts then restores its appearance:</p>
+<p>This is typically used to inform the user that the window requires attention while it does not currently have keyboard focus.</p>
+<p>The following example makes the window blink three times because each flash pair toggles its appearance:</p>
 <pre>Loop 6
 {
     MyGui.Flash()
-    Sleep 500  <em>; It's quite sensitive to this value; altering it may change the behavior in unexpected ways.</em>
+    Sleep 500  <em>; This value is sensitive and may cause issues if modified.</em>
 }</pre>
 </div>
 
