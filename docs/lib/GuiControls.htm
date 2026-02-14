@@ -802,7 +802,7 @@ MySB.SetText("There are " RowCount " rows selected.")</pre>
   <dt>NewText</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#strings">String</a></p>
-    <p>Up to two tab characters (`t) may be present anywhere in <em>NewText</em>: anything to the right of the first tab is centered within the part, and anything to the right of the second tab is right-justified.</p>
+    <p>Up to two tab characters (`t) may be present anywhere in the new text: anything to the right of the first tab is centered within the part, and anything to the right of the second tab is right-justified.</p>
   </dd>
   <dt>PartNumber</dt>
   <dd>
@@ -812,7 +812,7 @@ MySB.SetText("There are " RowCount " rows selected.")</pre>
   <dt>Style</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
-    <p>If omitted, it defaults to 0, which uses a traditional border that makes that part of the bar look sunken. Otherwise, specify 1 to have no border or 2 to have border that makes that part of the bar look raised.</p>
+    <p>If omitted, it defaults to 0, which uses a traditional border that makes that part of the bar look sunken. Otherwise, specify 1 to have no border, or 2 to have border that makes that part of the bar look raised.</p>
   </dd>
 </dl>
 </div>
@@ -826,14 +826,14 @@ MySB.SetText("There are " RowCount " rows selected.")</pre>
   <dt>Width1 ... Width255</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
-    <p>If all parameters are omitted, the bar is restored to having only a single, long part. Otherwise, specify the width of each part except the last (the last will fill the remaining width of the bar). For example, <code>MySB.SetParts(50, 50)</code> would create three parts: the first two of width 50 and the last one of all the remaining width.</p>
+    <p>If all parameters are omitted, the bar is restored to having only a single, long part. Otherwise, specify the width of each part except the last (the last will fill the remaining width of the bar). For example, <code>MySB.SetParts(50, 50)</code> would create three parts: the first two of width 50, and the last one of all the remaining width. The numbers are in pixels.</p>
   </dd>
 </dl>
 <h4 id="SB_SetParts_Return_Value">Return Value</h4>
 <p>Type: <a href="../Concepts.htm#numbers">Integer</a></p>
-<p>This method returns the status bar's window handle (HWND). A control's HWND is often used with <a href="PostMessage.htm">PostMessage</a>, <a href="SendMessage.htm">SendMessage</a>, and <a href="DllCall.htm">DllCall</a>. It can also be used directly in a <a href="Control.htm#Parameter">Control parameter</a>.</p>
+<p>This method returns the <a href="GuiControl.htm#Hwnd">control's HWND</a>.</p>
 <h4 id="SB_SetParts_Remarks">Remarks</h4>
-<p>Any parts "deleted" by this method will start off with no text the next time they are shown (furthermore, their icons are automatically destroyed).</p></div>
+<p>Any parts "deleted" by this method will start off with no text the next time they are shown. Furthermore, their icons are automatically destroyed.</p></div>
 
 <div class="methodShort" id="SB_SetIcon">
 <h3>SetIcon</h3>
