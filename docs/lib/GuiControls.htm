@@ -939,9 +939,9 @@ MySB.SetText("There are " RowCount " rows selected.")</pre>
 
 <h3 id="Tab_Remarks">Tab Remarks</h3>
 <p id="UseTab_Usage">After creating a Tab control, subsequently added controls automatically belong to its first tab. This can be changed at any time by using <a href="#Tab_UseTab">UseTab</a> as follows:</p>
-<pre>MyTab.UseTab()  <em>; Future controls are not part of any tab control.</em>
-MyTab.UseTab(3)  <em>; Future controls are owned by the third tab of the current tab control.</em>
-MyTab2.UseTab(3)  <em>; Future controls are owned by the third tab of the second tab control.</em>
+<pre>MyTab.UseTab()  <em>; Future controls are not part of any Tab control.</em>
+MyTab.UseTab(3)  <em>; Future controls are owned by the third tab of the current Tab control.</em>
+MyTab2.UseTab(3)  <em>; Future controls are owned by the third tab of the second Tab control.</em>
 MyTab.UseTab("Name")  <em>; Future controls are owned by the tab whose name starts with <i>Name</i> (not case-sensitive).</em>
 MyTab.UseTab("Name", true)  <em>; Same as above but requires exact match (not case-sensitive).</em></pre>
 <p>It is also possible to use any of the examples above to assign controls to a tab or tab-control that does not yet exist (except in the case of the <em>Name</em> method). But in that case, the relative positioning options described below are not supported.</p>
