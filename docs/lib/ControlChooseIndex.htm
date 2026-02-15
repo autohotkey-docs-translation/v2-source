@@ -46,8 +46,9 @@
 
 <h2 id="Remarks">Remarks</h2>
 <p>This function is intended for use with controls in a non-GUI window, i.e. a window that is not created with the <a href="Gui.htm#Call">Gui</a> function. It works best with common or predefined Microsoft controls; some applications use custom or modified controls, in which case the function might not work as expected. For <a href="GuiControls.htm">GUI controls</a>, it is usually more convenient to use <a href="GuiControl.htm#Choose">GuiControl.Choose</a>.</p>
-<p>To select all entries in a <em>multi-select</em> list box, follow this example:</p>
-<pre class="NoIndent"><a href="PostMessage.htm">PostMessage</a>(0x0185, 1, -1, "ListBox1", WinTitle)  <em>; Select all list box entries. 0x0185 is LB_SETSEL.</em></pre>
+<p>To select all items in a <em>multi-select</em> list box, use <code>PostMessage(0x0185, 1, -1, "ListBox1", WinTitle)</code>, where 0x0185 is <a href="https://learn.microsoft.com/windows/win32/controls/lb-setsel">LB_SETSEL</a>. As an alternative, call this function for each item in the array returned by <a href="ControlGetItems.htm">ControlGetItems</a>:</p>
+<pre>for index, text in ControlGetItems("ListBox1", WinTitle)
+    ControlChooseIndex(index, "ListBox1", WinTitle)</pre>
 <p>Unlike <a href="GuiControl.htm#Choose">GuiControl.Choose</a>, this function raises a <a href="GuiOnEvent.htm#Change">Change</a> or <a href="GuiOnEvent.htm#DoubleClick">DoubleClick</a> event.</p>
 <p>To improve reliability, a delay is done automatically after each use of this function. That delay can be changed via <a href="SetControlDelay.htm">SetControlDelay</a> or by assigning a value to <a href="../Variables.htm#ControlDelay">A_ControlDelay</a>. For details, see <a href="SetControlDelay.htm#Remarks">SetControlDelay remarks</a>.</p>
 
