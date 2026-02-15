@@ -45,6 +45,8 @@
 <h2 id="Remarks">Remarks</h2>
 <p>This function works best with common or predefined Microsoft controls; some applications use custom or modified controls, in which case the function might not work as expected.</p>
 <p>Some applications store their control data privately, preventing AutoHotkey from retrieving any text. In such cases, no exception is usually thrown, but all the retrieved text will be empty.</p>
+<p>To get the total number of entries, use <a href="Array.htm#Length">Array.Length</a>, as in <a href="#ExCount">example #3</a>. To instead discover how many pages exist in a tab control, follow this example:</p>
+<pre>PageCount := <a href="SendMessage.htm">SendMessage</a>(0x1304,,, "SysTabControl321", WinTitle)  <em>; 0x1304 is TCM_GETITEMCOUNT.</em></pre>
 
 <h2 id="Related">Related</h2>
 <p><a href="ListViewGetContent.htm">ListViewGetContent</a>, <a href="WinGetList.htm">WinGetList</a>, <a href="Control.htm">Control functions</a></p>
@@ -61,6 +63,12 @@
 <pre>entries := ControlGetItems("ListBox1", "Some Window Title")
 MsgBox "The first item is " entries[1]
 MsgBox "The last item is " entries[-1]</pre>
+</div>
+
+<div class="ex" id="ExCount">
+<p><a class="ex_number" href="#ExCount"></a> Reports the total number of entries in a list box within a GUI or non-GUI window.</p>
+<pre>entries := ControlGetItems("ListBox1", "Some Window Title")
+MsgBox "The total number is " entries.Length</pre>
 </div>
 
 </body>
