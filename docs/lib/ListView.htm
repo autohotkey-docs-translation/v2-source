@@ -468,7 +468,7 @@ IsChecked := (ItemState &gt;&gt; 12) - 1  <em>; This sets IsChecked to true if <
 <p>Additional (rarely-used) notifications can be detected by using <a href="GuiControl.htm#OnNotify">GuiControl.OnNotify</a>. These notifications are <a href="https://learn.microsoft.com/windows/win32/controls/bumper-list-view-control-reference-notifications">documented at Microsoft Docs</a>. Microsoft Docs does not show the numeric value of each notification code; those can be found in the Windows SDK or by searching the Internet.</p>
 
 <h2 id="IL">ImageLists</h2>
-<p>An Image-List is a group of identically sized icons stored in memory. Upon creation, each ImageList is empty. The script calls IL_Add repeatedly to add icons to the list, and each icon is assigned a sequential number starting at 1. This is the number to which the script refers to display a particular icon in a row or column header. Here is a working example that demonstrates how to put icons into a ListView's rows:</p>
+<p>An Image-List is a group of identically sized icons stored in memory. Upon creation, each ImageList is empty. The script calls <a href="#IL_Add">IL_Add</a> repeatedly to add icons to the list, and each icon is assigned a sequential number starting at 1. This is the number to which the script refers to display a particular icon in a row or column header. Here is a working example that demonstrates how to put icons into a ListView's rows:</p>
 <pre>MyGui := Gui()  <em>; Create a Gui window.</em>
 LV := MyGui.Add("ListView", "h200 w180", ["Icon &amp; Number", "Description"])  <em>; Create a ListView.</em>
 ImageListID := <a href="#IL_Create">IL_Create</a>(10)  <em>; Create an ImageList to hold 10 small icons.</em>

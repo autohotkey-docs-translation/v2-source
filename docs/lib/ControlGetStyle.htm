@@ -45,7 +45,7 @@ ExStyle := <span class="func">ControlGetExStyle</span>(Control <span class="opti
 <h2 id="Remarks">Remarks</h2>
 <p>This function works best with common or predefined Microsoft controls; some applications use custom or modified controls, in which case the function might not work as expected.</p>
 <p>See the <a href="../misc/Styles.htm">styles table</a> for a partial listing of styles.</p>
-<p>ControlGetExStyle only retrieves generic extended styles, such as WS_EX_CLIENTEDGE (0x200). To retrieve control-specific extended styles, use <a href="SendMessage.htm">SendMessage</a>. For example, <code>SendMessage(0x1037, 0, 0, "SysListView321")</code>, where 0x1037 is <a href="https://learn.microsoft.com/windows/win32/controls/lvm-getextendedlistviewstyle">LVM_GETEXTENDEDLISTVIEWSTYLE</a>, returns the extended styles of a list-view control.</p>
+<p>ControlGetExStyle only retrieves generic extended styles, such as WS_EX_CLIENTEDGE (0x200). To retrieve control-specific extended styles, use <a href="SendMessage.htm">SendMessage</a>. For example, <code>SendMessage(0x1037, 0, 0, "SysListView321")</code>, where 0x1037 is <a href="https://learn.microsoft.com/windows/win32/controls/lvm-getextendedlistviewstyle">LVM_GETEXTENDEDLISTVIEWSTYLE</a>, returns the extended style of a list-view control.</p>
 
 <h2 id="Related">Related</h2>
 <p><a href="ControlSetStyle.htm">ControlSetStyle / ControlSetExStyle</a>, <a href="WinGetStyle.htm">WinGetStyle / WinGetExStyle</a>, <a href="../misc/Styles.htm">styles table</a>, <a href="Control.htm">Control functions</a></p>

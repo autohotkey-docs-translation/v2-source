@@ -245,7 +245,6 @@
 <p><em>IsEnabled</em> is 1 if the control is enabled, or 0 if disabled. The <a href="Gui.htm#Disabled">Disabled option</a> affects the initial setting.</p>
 <p><em>NewState</em> should be a <a href="../Concepts.htm#boolean">boolean value</a>. If true, the control is enabled. If false, the control is disabled.</p>
 <p>For <a href="GuiControls.htm#Tab">Tab</a> controls, this will also enable or disable all of the tab's sub-controls. However, any sub-control explicitly disabled via <code>GuiCtrl.Enabled := false</code> will remember that setting and thus remain disabled even after its Tab control is re-enabled.</p>
-<p>Related: <a href="Gui.htm#Disabled">Disabled option</a></p>
 </div>
 
 <div class="methodShort" id="Focused">
@@ -277,10 +276,9 @@
 <p>Gets or sets the explicit name of a control.</p>
 <pre class="Syntax">CurrentName := GuiCtrl.<span class="func">Name</span></pre>
 <pre class="Syntax">GuiCtrl.<span class="func">Name</span> := NewName</pre>
-<p><em>CurrentName</em> is the control's current name, or an empty string if it has no name.</p>
+<p><em>CurrentName</em> is the control's current name, or an empty string if it has no name. The <a href="Gui.htm#var">V option</a> affects the initial setting.</p>
 <p><em>NewName</em> is the control's new name.</p>
 <p>This name can be used with <a href="Gui.htm#__Item">Gui.__Item</a> to retrieve the corresponding GuiControl object. For most input-capable controls, the name is also used by <a href="Gui.htm#Submit">Gui.Submit</a>.</p>
-<p>Related: <a href="Gui.htm#var">V option</a></p>
 </div>
 
 <div class="methodShort" id="Text">
@@ -345,11 +343,10 @@
 <p>Gets or sets whether a control is visible.</p>
 <pre class="Syntax">IsVisible := GuiCtrl.<span class="func">Visible</span></pre>
 <pre class="Syntax">GuiCtrl.<span class="func">Visible</span> := NewState</pre>
-<p><em>IsVisible</em> is 1 if the control is visible, or 0 if hidden.</p>
+<p><em>IsVisible</em> is 1 if the control is visible, or 0 if hidden. The <a href="Gui.htm#Hidden">Hidden option</a> affects the initial setting.</p>
 <p><em>NewState</em> should be a <a href="../Concepts.htm#boolean">boolean value</a>. If true, the control is visible. If false, the control is hidden.</p>
 <p>For <a href="GuiControls.htm#Tab">Tab</a> controls, this will also show or hide all of the tab's sub-controls.</p>
 <p>If you additionally want to prevent a control's shortcut key (underlined letter) from working, disable the control via <code>GuiCtrl.Enabled := false</code>.</p>
-<p>Related: <a href="Gui.htm#Hidden">Hidden option</a></p>
 </div>
 
 <h2 id="Remarks">Remarks</h2>

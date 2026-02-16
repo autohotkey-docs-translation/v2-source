@@ -341,10 +341,10 @@ DTN_DROPDOWN(MyDT, lParam) {
 <p>Whenever the user selects a new item, the <a href="GuiOnEvent.htm#Change">Change</a> event is raised. The <a href="GuiOnEvent.htm#Focus">Focus</a> and <a href="GuiOnEvent.htm#LoseFocus">LoseFocus</a> events are also supported.</p>
 <p>To set the height of the selection field or list items, use the <a href="https://learn.microsoft.com/windows/win32/controls/cb-setitemheight">CB_SETITEMHEIGHT</a> message as in the example below:</p>
 <pre>MyGui := Gui()
-DDL := MyGui.Add("DDL", "vcbx w200 Choose1", ["One", "Two"])
+MyDDL := MyGui.Add("DDL", "w200 Choose1", ["One", "Two"])
 <em>; CB_SETITEMHEIGHT = 0x0153</em>
-PostMessage(0x0153, -1, 50, DDL)  <em>; Set height of selection field.</em>
-PostMessage(0x0153, 0, 50, DDL)  <em>; Set height of list items.</em>
+PostMessage(0x0153, -1, 50, MyDDL)  <em>; Set height of selection field.</em>
+PostMessage(0x0153, 0, 50, MyDDL)  <em>; Set height of list items.</em>
 MyGui.Show("h70")</pre>
 <p>On a related note, if you want to automate the process of showing and hiding the popup list later on, use <a href="ControlShowDropDown.htm">ControlShowDropDown</a> and <a href="ControlHideDropDown.htm">ControlHideDropDown</a>.</p>
 
@@ -674,7 +674,7 @@ MyGui.Show()</pre>
 
 <h3 id="Progress_Remarks">Progress Remarks</h3>
 <p><a href="GuiControl.htm#Value">GuiControl.Value</a> returns the current numeric position of the bar. <a href="Gui.htm#Submit">Gui.Submit</a> stores the same value.</p>
-<p>To later change the position of the bar, follow these examples:</p>
+<p>To later change the position of the bar, follow this example:</p>
 <pre>MyProgress.<a href="GuiControl.htm#Value">Value</a> += 20  <em>; Increase the current position by 20.</em>
 MyProgress.Value := 50  <em>; Set the current position to 50.</em></pre>
 <p>For horizontal progress bars, the thickness of the bar is equal to the control's height. For <a href="#Progress_Vertical">vertical</a> progress bars it is equal to the control's width.</p>
@@ -731,7 +731,7 @@ MyProgress.Value := 50  <em>; Set the current position to 50.</em></pre>
   <dd>
     <p>Type: <a href="../Concepts.htm#strings">String</a></p>
     <p>In addition to the <a href="Gui.htm#Add_Options">general options and styles</a>, the following are supported or noteworthy:</p>
-    <p><strong>Buddy1</strong><em>Control</em> and <strong>Buddy2</strong><em>Control</em>: Automatically repositions up to two existing controls at the ends of the slider. Buddy1 is displayed at the left or top side (depending on whether the <a href="#Slider_Vertical">Vertical</a> option is present). Buddy2 is displayed at the right or bottom side. Specify for <em>Control</em> the <a href="GuiControl.htm#Name">Name</a> or <a href="GuiControl.htm#Hwnd">HWND</a> of an existing control. For example, <code class="no-highlight">Buddy1MyTopText</code> would assign the control whose variable name is MyTopText. The text or ClassNN of a control can also be used, but only up to the first space or tab.</p>
+    <p><strong>Buddy1</strong><em>Control</em> and <strong>Buddy2</strong><em>Control</em>: Automatically repositions up to two existing controls at the ends of the slider. Buddy1 is displayed at the left or top side (depending on whether the <a href="#Slider_Vertical">Vertical</a> option is present). Buddy2 is displayed at the right or bottom side. Specify for <em>Control</em> the <a href="GuiControl.htm#Name">Name</a> or <a href="GuiControl.htm#Hwnd">HWND</a> of an existing control. For example, <code class="no-highlight">Buddy1MyTopText</code> would assign the control whose explicit name is MyTopText. The text or ClassNN of a control can also be used, but only up to the first space or tab.</p>
     <p id="Slider_Center"><strong>Center:</strong> The thumb (the bar moved by the user) will be blunt on both ends rather than pointed at one end.</p>
     <p><strong>Invert:</strong> Reverses the control so that the lower value is considered to be on the right/bottom rather than the left/top. This is typically used to make a <a href="#Slider_Vertical">vertical</a> slider move in the direction of a traditional volume control. Note that the <a href="#Slider_ToolTip">ToolTip</a> option will not obey the inversion and therefore should not be used in this case.</p>
     <p><strong>Left:</strong> The thumb (the bar moved by the user) will point to the top rather than the bottom. But if the <a href="#Slider_Vertical">Vertical</a> option is in effect, the thumb will point to the left rather than the right.</p>
