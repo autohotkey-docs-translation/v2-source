@@ -116,8 +116,8 @@ MyBtn.OnEvent("Click", MyBtn_Click)  <em>; Call MyBtn_Click when clicked.</em></
 <a id="Checkbox"></a><h2 id="CheckBox">CheckBox</h2>
 <p>A small box that can be checked or unchecked to represent On/Off, Yes/No, and so on.</p>
 <p>Syntax:</p>
-<pre class="Syntax Indent"><a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">Add</span>("CheckBox", Options, Label)
-<a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">AddCheckBox</span>(Options, Label)</pre>
+<pre class="Syntax Indent"><a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">Add</span>("CheckBox", Options, Caption)
+<a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">AddCheckBox</span>(Options, Caption)</pre>
 <p>Example:</p>
 <pre>MyCB := MyGui.Add("CheckBox",, "Ship to billing address?")</pre>
 <p>Appearance:</p>
@@ -133,7 +133,7 @@ MyBtn.OnEvent("Click", MyBtn_Click)  <em>; Call MyBtn_Click when clicked.</em></
     <p><strong>Checked:</strong> The checkbox starts off with a checkmark. The word Checked may optionally be followed immediately by a 0, 1, or -1 (or the word Gray) to indicate the starting state (unchecked, checked, or indeterminate). In other words, <code>"Checked"</code> and <code>"Checked" VarContainingOne</code> are the same.</p>
     <p><strong>(Uncommon numeric styles):</strong> See the <a href="../misc/Styles.htm#Button">CheckBox styles table</a> for a list.</p>
   </dd>
-  <dt>Label</dt>
+  <dt>Caption</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#strings">String</a></p>
     <p>The label to display to the right of the box. This label is typically used as a prompt or description, and it may include linefeeds (`n) to start new lines.</p>
@@ -682,8 +682,8 @@ MyProgress.Value := 50  <em>; Set the current position to 50.</em></pre>
 <h2 id="Radio">Radio</h2>
 <p>A radio button is a small empty circle that can be checked (on) or unchecked (off).</p>
 <p>Syntax:</p>
-<pre class="Syntax Indent"><a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">Add</span>("Radio", Options, Label)
-<a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">AddRadio</span>(Options, Label)</pre>
+<pre class="Syntax Indent"><a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">Add</span>("Radio", Options, Caption)
+<a href="GuiControl.htm">GuiCtrl</a> := MyGui.<span class="func">AddRadio</span>(Options, Caption)</pre>
 <p>Example:</p>
 <pre>MyRadio := MyGui.Add("Radio",, "Wait for all items to be in stock before shipping.")</pre>
 <p>Appearance:</p>
@@ -699,7 +699,7 @@ MyProgress.Value := 50  <em>; Set the current position to 50.</em></pre>
     <p id="Radio_Group"><strong>Group:</strong> Starts a new <a href="#Radio_Group_Details">radio group</a>.</p>
     <p><strong>(Uncommon numeric styles):</strong> See the <a href="../misc/Styles.htm#Button">Radio styles table</a> for a list.</p>
   </dd>
-  <dt>Label</dt>
+  <dt>Caption</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#strings">String</a></p>
     <p>The label to display to the right of the radio button. This label is typically used as a prompt or description, and it may include linefeeds (`n) to start new lines.</p>
