@@ -913,26 +913,26 @@ MySB.SetText("There are " RowCount " rows selected.")</pre>
 <h3 id="Tab_Methods">Tab Methods</h3>
 <p>In addition to the <a href="GuiControl.htm">default methods/properties of a GUI control</a>, this control type has the following methods:</p>
 <ul>
-  <li><a href="#Tab_UseTab">UseTab</a>: Specifies the tab to which subsequently created controls will be added.</li>
+  <li><a href="#Tab_UseTab">UseTab</a>: Causes subsequently added controls to be owned by a tab.</li>
 </ul>
 <div class="methodShort" id="Tab_UseTab">
 <h3>UseTab</h3>
-<p>Specifies the tab to which subsequently created controls will be added.</p>
-<pre class="Syntax"><a href="GuiControl.htm">GuiCtrl</a>.<span class="func">UseTab</span>(<span class="optional">Value, ExactMatch</span>)</pre>
+<p>Causes subsequently added controls to be owned by a tab.</p>
+<pre class="Syntax"><a href="GuiControl.htm">GuiCtrl</a>.<span class="func">UseTab</span>(<span class="optional">Tab, FullNameMatch</span>)</pre>
 <h4 id="Tab_UseTab_Parameters">Parameters</h4>
 <dl>
-  <dt>Value</dt>
+  <dt>Tab</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#numbers">Integer</a> or <a href="../Concepts.htm#strings">String</a></p>
-    <p>If blank or omitted, it defaults to 0, which causes subsequently created controls to be added outside the Tab control. Otherwise, specify 1 for the first tab, 2 for the second, etc.</p>
-    <p>If <em>Value</em> is a string (even a numeric string), the tab whose leading name part matches <em>Value</em> will be used. The search is not case-sensitive. For example, if the control contains the tab "UNIX Text", specifying the word unix (lowercase) would be enough to use it. Use <em>ExactMatch</em> to change this matching behavior.</p>
+    <p>If blank or omitted, it defaults to 0, which causes subsequently added controls to not be part of any Tab control. Otherwise, specify 1 for the first tab, 2 for the second, etc.</p>
+    <p>If a string is specified (even a numeric string), UseTab iterates through the tab names until it finds a match. The search is not case-sensitive. Use <em>FullNameMatch</em> to change the matching behavior.</p>
   </dd>
-  <dt>ExactMatch</dt>
+  <dt>FullNameMatch</dt>
   <dd>
     <p>Type: <a href="../Concepts.htm#boolean">Boolean</a></p>
     <p>If omitted, it defaults to false.</p>
-    <p>If <strong>false</strong>, the tab whose leading name part matches <em>Value</em> will be used, as described above.</p>
-    <p>If <strong>true</strong>, <em>Value</em> has to be an exact match (but still not case-sensitive).</p>
+    <p>If <strong>false</strong>, the tab whose name starts with the string will be used. For example, if the control contains the tab "UNIX Text", specifying the word unix (lowercase) would be enough to use it.</p>
+    <p>If <strong>true</strong>, the tab whose name fully matches the string will be used.</p>
   </dd>
 </dl>
 </div>
