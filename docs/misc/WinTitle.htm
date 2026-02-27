@@ -34,7 +34,7 @@
 
 <a id="Matching"></a>
 <h2 id="WinTitle">Window Title &amp; Matching Behaviour</h2>
-<p>Specify any string for <var>WinTitle</var> to identify a window by its title. The title of a window is often visible as text in a title bar at the top of the window. If invisible or only partially visible, the full window title can be revealed via <a href="../lib/WinGetTitle.htm">WinGetTitle</a> or Window Spy.</p>
+<p>Specify any string for <var>WinTitle</var> to identify a window by its title. The title of a window is often visible as text in a title bar at the top of the window. If invisible or only partially visible, the full window title can be revealed via <a href="../lib/WinGetTitle.htm">WinGetTitle</a> or <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates the calculator:</p>
 <pre>WinActivate "Calculator"</pre>
 <p><a href="../lib/SetTitleMatchMode.htm">SetTitleMatchMode</a> controls how a partial or complete title is compared against the title of each window. Depending on the setting, <var>WinTitle</var> can be an exact title, or it can contain a prefix, a substring which occurs anywhere in the title, or a <a href="RegEx-QuickRef.htm">RegEx pattern</a>. This setting also controls whether the <a href="#ahk_class">ahk_class</a> and <a href="#ahk_exe">ahk_exe</a> criteria are interpreted as RegEx patterns.</p>
@@ -56,7 +56,7 @@
 
 <h3 id="ahk_class">ahk_class (Window Class)</h3>
 <p>Use <code class="no-highlight">ahk_class <var>ClassName</var></code> in <var>WinTitle</var> to identify a window by its window class.</p>
-<p>A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what <em>type</em> of window it is. A window class can be revealed via Window Spy or retrieved by <a href="../lib/WinGetClass.htm">WinGetClass</a>. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ClassName</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a>.</p>
+<p>A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what <em>type</em> of window it is. A window class can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a> or retrieved by <a href="../lib/WinGetClass.htm">WinGetClass</a>. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ClassName</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a>.</p>
 <p>Window classes are case-sensitive, except when using the <a href="RegEx-QuickRef.htm#opt_i">i) modifier</a> in a RegEx pattern.</p>
 <p>The following example activates a console window (e.g. cmd.exe):</p>
 <pre>WinActivate "ahk_class ConsoleWindowClass"</pre>
@@ -84,13 +84,13 @@ WinActivate "ahk_id " VarContainingID
 </pre>
 
 <h3 id="ahk_pid">ahk_pid (Process ID)</h3>
-<p>Use <code class="no-highlight">ahk_pid <var>PID</var></code> in <var>WinTitle</var> to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by <a href="../lib/WinGetPID.htm">WinGetPID</a>, <a href="../lib/Run.htm">Run</a> or <a href="../lib/Process.htm">Process functions</a>. The ID of a window's process can be revealed via Window Spy.</p>
+<p>Use <code class="no-highlight">ahk_pid <var>PID</var></code> in <var>WinTitle</var> to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by <a href="../lib/WinGetPID.htm">WinGetPID</a>, <a href="../lib/Run.htm">Run</a> or <a href="../lib/Process.htm">Process functions</a>. The ID of a window's process can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates a window by a process ID stored in <var>VarContainingPID</var>:</p>
 <pre>WinActivate "ahk_pid " VarContainingPID</pre>
 
 <h3 id="ahk_exe">ahk_exe (Process Name/Path)</h3>
 <p>Use <code class="no-highlight">ahk_exe <var>ProcessNameOrPath</var></code> in <var>WinTitle</var> to identify a window belonging to any process with the given name or path.</p>
-<p>While the <a href="#ahk_pid">ahk_pid criterion</a> is limited to one specific process, the ahk_exe criterion considers all processes with name or full path matching a given string. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ProcessNameOrPath</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a> which must match the full path of the process. Otherwise, it accepts a case-insensitive name or full path; for example, <code class="no-highlight">ahk_exe notepad.exe</code> covers <code class="no-highlight">ahk_exe C:\Windows\Notepad.exe</code>, <code class="no-highlight">ahk_exe C:\Windows\System32\Notepad.exe</code> and other variations. The name of a window's process can be revealed via Window Spy.</p>
+<p>While the <a href="#ahk_pid">ahk_pid criterion</a> is limited to one specific process, the ahk_exe criterion considers all processes with name or full path matching a given string. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ProcessNameOrPath</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a> which must match the full path of the process. Otherwise, it accepts a case-insensitive name or full path; for example, <code class="no-highlight">ahk_exe notepad.exe</code> covers <code class="no-highlight">ahk_exe C:\Windows\Notepad.exe</code>, <code class="no-highlight">ahk_exe C:\Windows\System32\Notepad.exe</code> and other variations. The name of a window's process can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates a Notepad window by its process name:</p>
 <pre>WinActivate "ahk_exe notepad.exe"</pre>
 <p>The following example does the same as above, but uses a <a href="RegEx-QuickRef.htm">regular expression</a> (note that the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> must be turned on beforehand to make it work):</p>
