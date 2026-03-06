@@ -580,12 +580,12 @@ MsgBox,  %ElapsedTime% milliseconds have elapsed.</pre>
   <tr id="KeyDelay">
     <td>A_KeyDelay<br>
     A_KeyDuration</td>
-    <td>The current delay or duration set by <a href="lib/SetKeyDelay.htm">SetKeyDelay</a> (always decimal, not hex). A_KeyDuration requires <span class="ver">[v1.1.23+]</span>.</td>
+    <td>The current delay or duration set by <a href="lib/SetKeyDelay.htm">SetKeyDelay</a> for the traditional <a href="lib/SendMode.htm#Event">SendEvent mode</a> (always decimal, not hex). A_KeyDuration requires <span class="ver">[v1.1.23+]</span>.</td>
   </tr>
   <tr id="KeyDelayPlay">
     <td>A_KeyDelayPlay<br>
     A_KeyDurationPlay</td>
-    <td>The current delay or duration set by <a href="lib/SetKeyDelay.htm">SetKeyDelay</a> for the <a href="lib/Send.htm#SendPlayDetail">SendPlay</a> mode (always decimal, not hex). Requires <span class="ver">[v1.1.23+]</span>.</td>
+    <td>The current delay or duration set by <a href="lib/SetKeyDelay.htm">SetKeyDelay</a> for the <a href="lib/SendMode.htm#Play">SendPlay mode</a> (always decimal, not hex). Requires <span class="ver">[v1.1.23+]</span>.</td>
   </tr>
   <tr id="WinDelay">
     <td>A_WinDelay</td>
@@ -598,7 +598,7 @@ MsgBox,  %ElapsedTime% milliseconds have elapsed.</pre>
   <tr id="MouseDelay">
     <td>A_MouseDelay<br>
     A_MouseDelayPlay</td>
-    <td>The current delay set by <a href="lib/SetMouseDelay.htm">SetMouseDelay</a> (always decimal, not hex). A_MouseDelay is for the traditional SendEvent mode, whereas A_MouseDelayPlay is for <a href="lib/Send.htm#SendPlayDetail">SendPlay</a>. A_MouseDelayPlay requires <span class="ver">[v1.1.23+]</span>.</td>
+    <td>The current delay set by <a href="lib/SetMouseDelay.htm">SetMouseDelay</a> (always decimal, not hex). A_MouseDelay is for the traditional <a href="lib/SendMode.htm#Event">SendEvent mode</a>, whereas A_MouseDelayPlay is for <a href="lib/SendMode.htm#Play">SendPlay mode</a>. A_MouseDelayPlay requires <span class="ver">[v1.1.23+]</span>.</td>
   </tr>
   <tr id="DefaultMouseSpeed">
     <td>A_DefaultMouseSpeed</td>
@@ -974,7 +974,7 @@ return
   </tr>
   <tr id="Clipboard">
     <td>Clipboard</td>
-    <td rowspan="2">Can be used to get or set the contents of the OS's clipboard. For details, see <a href="misc/Clipboard.htm">Clipboard</a>.</td>
+    <td rowspan="2">Gets or sets the contents of the OS's clipboard. For details, see <a href="misc/Clipboard.htm">Clipboard</a>.</td>
   </tr>
   <tr id="A_Clipboard">
     <td>A_Clipboard <span class="ver">[v1.1.35+]</span></td>

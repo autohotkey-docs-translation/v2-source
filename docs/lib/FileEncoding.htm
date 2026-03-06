@@ -32,11 +32,10 @@
 </dl>
 
 <h2 id="Remarks">Remarks</h2>
-<p>If FileEncoding is not used, the default encoding is CP0.</p>
+<p>The default encoding is CP0. However, the default encoding is not used if a UTF-8 or UTF-16 byte order mark is present in the file, unless the file is being opened with write-only access (i.e. the previous contents of the file are being discarded).</p>
 <p>CP0 does not universally identify a single code page; rather, it corresponds to the system default ANSI code page, which depends on the system locale or "language for non-Unicode programs" system setting. To get the actual code page number, call <code>DllCall("GetACP")</code>.</p>
 <p>The built-in variable <strong>A_FileEncoding</strong> contains the current setting. If CP0 is the current setting, A_FileEncoding returns a blank value.</p>
 <p>Every newly launched <a href="../misc/Threads.htm">thread</a> (such as a <a href="../Hotkeys.htm">hotkey</a>, <a href="Menu.htm">custom menu item</a>, or <a href="SetTimer.htm">timed</a> subroutine) starts off fresh with the default setting for this command. That default may be changed by using this command in the <a href="../Scripts.htm#auto">auto-execute section</a> (top part of the script).</p>
-<p>The default encoding is not used if a UTF-8 or UTF-16 byte order mark is present in the file, unless the file is being opened with write-only access (i.e. the previous contents of the file are being discarded).</p>
 
 <h2 id="Related">Related</h2>
 <p><a href="FileOpen.htm">FileOpen()</a>, <a href="StrGet.htm">StrGet()</a>, <a href="StrPut.htm">StrPut()</a>, <a href="../Compat.htm#FileRead">Script Compatibility</a></p>
