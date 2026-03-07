@@ -81,25 +81,25 @@
 
 </dl>
 
-<h2 id="Send_variants">Send variants</h2>
+<span id="Send_variants"></span><h2 id="Send_Variants">Send Variants</h2>
 <p><strong>Send:</strong> By default, Send is synonymous with SendEvent; but it can be made a synonym for SendInput or SendPlay via <a href="SendMode.htm">SendMode</a>.</p>
 <p><strong>SendRaw:</strong> Similar to Send, except that all characters in <em>Keys</em> are interpreted and sent literally. See <a href="#Raw">Raw mode</a> for details.</p>
 <p><strong id="SendInput">SendInput</strong> and <strong id="SendPlay">SendPlay</strong> <span class="ver">[v1.0.43+]</span>: SendInput and SendPlay use the same syntax as Send but are generally faster and more reliable. In addition, they buffer any physical keyboard or mouse activity during the send, which prevents the user's keystrokes from being interspersed with those being sent. <a href="SendMode.htm">SendMode</a> can be used to make Send synonymous with SendInput or SendPlay. For more details about each mode, see <a href="#SendInputDetail">SendInput</a> and <a href="#SendPlayDetail">SendPlay</a> below.</p>
 <p id="SendEvent"><strong>SendEvent</strong> <span class="ver">[v1.0.43+]</span>: SendEvent sends keystrokes using the same method as the pre-1.0.43 <em>Send</em> command. The rate at which keystrokes are sent is determined by <a href="SetKeyDelay.htm">SetKeyDelay</a>.</p>
 
-<h2 id="Special_modes">Special modes</h2>
+<span id="Special_modes"></span><h2 id="Special_Modes">Special Modes</h2>
 <p>The following modes affect the interpretation of the characters in <em>Keys</em> or the behavior of key-sending commands such as Send, SendInput, SendPlay, SendEvent and <a href="ControlSend.htm">ControlSend</a>. These modes must be specified as <code class="no-highlight">{x}</code> in <em>Keys</em>, where x is either Raw, Text, or Blind. For example, <code class="no-highlight">{Raw}</code>.</p>
 
-<h3 id="Raw">Raw mode</h3>
+<h3 id="Raw">Raw Mode</h3>
 <p id="SendRaw">The Raw mode can be either enabled with <code class="no-highlight">{Raw}</code>, SendRaw or <a href="ControlSend.htm">ControlSendRaw</a>, which causes all subsequent characters, including the special characters <code class="no-highlight">^+!#{}</code>, to be interpreted literally rather than translating <code class="no-highlight">{Enter}</code> to <kbd>Enter</kbd>, <code class="no-highlight">^c</code> to <kbd>Ctrl</kbd>+<kbd>C</kbd>, etc. For example, both <code>Send {Raw}{Tab}</code> and <code>SendRaw {Tab}</code> send <code class="no-highlight">{Tab}</code> instead of <kbd>Tab</kbd>.</p>
 <p>The Raw mode does not affect the interpretation of <a href="../misc/EscapeChar.htm">escape sequences</a>, <a href="../Variables.htm#retrieving">variable references</a> and <a href="../Variables.htm#Expressions">expressions</a>. For example, <code>SendRaw ``100`%</code> sends the string <code class="no-highlight">`100%</code>. When using <a href="ControlSend.htm">ControlSend</a>, it is also necessary to escape literal commas (<code class="no-highlight">`,</code>).</p>
 
-<h3 id="Text">Text mode <span class="ver">[v1.1.27+]</span></h3>
+<h3 id="Text">Text Mode <span class="ver">[v1.1.27+]</span></h3>
 <p id="SendText">The Text mode can be enabled with <code class="no-highlight">{Text}</code>, which is similar to the Raw mode, except that no attempt is made to translate characters (other than <code class="no-highlight">`r</code>, <code class="no-highlight">`n</code>, <code class="no-highlight">`t</code> and <code class="no-highlight">`b</code>) to keycodes; instead, the <a href="#fallback">fallback method</a> is used for all of the remaining characters. For SendEvent, SendInput and <a href="ControlSend.htm">ControlSend</a>, this improves reliability because the characters are much less dependent on correct modifier state. This mode can be combined with the Blind mode to avoid releasing any modifier keys: <code>Send {Blind}{Text}your text</code>. However, some applications require that the modifier keys be released.</p>
 <p><code class="no-highlight">`n</code>, <code class="no-highlight">`r</code> and <code class="no-highlight">`r`n</code> are all translated to a single <kbd>Enter</kbd>, unlike the default behavior and Raw mode, which translate <code class="no-highlight">`r`n</code> to two <kbd>Enter</kbd>. <code class="no-highlight">`t</code> is translated to <kbd>Tab</kbd> and <code class="no-highlight">`b</code> to <kbd>Backspace</kbd>, but all other characters are sent without translation.</p>
 <p><span class="ver">[v1.1.29+]</span>: Like the Blind mode, the Text mode ignores <a href="SetStoreCapsLockMode.htm">SetStoreCapsLockMode</a> (that is, the state of <kbd>CapsLock</kbd> is not changed) and does not <a href="../Hotkeys.htm#win-l">wait for <kbd>Win</kbd> to be released</a>. This is because the Text mode typically does not depend on the state of <kbd>CapsLock</kbd> and cannot trigger the system <kbd>Win</kbd>+<kbd>L</kbd> hotkey. However, this only applies when <em>Keys</em> begins with <code class="no-highlight">{Text}</code> or <code class="no-highlight">{Blind}{Text}</code>.</p>
 
-<h3 id="Blind">Blind mode</h3>
+<h3 id="Blind">Blind Mode</h3>
 <p id="blind">The Blind mode can be enabled with <code class="no-highlight">{Blind}</code>, which gives the script more control by disabling a number of things that are normally done automatically to make things work as expected. <code class="no-highlight">{Blind}</code> must be the first item in the string to enable the Blind mode. It has the following effects:</p>
 <ul>
   <li>The Blind mode avoids releasing the modifier keys (Alt, Ctrl, Shift, and Win) if they started out in the down position. For example, the hotkey <code>+s::Send {Blind}abc</code> would send ABC rather than abc because the user is holding down <kbd>Shift</kbd>.</li>
@@ -112,7 +112,7 @@
 <p><code class="no-highlight">{Blind}</code> is not supported by SendRaw or <a href="ControlSend.htm">ControlSendRaw</a>; use <code class="no-highlight">{Blind}{Raw}</code> instead.</p>
 <p>The Blind mode is not completely supported by <a href="#SendPlayDetail">SendPlay</a>, especially when dealing with the modifier keys (Ctrl, Alt, Shift, and Win).</p>
 
-<h2 id="keynames">Key names</h2>
+<h2 id="keynames">Key Names</h2>
 <p>The following table lists the special keys that can be sent (each key name must be enclosed in braces):</p>
 <table class="info">
   <tr>
