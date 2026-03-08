@@ -852,8 +852,18 @@
     <td>The means by which the bar of a <a href="GuiControls.htm#StatusBar">StatusBar</a> control is modified.</td>
   </tr>
   <tr>
-    <td class="larger"><a href="Send.htm">Send</a> / <a href="Send.htm#SendRaw">SendRaw</a> / <a href="Send.htm#SendInput">SendInput</a> / <a href="Send.htm#SendPlay">SendPlay</a> / <a href="Send.htm#SendEvent">SendEvent</a></td>
-    <td>Sends simulated keystrokes and mouse clicks to the <a href="WinActivate.htm">active</a> window.</td>
+    <td class="larger">
+      <a href="Send.htm">Send</a>
+    </td>
+    <td rowspan="2">
+      Sends simulated keystrokes and mouse clicks to the
+      <a href="WinActivate.htm">active</a> window.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="Send.htm">SendEvent<br>SendInput<br>SendPlay<br>SendRaw</a>
+    </td>
   </tr>
   <tr>
     <td><a href="SendLevel.htm">SendLevel</a></td>
@@ -865,7 +875,7 @@
   </tr>
   <tr>
     <td class="larger"><a href="SendMode.htm">SendMode</a></td>
-    <td>Makes <a href="Send.htm">Send</a> synonymous with SendInput or SendPlay rather than the default (SendEvent). Also makes Click and MouseMove/Click/Drag use the specified method.</td>
+    <td>Makes <a href="Send.htm">Send</a> synonymous with SendInput or SendPlay rather than the default (SendEvent). Also makes <a href="Click.htm">Click</a>, <a href="MouseClick.htm">MouseClick</a>, <a href="MouseClickDrag.htm">MouseClickDrag</a>, and <a href="MouseMove.htm">MouseMove</a> use the specified mode.</td>
   </tr>
   <tr>
     <td><a href="SetBatchLines.htm">SetBatchLines</a></td>

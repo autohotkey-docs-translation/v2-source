@@ -1115,7 +1115,7 @@
 <h2 id="v1.1.07.00">1.1.07.00 - February 27, 2012</h2>
 <p>Enhanced <code><a href="Functions.htm#DynCall">%var%()</a></code> to support <a href="misc/Functor.htm">function objects</a> and the <a href="Objects.htm#Default_Base_Object">default __Call meta-function</a>.</p>
 <p>Fixed <a href="lib/ControlGet.htm#List">ControlGet List</a> to work for ListViews where the script and the target process aren't both 32-bit or both 64-bit.</p>
-<p>Fixed <a href="lib/Send.htm#SendEvent">SendEvent</a> with a key delay of 0; a change introduced by v1.1.05.04 caused it to be slower than intended.</p>
+<p>Fixed <a href="lib/SendMode.htm#Event">SendEvent</a> with a key delay of 0; a change introduced by v1.1.05.04 caused it to be slower than intended.</p>
 <p>Fixed <a href="lib/Object.htm#Remove">Object.Remove(i)</a> not adjusting keys if Object[i] doesn't exist.</p>
 <p>Fixed an error in <a href="lib/ComObjType.htm">ComObjType()</a> which may have caused unpredictable behaviour when it is called via an <a href="lib/ComObjActive.htm#Remarks">alternative name</a>.</p>
 <p>Fixed <a href="lib/ExitApp.htm">ExitApp</a> to exit the thread if an <a href="lib/OnExit.htm#command">OnExit</a> subroutine prevents the script from terminating, instead of resuming execution after the <a href="lib/Block.htm">block</a> which contained ExitApp.</p>

@@ -136,7 +136,7 @@ return</pre>
 
 <h3 id="uac">How do I work around problems caused by User Account Control (UAC)?</h3>
 <p>By default, <a href="https://en.wikipedia.org/wiki/User_Account_Control">User Account Control (UAC)</a> protects "elevated" programs (that is, programs which are running as admin) from being automated by non-elevated programs, since that would allow them to bypass security restrictions. Hotkeys are also blocked, so for instance, a non-elevated program cannot spy on input intended for an elevated program.</p>
-<p>UAC may also prevent <a href="lib/Send.htm#SendPlayDetail">SendPlay</a> and <a href="lib/BlockInput.htm">BlockInput</a> from working.</p>
+<p>UAC may also prevent <a href="lib/SendMode.htm#Play">SendPlay</a> and <a href="lib/BlockInput.htm">BlockInput</a> from working.</p>
 <p>Common workarounds are as follows:</p>
 <ul>
   <li>Enable the <em><a href="Program.htm#Installer_uiAccess">Add 'Run with UI Access' to context menus</a></em> option in AutoHotkey Setup. This option can be enabled or disabled without reinstalling AutoHotkey by re-running AutoHotkey Setup from the Start menu. Once it is enabled, launch your script file by right-clicking it and selecting <em>Run with UI Access</em>, or use a <a href="Scripts.htm#cmd">command line</a> like <code class="no-highlight">"AutoHotkeyU32_UIA.exe" "Your script.ahk"</code> (but include full paths).</li>
@@ -176,7 +176,7 @@ return</pre>
 <p>But there are some alternatives, try all the solutions mentioned below. If all these fail, it may not be possible for AHK to work with your game. Sometimes games have a hack and cheat prevention measure, such as GameGuard and Hackshield. If they do, there is a high chance that AutoHotkey will not work with that game.</p>
 <ul>
   <li>
-  <p>Use SendPlay via the <a href="lib/Send.htm#SendPlay">SendPlay</a> command, <a href="lib/SendMode.htm#Play">SendMode Play</a> and/or the <a href="Hotstrings.htm#SendMode">hotstring option SP</a>.</p>
+  <p>Use SendPlay via the <a href="lib/Send.htm">SendPlay</a> command, <a href="lib/SendMode.htm#Play">SendMode Play</a> and/or the <a href="Hotstrings.htm#SendMode">hotstring option SP</a>.</p>
   <pre>SendPlay, abc</pre>
   <pre>SendMode, Play
 Send, abc</pre>
