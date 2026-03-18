@@ -210,6 +210,12 @@ function ctor_highlighter()
         var link = index_data[syn[5].dict['class']][1];
         return ph('dec', wrap(CLASS, 'dec', link) + SPACE1 + expressions(NAME1) + SPACE2 + wrap(EXTENDS, 'dec', link) + SPACE3 + expressions(NAME2));
       });
+      // class's accessor definitions:
+      innerHTML = innerHTML.replace(new RegExp(r_pre + '\\b(get|set)\\b(?=(?=' + r_s + '*\\{)|' + r_suf + ')', 'gim'), function(_, PRE, ACCESSOR)
+      {
+        var link = index_data[syn[5].dict['class']][1];
+        return PRE + ph('cfs', wrap(ACCESSOR, 'dec', link));
+      });
       return innerHTML;
     }
     /** Searches for directives, formats them and replaces them with placeholders. */
