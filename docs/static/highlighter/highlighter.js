@@ -53,18 +53,18 @@ function ctor_highlighter()
       // Convert to pre>code if necessary:
       if (pre.tagName == 'PRE')
       {
-        if (pre.firstChild.tagName != 'CODE')
+        if (pre.firstChild && pre.firstChild.tagName == 'CODE')
+        {
+          code = pre.firstChild;
+          code.className += ' highlight';
+        }
+        else
         {
           code = document.createElement('code');
           code.className = 'highlight';
           code.innerHTML = pre.innerHTML;
           pre.innerHTML = '';
           pre.appendChild(code);
-        }
-        else
-        {
-          code = pre.firstChild;
-          code.className += ' highlight';
         }
       }
       // Temporarily remove HTML elements interfering with syntax detection:
