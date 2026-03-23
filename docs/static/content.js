@@ -460,10 +460,12 @@ function ctor_index()
   self.dataPath = scriptDir + '/source/data_index.js';
   self.create = function(input, filter) { // Create and add the index links.
     var output = '';
-    input.sort(function(a, b) {
-      var textA = a[0].toLowerCase(), textB = b[0].toLowerCase()
-      return textA.localeCompare(textB);
-    });
+    var lang = T('en');
+    var collator = window.Intl ? new Intl.Collator(lang) : null;
+    if (collator)
+      input.sort(function(a, b) { return collator.compare(a[0], b[0]); });
+    else
+      input.sort(function(a, b) { return a[0].localeCompare(b[0], lang); });
     for (var i = 0, len = input.length; i < len; i++)
     {
       if (filter != -1 && input[i][2] != filter)
