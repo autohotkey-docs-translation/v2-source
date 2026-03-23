@@ -13,7 +13,7 @@
 <body>
 <h1>Changes &amp; New Features</h1>
 <p><a href="v2-changes.htm">Changes from v1.1 to v2.0</a> covers the differences between v1.1 and v2.0.</p>
-<p>For full technical details of changes, refer to <a href="https://github.com/AutoHotkey/AutoHotkey/tree/alpha">GitHub</a>.</p>
+<p>For full technical details of changes, refer to <a href="https://github.com/AutoHotkey/AutoHotkey">GitHub</a>.</p>
 
 <h2 id="v2.0.22">2.0.22 - March 22, 2026</h2>
 <p>Removed the undocumented effect that a hotkey with the &lt;/&gt; prefix had on the corresponding modifier key; e.g. <code>&lt;^a::</code> causing <code>LCtrl::</code> to fire on release, inconsistent with the <a href="KeyList.htm#modifier">documentation</a>. Always firing on press provides greater consistency and flexibility. The modifier key itself was suppressed since v2.0.20. Neutral modifiers such as <code>Ctrl::</code> always fire on release, and similar behaviour can be implemented with <a href="Variables.htm#PriorKey">A_PriorKey</a> and <code>~LCtrl up::</code>.</p>
