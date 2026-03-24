@@ -488,6 +488,8 @@ function ctor_index()
 
     if (!retrieveData(self.dataPath, "index_data", "indexData", self.modify))
       return;
+    if (!retrieveData(translate.dataPath, "translate_data", "translateData", self.modify))
+      return;
 
     var $index = $('#left div.index');
     var $indexSelect = $index.find('.select select');
