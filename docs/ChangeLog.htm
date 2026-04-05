@@ -15,6 +15,13 @@
 <p><a href="v2-changes.htm">Changes from v1.1 to v2.0</a> covers the differences between v1.1 and v2.0.</p>
 <p>For full technical details of changes, refer to <a href="https://github.com/AutoHotkey/AutoHotkey">GitHub</a>.</p>
 
+<h2 id="v2.0.23">2.0.23 - April 5, 2026</h2>
+<p>Changed how key-up events are correlated to key-down events for the purpose of determining whether to suppress key-up. A key-down with SendLevel between 1 and 7 now only correlates with a key-up of the same level. When <code>#InputLevel 1</code> is in effect, this fixes <code>Right::Send "{Right}"</code> not suppressing key-up, <code>RShift::RAlt</code> interfering with <code>RAlt::RShift</code> and vice versa. Events with SendLevel 8 and above are still grouped with non-sent events for practical reasons.</p>
+<p>Fixed <code>WinExist("A",,,"B")</code> to not exclude windows which have no controls.</p>
+<p>Fixed custom combo hotkeys with neutral modifiers (e.g. <code>Alt &amp; Esc::</code>) [broken by v2.0.22].</p>
+<p>Fixed key-up hotkeys to fire consistently when the key is used as both a prefix and a suffix (e.g. <code>a &amp; b::</code>, <code>b &amp; a::</code> and <code>a up::</code>).</p>
+<p>Fixed timers interrupting MsgBox after the timeout starts but before the window is shown, such as if <code>SetTimer(MsgBox, -10)</code> is used immediately before <code>MsgBox(1,,"T1")</code>.</p>
+
 <h2 id="v2.0.22">2.0.22 - March 22, 2026</h2>
 <p>Removed the undocumented effect that a hotkey with the &lt;/&gt; prefix had on the corresponding modifier key; e.g. <code>&lt;^a::</code> causing <code>LCtrl::</code> to fire on release, inconsistent with the <a href="KeyList.htm#modifier">documentation</a>. Always firing on press provides greater consistency and flexibility. The modifier key itself was suppressed since v2.0.20. Neutral modifiers such as <code>Ctrl::</code> always fire on release, and similar behaviour can be implemented with <a href="Variables.htm#PriorKey">A_PriorKey</a> and <code>~LCtrl up::</code>.</p>
 <p>Changed error dialogs to use msftedit.dll instead of riched20.dll to fix the following issues:</p>
